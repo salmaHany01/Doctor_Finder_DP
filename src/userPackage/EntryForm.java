@@ -5,8 +5,8 @@
  */
 package userPackage;
 
+import adminPackage.loginadmin;
 import java.awt.Color;
-
 /**
  *
  * @author Salma
@@ -75,6 +75,8 @@ public class EntryForm extends javax.swing.JFrame {
 
     private void adminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBtnActionPerformed
         // TODO add your handling code here:
+       		new loginadmin().setVisible(true);
+
     }//GEN-LAST:event_adminBtnActionPerformed
 
 	/**

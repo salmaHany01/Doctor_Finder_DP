@@ -7,6 +7,8 @@ package adminPackage;
 import userPackage.Userfarah;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -17,8 +19,7 @@ import java.sql.Statement;
 public class Admin {
     private static Admin instance = new Admin();
     private Admin(){}
-    private String name = "admin";
-    private String password = "admin";
+   
     public static Admin getInstance(){
         return instance;
     }
@@ -40,4 +41,44 @@ public class Admin {
             return false;     
         }
     }
+        private String username;
+    private String password;
+    private int id= 0;  
+  
+   //Resultset is considered a pointer hence it's used to point at a row and get it's data   
+     public void setId(int id) {
+            this.id = id;
+        }
+      public int getId() {
+            return id;
+        }
+ 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+ public boolean Login()
+    {
+        if(this.username.equals("Admin") && this.password.equals("admin1234"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+}
+    
 }
