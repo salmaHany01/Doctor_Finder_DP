@@ -60,6 +60,11 @@ public class EntryForm extends javax.swing.JFrame {
 
         userBtn.setText("User");
         userBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        userBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userBtnActionPerformed(evt);
+            }
+        });
         accessPanel.add(userBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 400, 280, 53));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userPackage/userResized.png"))); // NOI18N
@@ -71,13 +76,20 @@ public class EntryForm extends javax.swing.JFrame {
         getContentPane().add(accessPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1310, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void adminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBtnActionPerformed
         // TODO add your handling code here:
-       		new loginadmin().setVisible(true);
-
+       	new loginadmin().setVisible(true);
+		this.setVisible(false);
     }//GEN-LAST:event_adminBtnActionPerformed
+
+    private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
+        // TODO add your handling code here:
+		new UserLogin().setVisible(true);
+		this.setVisible(false);
+    }//GEN-LAST:event_userBtnActionPerformed
 
 	/**
 	 * @param args the command line arguments
