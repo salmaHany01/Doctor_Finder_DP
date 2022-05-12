@@ -144,7 +144,9 @@ public class loginadmin extends javax.swing.JFrame {
            
            //new Doctor().setVisible(true);
            
-           JOptionPane.showMessageDialog(null,"Welcomee");
+           //JOptionPane.showMessageDialog(null,"Welcomee");
+		   new admin_dashboard().setVisible(true);
+		   this.setVisible(false);
        }
        else
        {

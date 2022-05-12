@@ -5,6 +5,12 @@
  */
 package adminPackage;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import javax.swing.JFrame;
+
 /**
  *
  * @author DELL
@@ -14,8 +20,15 @@ public class admin_dashboard extends javax.swing.JFrame {
     /**
      * Creates new form admin_dashboard
      */
+	
+	CardLayout cardLayout;
     public admin_dashboard() {
         initComponents();
+		
+		//*ignore* GUI related code
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setSize(screenSize);
     }
 
     /**
@@ -28,82 +41,281 @@ public class admin_dashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jSplitPane2 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
-        confirm_Btn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        view_btn = new javax.swing.JButton();
-        manageProfiles_Btn = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        adminProfile_btn = new javax.swing.JLabel();
+        logout_btn = new javax.swing.JLabel();
+        viewAllUsers_btn = new javax.swing.JLabel();
+        manageAppt_btn = new javax.swing.JLabel();
+        manageDoctor_btn = new javax.swing.JLabel();
+        manageUsers_btn = new javax.swing.JLabel();
+        cards_panel = new javax.swing.JPanel();
+        homePage_panel = new javax.swing.JPanel();
+        appointment_panel = new javax.swing.JPanel();
+        doctors_panel = new javax.swing.JPanel();
+        users_panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 255));
+        jSplitPane2.setBorder(null);
+        jSplitPane2.setDividerSize(1);
 
-        confirm_Btn.setText("manage Appointments");
+        jPanel2.setBackground(new java.awt.Color(8, 128, 176));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton2.setText("mamnage doctors");
+        adminProfile_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/adminLoginIcon.png"))); // NOI18N
+        jPanel2.add(adminProfile_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 200, 210));
 
-        view_btn.setText("view all users");
+        logout_btn.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
+        logout_btn.setForeground(new java.awt.Color(255, 255, 255));
+        logout_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/shutdown.png"))); // NOI18N
+        logout_btn.setText(" Logout");
+        logout_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logout_btnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logout_btnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logout_btnMouseExited(evt);
+            }
+        });
+        jPanel2.add(logout_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 950, 365, 70));
 
-        manageProfiles_Btn.setText("manage Users information");
+        viewAllUsers_btn.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
+        viewAllUsers_btn.setForeground(new java.awt.Color(255, 255, 255));
+        viewAllUsers_btn.setText(" Home");
+        viewAllUsers_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewAllUsers_btnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                viewAllUsers_btnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                viewAllUsers_btnMouseExited(evt);
+            }
+        });
+        jPanel2.add(viewAllUsers_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 365, 70));
 
-        jButton6.setText("Logout");
+        manageAppt_btn.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
+        manageAppt_btn.setForeground(new java.awt.Color(255, 255, 255));
+        manageAppt_btn.setText(" Manage Appointments");
+        manageAppt_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageAppt_btnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                manageAppt_btnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                manageAppt_btnMouseExited(evt);
+            }
+        });
+        jPanel2.add(manageAppt_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 365, 70));
 
-        jButton1.setText("admin icon");
+        manageDoctor_btn.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
+        manageDoctor_btn.setForeground(new java.awt.Color(255, 255, 255));
+        manageDoctor_btn.setText(" Manage Doctors");
+        manageDoctor_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageDoctor_btnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                manageDoctor_btnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                manageDoctor_btnMouseExited(evt);
+            }
+        });
+        jPanel2.add(manageDoctor_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 365, 70));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(confirm_Btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(manageProfiles_Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(view_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+        manageUsers_btn.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
+        manageUsers_btn.setForeground(new java.awt.Color(255, 255, 255));
+        manageUsers_btn.setText(" Manage Users");
+        manageUsers_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                manageUsers_btnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                manageUsers_btnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                manageUsers_btnMouseExited(evt);
+            }
+        });
+        jPanel2.add(manageUsers_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 365, 70));
+
+        jSplitPane2.setLeftComponent(jPanel2);
+
+        cards_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        homePage_panel.setBackground(new java.awt.Color(153, 255, 0));
+
+        javax.swing.GroupLayout homePage_panelLayout = new javax.swing.GroupLayout(homePage_panel);
+        homePage_panel.setLayout(homePage_panelLayout);
+        homePage_panelLayout.setHorizontalGroup(
+            homePage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1574, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104)
-                .addComponent(view_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(confirm_Btn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(manageProfiles_Btn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        homePage_panelLayout.setVerticalGroup(
+            homePage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 743, Short.MAX_VALUE))
+        cards_panel.add(homePage_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        appointment_panel.setBackground(new java.awt.Color(204, 0, 204));
+
+        javax.swing.GroupLayout appointment_panelLayout = new javax.swing.GroupLayout(appointment_panel);
+        appointment_panel.setLayout(appointment_panelLayout);
+        appointment_panelLayout.setHorizontalGroup(
+            appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1574, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        appointment_panelLayout.setVerticalGroup(
+            appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 640));
+        cards_panel.add(appointment_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        doctors_panel.setBackground(new java.awt.Color(51, 0, 0));
+
+        javax.swing.GroupLayout doctors_panelLayout = new javax.swing.GroupLayout(doctors_panel);
+        doctors_panel.setLayout(doctors_panelLayout);
+        doctors_panelLayout.setHorizontalGroup(
+            doctors_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1574, Short.MAX_VALUE)
+        );
+        doctors_panelLayout.setVerticalGroup(
+            doctors_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
+        );
+
+        cards_panel.add(doctors_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        users_panel.setBackground(new java.awt.Color(0, 102, 153));
+
+        javax.swing.GroupLayout users_panelLayout = new javax.swing.GroupLayout(users_panel);
+        users_panel.setLayout(users_panelLayout);
+        users_panelLayout.setHorizontalGroup(
+            users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1574, Short.MAX_VALUE)
+        );
+        users_panelLayout.setVerticalGroup(
+            users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
+        );
+
+        cards_panel.add(users_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1574, 1020));
+
+        jSplitPane2.setRightComponent(cards_panel);
+
+        jPanel1.add(jSplitPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -3, 1940, 1020));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1940, 1020));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewAllUsers_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewAllUsers_btnMouseClicked
+        // TODO add your handling code here:
+		homePage_panel.setVisible(true);
+		appointment_panel.setVisible(false);
+		doctors_panel.setVisible(false);
+		users_panel.setVisible(false);
+		
+    }//GEN-LAST:event_viewAllUsers_btnMouseClicked
+
+    private void manageAppt_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageAppt_btnMouseClicked
+        // TODO add your handling code here:
+		homePage_panel.setVisible(false);
+		appointment_panel.setVisible(true);
+		doctors_panel.setVisible(false);
+		users_panel.setVisible(false);
+    }//GEN-LAST:event_manageAppt_btnMouseClicked
+
+    private void manageDoctor_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDoctor_btnMouseClicked
+        // TODO add your handling code here:
+		homePage_panel.setVisible(false);
+		appointment_panel.setVisible(false);
+		doctors_panel.setVisible(true);
+		users_panel.setVisible(false);
+    }//GEN-LAST:event_manageDoctor_btnMouseClicked
+
+    private void manageUsers_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageUsers_btnMouseClicked
+        // TODO add your handling code here:
+		homePage_panel.setVisible(false);
+		appointment_panel.setVisible(false);
+		doctors_panel.setVisible(false);
+		users_panel.setVisible(true);
+    }//GEN-LAST:event_manageUsers_btnMouseClicked
+
+    private void logout_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout_btnMouseClicked
+        // TODO add your handling code here:
+		//samaa
+    }//GEN-LAST:event_logout_btnMouseClicked
+
+    private void viewAllUsers_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewAllUsers_btnMouseEntered
+        // TODO add your handling code here:
+		viewAllUsers_btn.setBackground(new Color(82,166,199));
+		viewAllUsers_btn.setOpaque(true);
+    }//GEN-LAST:event_viewAllUsers_btnMouseEntered
+
+    private void viewAllUsers_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewAllUsers_btnMouseExited
+        // TODO add your handling code here:
+		viewAllUsers_btn.setBackground(new Color(8,128,176));
+    }//GEN-LAST:event_viewAllUsers_btnMouseExited
+
+    private void manageAppt_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageAppt_btnMouseEntered
+        // TODO add your handling code here:
+		manageAppt_btn.setBackground(new Color(82,166,199));
+		manageAppt_btn.setOpaque(true);
+    }//GEN-LAST:event_manageAppt_btnMouseEntered
+
+    private void manageAppt_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageAppt_btnMouseExited
+        // TODO add your handling code here:
+		manageAppt_btn.setBackground(new Color(8,128,176));
+    }//GEN-LAST:event_manageAppt_btnMouseExited
+
+    private void manageDoctor_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDoctor_btnMouseEntered
+        // TODO add your handling code here:
+		manageDoctor_btn.setBackground(new Color(82,166,199));
+		manageDoctor_btn.setOpaque(true);
+    }//GEN-LAST:event_manageDoctor_btnMouseEntered
+
+    private void manageDoctor_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageDoctor_btnMouseExited
+        // TODO add your handling code here:\
+		manageDoctor_btn.setBackground(new Color(8,128,176));
+    }//GEN-LAST:event_manageDoctor_btnMouseExited
+
+    private void manageUsers_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageUsers_btnMouseEntered
+        // TODO add your handling code here:
+		manageUsers_btn.setBackground(new Color(82,166,199));
+		manageUsers_btn.setOpaque(true);
+    }//GEN-LAST:event_manageUsers_btnMouseEntered
+
+    private void manageUsers_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageUsers_btnMouseExited
+        // TODO add your handling code here:
+		manageUsers_btn.setBackground(new Color(8,128,176));
+    }//GEN-LAST:event_manageUsers_btnMouseExited
+
+    private void logout_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout_btnMouseEntered
+        // TODO add your handling code here:
+		logout_btn.setBackground(new Color(243,66,53));
+		logout_btn.setOpaque(true);
+    }//GEN-LAST:event_logout_btnMouseEntered
+
+    private void logout_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout_btnMouseExited
+        // TODO add your handling code here:
+		logout_btn.setBackground(new Color(8,128,176));
+    }//GEN-LAST:event_logout_btnMouseExited
 
     /**
      * @param args the command line arguments
@@ -142,13 +354,19 @@ public class admin_dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton confirm_Btn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JLabel adminProfile_btn;
+    private javax.swing.JPanel appointment_panel;
+    private javax.swing.JPanel cards_panel;
+    private javax.swing.JPanel doctors_panel;
+    private javax.swing.JPanel homePage_panel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton manageProfiles_Btn;
-    private javax.swing.JButton view_btn;
+    private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JLabel logout_btn;
+    private javax.swing.JLabel manageAppt_btn;
+    private javax.swing.JLabel manageDoctor_btn;
+    private javax.swing.JLabel manageUsers_btn;
+    private javax.swing.JPanel users_panel;
+    private javax.swing.JLabel viewAllUsers_btn;
     // End of variables declaration//GEN-END:variables
 }
