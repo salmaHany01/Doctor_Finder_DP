@@ -14,11 +14,11 @@ public class UserBuilder {
     private String Fname;
     private String Lname = null;
     private String gender;
-    private Date birthDate = null;
-    private String phoneNo1;
-    private String phoneNo2 = null;
+    private int age = 0;
+    private int phoneNo1;
+    private int phoneNo2 = 0;
     private String address = null;
-    private String visa = null;
+    private int visa = 0;
     private String email;
     private String pass;
 
@@ -45,17 +45,17 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public UserBuilder setBirthDate(int age) {
+        this.age = age;
         return this;
     }
 
-    public UserBuilder setPhoneNo1(String phoneNo1) {
+    public UserBuilder setPhoneNo1(int phoneNo1) {
         this.phoneNo1 = phoneNo1;
         return this;
     }
 
-    public UserBuilder setPhoneNo2(String phoneNo2) {
+    public UserBuilder setPhoneNo2(int phoneNo2) {
         this.phoneNo2 = phoneNo2;
         return this;
     }
@@ -65,7 +65,7 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setVisa(String visa) {
+    public UserBuilder setVisa(int visa) {
         this.visa = visa;
         return this;
     }
@@ -81,7 +81,7 @@ public class UserBuilder {
     }
 
     public User createUser() {
-        return new User(id, Fname, Lname, gender, birthDate, phoneNo1, phoneNo2, address, visa, email, pass);
+        return new User(id, Fname, Lname, gender, age, phoneNo1, phoneNo2, address, visa, email, pass);
     }
     
 }

@@ -6,30 +6,33 @@
 package userPackage;
 
 import java.util.Date;
+import javafx.scene.layout.Region;
 
 /**
  *
  * @author Fayroz Tarek
  */
 public class User {
+    
     private int id;
     private String Fname;
     private String Lname;
     private String gender;
-    private Date birthDate;
-    private String phoneNo1;
-    private String phoneNo2;
+    private int age;
+    private int phoneNo1;
+    private int phoneNo2;
     private String address;
-    private String visa;
+    private int visa;
     private String email;
     private String pass;
+    
 
-    public User(int id, String name, String Lname, String gender, Date birthDate, String phoneNo1, String phoneNo2, String address, String visa, String email, String pass) {
+    public User(int id, String name, String Lname, String gender, int age, int phoneNo1, int phoneNo2, String address, int visa, String email, String pass) {
         this.id = id;
         this.Fname = name;
         this.Lname = Lname;
         this.gender = gender;
-        this.birthDate = birthDate;
+        this.age = age;
         this.phoneNo1 = phoneNo1;
         this.phoneNo2 = phoneNo2;
         this.address = address;
@@ -54,11 +57,11 @@ public class User {
         this.Lname = Lname;
     }
 
-    public String getPhoneNo2() {
+    public int getPhoneNo2() {
         return phoneNo2;
     }
 
-    public void setPhoneNo2(String phoneNo2) {
+    public void setPhoneNo2(int phoneNo2) {
         this.phoneNo2 = phoneNo2;
     }
     
@@ -78,20 +81,12 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getPhoneNo() {
+    
+    public int getPhoneNo() {
         return phoneNo1;
     }
 
-    public void setPhoneNo(String phoneNo) {
+    public void setPhoneNo(int phoneNo) {
         this.phoneNo1 = phoneNo;
     }
 
@@ -103,11 +98,11 @@ public class User {
         this.address = address;
     }
 
-    public String getVisa() {
+    public int getVisa() {
         return visa;
     }
 
-    public void setVisa(String visa) {
+    public void setVisa(int visa) {
         this.visa = visa;
     }
 
@@ -126,6 +121,16 @@ public class User {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+    
+    
 
     
 
