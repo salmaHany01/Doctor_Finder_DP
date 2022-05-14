@@ -5,12 +5,25 @@
  */
 package adminPackage;
 
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import userPackage.EntryForm;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.table.TableRowSorter;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 /**
  *
  * @author DELL
@@ -20,17 +33,30 @@ public class admin_dashboard extends javax.swing.JFrame {
     /**
      * Creates new form admin_dashboard
      */
-	
+	Connection con;
+	DefaultTableModel adminModel, viewModel;
 	CardLayout cardLayout;
     public admin_dashboard() {
         initComponents();
-		
+		con = DatabaseConnectionDoc.setConnection();
+		adminModel = (DefaultTableModel) doctorsTableDisplay.getModel();
+		viewModel = (DefaultTableModel) viewTable.getModel();
+		displayDoctors();
+		AutoCompleteDecorator.decorate(search_cmbBox);
 		//*ignore* GUI related code
+		UIManager.put("OptionPane.messageFont", new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
+		homePage_panel.setVisible(true);
+		appointment_panel.setVisible(false);
+		doctors_panel.setVisible(false);
+		users_panel.setVisible(false);
+		appts_txt.setVisible(false);
+		doctorsTableDisplay.setRowHeight(28);
+		viewTable.setRowHeight(28);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setSize(screenSize);
     }
-
+	
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,6 +66,7 @@ public class admin_dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jSplitPane2 = new javax.swing.JSplitPane();
         jPanel2 = new javax.swing.JPanel();
@@ -51,8 +78,57 @@ public class admin_dashboard extends javax.swing.JFrame {
         manageUsers_btn = new javax.swing.JLabel();
         cards_panel = new javax.swing.JPanel();
         homePage_panel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        viewTable = new javax.swing.JTable();
+        viewDoctors_btn = new javax.swing.JButton();
+        viewUsers_btn = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         appointment_panel = new javax.swing.JPanel();
         doctors_panel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        doctorsTableDisplay = new javax.swing.JTable();
+        appts_txt = new javax.swing.JTextField();
+        name_txt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        fees_txt = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        toTime_txt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        am_pm_lbl = new javax.swing.JLabel();
+        speciality_comboBox = new javax.swing.JComboBox<>();
+        phone_txt = new javax.swing.JTextField();
+        fromTime_txt = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        pm_am_lbl = new javax.swing.JLabel();
+        apptDays_combo = new javax.swing.JComboBox<>();
+        updateData_btn = new javax.swing.JButton();
+        address_txt = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        add_radBtn = new javax.swing.JRadioButton();
+        remove_radBtn = new javax.swing.JRadioButton();
+        update_radBtn = new javax.swing.JRadioButton();
+        addDoctor_btn = new javax.swing.JButton();
+        removeDoctor_btn = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        search_cmbBox = new javax.swing.JComboBox<>();
+        search_btn = new javax.swing.JButton();
+        refresh_btn = new javax.swing.JLabel();
         users_panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -155,20 +231,170 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         cards_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        homePage_panel.setBackground(new java.awt.Color(153, 255, 0));
+        homePage_panel.setBackground(new java.awt.Color(255, 255, 255));
+        homePage_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout homePage_panelLayout = new javax.swing.GroupLayout(homePage_panel);
-        homePage_panel.setLayout(homePage_panelLayout);
-        homePage_panelLayout.setHorizontalGroup(
-            homePage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1574, Short.MAX_VALUE)
+        viewTable.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        viewTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Address", "Speciality", "Fees", "Appointments", "Phone number", "Rating"
+            }
+        ));
+        viewTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewTableMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                viewTableMouseExited(evt);
+            }
+        });
+        jScrollPane2.setViewportView(viewTable);
+
+        homePage_panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 1490, 390));
+
+        viewDoctors_btn.setBackground(new java.awt.Color(255, 255, 255));
+        viewDoctors_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        viewDoctors_btn.setText("View Doctors");
+        viewDoctors_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewDoctors_btnActionPerformed(evt);
+            }
+        });
+        homePage_panel.add(viewDoctors_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 174, 50));
+
+        viewUsers_btn.setBackground(new java.awt.Color(255, 255, 255));
+        viewUsers_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        viewUsers_btn.setText("View Users");
+        homePage_panel.add(viewUsers_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 490, 174, 50));
+
+        jPanel4.setBackground(new java.awt.Color(165, 226, 219));
+
+        jLabel14.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
+        jLabel14.setText("Online payments weekly");
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/online-payment.png"))); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 74)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel16.setText("53");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
-        homePage_panelLayout.setVerticalGroup(
-            homePage_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1020, Short.MAX_VALUE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(23, 23, 23))
         );
 
-        cards_panel.add(homePage_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        homePage_panel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 440, 250));
+
+        jPanel5.setBackground(new java.awt.Color(8, 176, 157));
+
+        jLabel17.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
+        jLabel17.setText("Appointments for the last week");
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/deadline.png"))); // NOI18N
+
+        jLabel19.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 74)); // NOI18N
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel19.setText("15");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jLabel17)
+                .addGap(22, 22, 22))
+        );
+
+        homePage_panel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 37, 440, 250));
+
+        jPanel6.setBackground(new java.awt.Color(106, 207, 196));
+
+        jLabel20.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
+        jLabel20.setText("New users monthly registered");
+
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/manpic.png"))); // NOI18N
+
+        jLabel22.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 74)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel22.setText("204");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addGap(121, 121, 121)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(153, 153, 153))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)))
+                .addComponent(jLabel20)
+                .addGap(23, 23, 23))
+        );
+
+        homePage_panel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 440, 250));
+
+        cards_panel.add(homePage_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1574, 1020));
 
         appointment_panel.setBackground(new java.awt.Color(204, 0, 204));
 
@@ -185,20 +411,233 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         cards_panel.add(appointment_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        doctors_panel.setBackground(new java.awt.Color(51, 0, 0));
+        doctors_panel.setBackground(new java.awt.Color(255, 255, 255));
+        doctors_panel.setPreferredSize(new java.awt.Dimension(1574, 1020));
+        doctors_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout doctors_panelLayout = new javax.swing.GroupLayout(doctors_panel);
-        doctors_panel.setLayout(doctors_panelLayout);
-        doctors_panelLayout.setHorizontalGroup(
-            doctors_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1574, Short.MAX_VALUE)
+        doctorsTableDisplay.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        doctorsTableDisplay.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Address", "Speciality", "Fees", "Appointments", "Phone number", "Rating"
+            }
+        ));
+        doctorsTableDisplay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                doctorsTableDisplayMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                doctorsTableDisplayMouseExited(evt);
+            }
+        });
+        jScrollPane1.setViewportView(doctorsTableDisplay);
+
+        doctors_panel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 1490, 390));
+
+        appts_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        doctors_panel.add(appts_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 330, 480, 40));
+
+        name_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        name_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                name_txtMouseClicked(evt);
+            }
+        });
+        doctors_panel.add(name_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 310, 37));
+
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 20)); // NOI18N
+        jLabel1.setText("Choose the action you want to take ");
+        doctors_panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel2.setText("Speciality");
+        doctors_panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
+
+        fees_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        doctors_panel.add(fees_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 210, 37));
+
+        jLabel3.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel3.setText("Fees");
+        doctors_panel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
+
+        toTime_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        toTime_txt.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        toTime_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toTime_txtActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(toTime_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 330, 50, 37));
+
+        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel4.setText("Phone Number");
+        doctors_panel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 410, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel5.setText("Address");
+        doctors_panel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, -1, -1));
+
+        am_pm_lbl.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        am_pm_lbl.setForeground(new java.awt.Color(102, 102, 255));
+        am_pm_lbl.setText("AM");
+        am_pm_lbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                am_pm_lblMouseClicked(evt);
+            }
+        });
+        doctors_panel.add(am_pm_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 340, -1, -1));
+
+        speciality_comboBox.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        speciality_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allergy and Immunology", "Audiology", "Cardiology", "Ear, Nose and Throat ", "Endocrinology", "Dermatology", "Dentistry", "Dietitian and Nutrition", "Gastroenterology ", "Genel Surgery", "Hematology", "Hepatology", "Internal Medicine", "IVF and Infertility", "Neurologist", "Oncology", "Opthalmology", "Osteopathy ", "Orthopedics", "Pediatrician", "Physiotherapy", "Psychiatry", "Rheumatology", "Urology", " ", " " }));
+        doctors_panel.add(speciality_comboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 310, 37));
+
+        phone_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        doctors_panel.add(phone_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 400, 180, 37));
+
+        fromTime_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        fromTime_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fromTime_txtActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(fromTime_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 330, 50, 37));
+
+        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel7.setText("Appointments");
+        doctors_panel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 340, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel8.setText("from");
+        doctors_panel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 340, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel9.setText("to");
+        doctors_panel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 340, -1, -1));
+
+        pm_am_lbl.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        pm_am_lbl.setForeground(new java.awt.Color(102, 102, 255));
+        pm_am_lbl.setText("PM");
+        pm_am_lbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pm_am_lblMouseClicked(evt);
+            }
+        });
+        doctors_panel.add(pm_am_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 340, -1, -1));
+
+        apptDays_combo.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        apptDays_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturdays", "Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thrusdays", "Fridays", "All Weekdays Except..." }));
+        doctors_panel.add(apptDays_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 330, 180, 37));
+
+        updateData_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        updateData_btn.setText("Update");
+        updateData_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateData_btnActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(updateData_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 480, 140, 50));
+
+        address_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        doctors_panel.add(address_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 270, 480, 37));
+
+        jLabel11.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 20)); // NOI18N
+        jLabel11.setText("Search by Speciality");
+        doctors_panel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel3MouseEntered(evt);
+            }
+        });
+
+        add_radBtn.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(add_radBtn);
+        add_radBtn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        add_radBtn.setText("Add Doctor");
+
+        remove_radBtn.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(remove_radBtn);
+        remove_radBtn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        remove_radBtn.setText("Remove Doctor ");
+
+        update_radBtn.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(update_radBtn);
+        update_radBtn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        update_radBtn.setText("Update Doctor data");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(add_radBtn)
+                .addGap(49, 49, 49)
+                .addComponent(remove_radBtn)
+                .addGap(30, 30, 30)
+                .addComponent(update_radBtn)
+                .addContainerGap(290, Short.MAX_VALUE))
         );
-        doctors_panelLayout.setVerticalGroup(
-            doctors_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1020, Short.MAX_VALUE)
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(add_radBtn)
+                    .addComponent(remove_radBtn)
+                    .addComponent(update_radBtn))
+                .addGap(56, 56, 56))
         );
 
-        cards_panel.add(doctors_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        doctors_panel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 890, 50));
+
+        addDoctor_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        addDoctor_btn.setText("Add");
+        addDoctor_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDoctor_btnActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(addDoctor_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 480, 140, 50));
+
+        removeDoctor_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        removeDoctor_btn.setText("Remove");
+        removeDoctor_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeDoctor_btnActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(removeDoctor_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 480, 140, 50));
+
+        jLabel12.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel12.setText("Name");
+        doctors_panel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+
+        search_cmbBox.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 18)); // NOI18N
+        search_cmbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allergy and Immunology", "Audiology", "Cardiology", "Ear, Nose and Throat ", "Endocrinology", "Dermatology", "Dentistry", "Dietitian and Nutrition", "Gastroenterology ", "Genel Surgery", "Hematology", "Hepatology", "Internal Medicine", "IVF and Infertility", "Neurologist", "Oncology", "Opthalmology", "Osteopathy ", "Orthopedics", "Pediatrician", "Physiotherapy", "Psychiatry", "Rheumatology", "Urology", " ", " " }));
+        doctors_panel.add(search_cmbBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 440, 40));
+
+        search_btn.setBackground(new java.awt.Color(255, 255, 255));
+        search_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/search (1).png"))); // NOI18N
+        search_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_btnActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(search_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, 41));
+
+        refresh_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/refresh-button (1).png"))); // NOI18N
+        refresh_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refresh_btnMouseClicked(evt);
+            }
+        });
+        doctors_panel.add(refresh_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 70, 80));
+
+        cards_panel.add(doctors_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1574, 1020));
 
         users_panel.setBackground(new java.awt.Color(0, 102, 153));
 
@@ -223,7 +662,29 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+	
+	public void displayDoctors(){
+		try{
+			Statement displayStat = con.createStatement();
+			String displaySql = "select * from Doctors";
+			ResultSet rs = displayStat.executeQuery(displaySql);
+			while(rs.next()){
+				String name = rs.getString("name");
+				String address = rs.getString("address");
+				String speciality = rs.getString("speciality");
+				String fees = String.valueOf(rs.getInt("fees"));
+				String appointments = rs.getString("appointments");
+				String phoneNum = String.valueOf(rs.getInt("phoneno"));
+				String rating = String.valueOf(rs.getDouble("rating"));
+				//string array to store data into jtable
+				String doctorData[] = {name, address, speciality, fees, appointments, phoneNum, rating};
+				adminModel.addRow(doctorData);
+			}
+		}
+		catch(SQLException exp){
+			JOptionPane.showMessageDialog(this, exp.toString());
+		}
+	}
     private void viewAllUsers_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewAllUsers_btnMouseClicked
         // TODO add your handling code here:
 		homePage_panel.setVisible(true);
@@ -259,14 +720,9 @@ public class admin_dashboard extends javax.swing.JFrame {
 
     private void logout_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout_btnMouseClicked
         // TODO add your handling code here:
-		//samaa
+		new EntryForm().setVisible(true);
+		this.setVisible(false);
     }//GEN-LAST:event_logout_btnMouseClicked
-
-    private void viewAllUsers_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewAllUsers_btnMouseEntered
-        // TODO add your handling code here:
-		viewAllUsers_btn.setBackground(new Color(82,166,199));
-		viewAllUsers_btn.setOpaque(true);
-    }//GEN-LAST:event_viewAllUsers_btnMouseEntered
 
     private void viewAllUsers_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewAllUsers_btnMouseExited
         // TODO add your handling code here:
@@ -317,6 +773,191 @@ public class admin_dashboard extends javax.swing.JFrame {
 		logout_btn.setBackground(new Color(8,128,176));
     }//GEN-LAST:event_logout_btnMouseExited
 
+    private void toTime_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toTime_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toTime_txtActionPerformed
+
+    private void fromTime_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromTime_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fromTime_txtActionPerformed
+
+    private void pm_am_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pm_am_lblMouseClicked
+        // TODO add your handling code here:
+		if(pm_am_lbl.getText().equalsIgnoreCase("PM")){
+			pm_am_lbl.setText("AM");
+		}
+		else{
+			pm_am_lbl.setText("PM");
+		}
+    }//GEN-LAST:event_pm_am_lblMouseClicked
+
+    private void am_pm_lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_am_pm_lblMouseClicked
+        // TODO add your handling code here:
+		if(am_pm_lbl.getText().equalsIgnoreCase("AM")){
+			am_pm_lbl.setText("PM");
+		}
+		else{
+			am_pm_lbl.setText("AM");
+		}
+    }//GEN-LAST:event_am_pm_lblMouseClicked
+
+    private void doctorsTableDisplayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorsTableDisplayMouseClicked
+        // TODO add your handling code here:
+		appts_txt.setVisible(true);
+		toTime_txt.setVisible(false);
+		name_txt.setText(adminModel.getValueAt(doctorsTableDisplay.getSelectedRow(),0).toString());
+		speciality_comboBox.setSelectedItem(adminModel.getValueAt(doctorsTableDisplay.getSelectedRow(),2).toString());
+		fees_txt.setText(adminModel.getValueAt(doctorsTableDisplay.getSelectedRow(),3).toString());
+		address_txt.setText(adminModel.getValueAt(doctorsTableDisplay.getSelectedRow(),1).toString());
+		appts_txt.setText(adminModel.getValueAt(doctorsTableDisplay.getSelectedRow(),4).toString());
+		phone_txt.setText(adminModel.getValueAt(doctorsTableDisplay.getSelectedRow(),5).toString());
+    }//GEN-LAST:event_doctorsTableDisplayMouseClicked
+
+    private void doctorsTableDisplayMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorsTableDisplayMouseExited
+        // TODO add your handling code here:
+		appts_txt.setVisible(false);
+		toTime_txt.setVisible(true);
+    }//GEN-LAST:event_doctorsTableDisplayMouseExited
+
+    private void name_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name_txtMouseClicked
+        // TODO add your handling code here:
+		
+    }//GEN-LAST:event_name_txtMouseClicked
+	
+    private void updateData_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateData_btnActionPerformed
+        // TODO add your handling code here:
+		if(doctorsTableDisplay.getSelectedRowCount() == 1){
+			
+			try{
+				//Connection con = DatabaseConnectionDoc.setConnection();
+				Statement updateStat = con.createStatement();
+				String spec = speciality_comboBox.getSelectedItem().toString();
+				String updateSQL = "update doctors set address = '"+address_txt.getText()+"', speciality = '"+spec+"', fees= "+fees_txt.getText()+", phoneno= "+phone_txt.getText()+"where name like '"+name_txt.getText()+"'";
+				updateStat.executeUpdate(updateSQL);
+				displayDoctors();
+				JOptionPane.showMessageDialog(this, "Doctor information updated successfully.");
+			}
+			catch(SQLException ex){
+				JOptionPane.showMessageDialog(this, ex.toString());
+			}
+		}
+    }//GEN-LAST:event_updateData_btnActionPerformed
+
+    private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
+        // TODO add your handling code here:
+		if(add_radBtn.isSelected()){
+			name_txt.setText("");
+			fees_txt.setText("");
+			address_txt.setText("");
+			phone_txt.setText("");
+			name_txt.setEditable(true);
+			name_txt.setBackground(Color.white);
+			removeDoctor_btn.setVisible(false);
+			addDoctor_btn.setVisible(true);
+			updateData_btn.setVisible(false);
+		}
+		else if(remove_radBtn.isSelected()){
+			name_txt.setEditable(false);
+			name_txt.setBackground(new Color(234,234,234));
+			removeDoctor_btn.setVisible(true);
+			addDoctor_btn.setVisible(false);
+			updateData_btn.setVisible(false);
+		}
+		else if(update_radBtn.isSelected()){
+			name_txt.setEditable(false);
+			name_txt.setBackground(new Color(234,234,234));
+			removeDoctor_btn.setVisible(false);
+			addDoctor_btn.setVisible(false);
+			updateData_btn.setVisible(true);
+		}
+    }//GEN-LAST:event_jPanel3MouseEntered
+
+    private void addDoctor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctor_btnActionPerformed
+        // TODO add your handling code here:
+		try{
+            //Connection con = DatabaseConnectionDoc.setConnection();
+            Statement addStat = con.createStatement();
+            String addSql = "insert into doctors values('"+"Dr. "+name_txt.getText()+"', '"+address_txt.getText()+"', '"+speciality_comboBox.getSelectedItem().toString()+"',"+fees_txt.getText()+", '"+apptDays_combo.getSelectedItem().toString()+" from "+fromTime_txt.getText()+pm_am_lbl.getText()+" to "+toTime_txt.getText()+am_pm_lbl.getText()+"', "+phone_txt.getText()+","+"0"+")";
+            addStat.executeUpdate(addSql);
+            displayDoctors();
+			
+        }
+        catch(SQLException exp){
+            JOptionPane.showMessageDialog(this, exp.toString());
+        }
+    }//GEN-LAST:event_addDoctor_btnActionPerformed
+
+    private void removeDoctor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeDoctor_btnActionPerformed
+        // TODO add your handling code here:
+		try{
+			//Connection con = DatabaseConnectionDoc.setConnection();
+			Statement removeStat = con.createStatement();
+			String removeSql = "delete from doctors where name like '"+name_txt.getText()+"'";
+			removeStat.executeUpdate(removeSql);
+			displayDoctors();
+			
+		}
+		catch(SQLException ex){
+			JOptionPane.showMessageDialog(this, ex.toString());
+		}
+    }//GEN-LAST:event_removeDoctor_btnActionPerformed
+
+    private void viewAllUsers_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewAllUsers_btnMouseEntered
+        // TODO add your handling code here:
+		viewAllUsers_btn.setBackground(new Color(82,166,199));
+		viewAllUsers_btn.setOpaque(true);
+    }//GEN-LAST:event_viewAllUsers_btnMouseEntered
+
+    private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
+        // TODO add your handling code here:
+		DefaultTableModel searchModel = (DefaultTableModel) doctorsTableDisplay.getModel();
+		String searchedItem = search_cmbBox.getSelectedItem().toString();
+		TableRowSorter<DefaultTableModel> trs = new TableRowSorter<DefaultTableModel>(searchModel);
+		doctorsTableDisplay.setRowSorter(trs);
+		trs.setRowFilter(javax.swing.RowFilter.regexFilter(searchedItem));
+		if(doctorsTableDisplay.getRowCount()==0){
+			JOptionPane.showMessageDialog(this, "No doctors in this speciality yet.");
+		}
+    }//GEN-LAST:event_search_btnActionPerformed
+
+    private void viewTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewTableMouseClicked
+
+    private void viewTableMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewTableMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewTableMouseExited
+
+    private void refresh_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refresh_btnMouseClicked
+        // TODO add your handling code here:
+		TableRowSorter<DefaultTableModel> viewTableSorter = new TableRowSorter<DefaultTableModel>(adminModel);
+		doctorsTableDisplay.setRowSorter(viewTableSorter);
+    }//GEN-LAST:event_refresh_btnMouseClicked
+
+    private void viewDoctors_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDoctors_btnActionPerformed
+        // TODO add your handling code here:
+		try{
+			Statement displayStat = con.createStatement();
+			String displaySql = "select * from Doctors";
+			ResultSet rs = displayStat.executeQuery(displaySql);
+			while(rs.next()){
+				String name = rs.getString("name");
+				String address = rs.getString("address");
+				String speciality = rs.getString("speciality");
+				String fees = String.valueOf(rs.getInt("fees"));
+				String appointments = rs.getString("appointments");
+				String phoneNum = String.valueOf(rs.getInt("phoneno"));
+				String rating = String.valueOf(rs.getDouble("rating"));
+				//string array to store data into jtable
+				String doctorData[] = {name, address, speciality, fees, appointments, phoneNum, rating};
+				viewModel.addRow(doctorData);
+			}
+		}
+		catch(SQLException exp){
+			JOptionPane.showMessageDialog(this, exp.toString());
+		}
+    }//GEN-LAST:event_viewDoctors_btnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -354,19 +995,69 @@ public class admin_dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addDoctor_btn;
+    private javax.swing.JRadioButton add_radBtn;
+    private javax.swing.JTextField address_txt;
     private javax.swing.JLabel adminProfile_btn;
+    private javax.swing.JLabel am_pm_lbl;
     private javax.swing.JPanel appointment_panel;
+    private javax.swing.JComboBox<String> apptDays_combo;
+    private javax.swing.JTextField appts_txt;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel cards_panel;
+    private javax.swing.JTable doctorsTableDisplay;
     private javax.swing.JPanel doctors_panel;
+    private javax.swing.JTextField fees_txt;
+    private javax.swing.JTextField fromTime_txt;
     private javax.swing.JPanel homePage_panel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JLabel logout_btn;
     private javax.swing.JLabel manageAppt_btn;
     private javax.swing.JLabel manageDoctor_btn;
     private javax.swing.JLabel manageUsers_btn;
+    private javax.swing.JTextField name_txt;
+    private javax.swing.JTextField phone_txt;
+    private javax.swing.JLabel pm_am_lbl;
+    private javax.swing.JLabel refresh_btn;
+    private javax.swing.JButton removeDoctor_btn;
+    private javax.swing.JRadioButton remove_radBtn;
+    private javax.swing.JButton search_btn;
+    private javax.swing.JComboBox<String> search_cmbBox;
+    private javax.swing.JComboBox<String> speciality_comboBox;
+    private javax.swing.JTextField toTime_txt;
+    private javax.swing.JButton updateData_btn;
+    private javax.swing.JRadioButton update_radBtn;
     private javax.swing.JPanel users_panel;
     private javax.swing.JLabel viewAllUsers_btn;
+    private javax.swing.JButton viewDoctors_btn;
+    private javax.swing.JTable viewTable;
+    private javax.swing.JButton viewUsers_btn;
     // End of variables declaration//GEN-END:variables
 }

@@ -40,7 +40,6 @@ public class loginadmin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(0, 0));
         setSize(new java.awt.Dimension(788, 532));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -94,7 +93,7 @@ public class loginadmin extends javax.swing.JFrame {
                             .addComponent(pass_txt, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                             .addComponent(user_txt)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
+                        .addGap(134, 134, 134)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );

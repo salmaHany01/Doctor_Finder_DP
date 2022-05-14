@@ -4,22 +4,24 @@
  * and open the template in the editor.
  */
 package adminPackage;
+import java.awt.List;
 import userPackage.Userfarah;
-
+import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.sql.SQLException;
 /**
  *
  * @author DELL
  */
 public class Admin {
     private static Admin instance = new Admin();
-    private Admin(){}
-   
+   // private Admin(){}
+	public Admin(){}
+	private String username;
+    private String password;
+    private int id= 0;  
     public static Admin getInstance(){
         return instance;
     }
@@ -41,11 +43,6 @@ public class Admin {
             return false;     
         }
     }
-        private String username;
-    private String password;
-    private int id= 0;  
-  
-   //Resultset is considered a pointer hence it's used to point at a row and get it's data   
      public void setId(int id) {
             this.id = id;
         }
@@ -80,5 +77,5 @@ public class Admin {
             return false;
         }
 }
-    
+
 }
