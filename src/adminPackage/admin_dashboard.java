@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.PageAttributes;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +24,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
+import javax.swing.text.JTextComponent;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 /**
  *
@@ -76,6 +78,7 @@ public class admin_dashboard extends javax.swing.JFrame {
         manageAppt_btn = new javax.swing.JLabel();
         manageDoctor_btn = new javax.swing.JLabel();
         manageUsers_btn = new javax.swing.JLabel();
+        changePass_btn = new javax.swing.JLabel();
         cards_panel = new javax.swing.JPanel();
         homePage_panel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -95,6 +98,14 @@ public class admin_dashboard extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         appointment_panel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        username_txt = new javax.swing.JTextField();
+        oldPass_txt = new javax.swing.JTextField();
+        newPass_txt = new javax.swing.JTextField();
+        confirmPass_txt = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
         doctors_panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         doctorsTableDisplay = new javax.swing.JTable();
@@ -226,6 +237,24 @@ public class admin_dashboard extends javax.swing.JFrame {
             }
         });
         jPanel2.add(manageUsers_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 640, 365, 70));
+
+        changePass_btn.setBackground(new java.awt.Color(255, 255, 255));
+        changePass_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 16)); // NOI18N
+        changePass_btn.setForeground(new java.awt.Color(255, 255, 255));
+        changePass_btn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        changePass_btn.setText("Change password");
+        changePass_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                changePass_btnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                changePass_btnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                changePass_btnMouseExited(evt);
+            }
+        });
+        jPanel2.add(changePass_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 366, 40));
 
         jSplitPane2.setLeftComponent(jPanel2);
 
@@ -398,15 +427,68 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         appointment_panel.setBackground(new java.awt.Color(204, 0, 204));
 
+        jLabel6.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel6.setText("new pass");
+
+        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel10.setText("old pass");
+
+        jLabel13.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel13.setText("confirm pass");
+
+        username_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        oldPass_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        newPass_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        confirmPass_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel23.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel23.setText("username");
+
         javax.swing.GroupLayout appointment_panelLayout = new javax.swing.GroupLayout(appointment_panel);
         appointment_panel.setLayout(appointment_panelLayout);
         appointment_panelLayout.setHorizontalGroup(
             appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1574, Short.MAX_VALUE)
+            .addGroup(appointment_panelLayout.createSequentialGroup()
+                .addGap(83, 83, 83)
+                .addGroup(appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel23))
+                .addGap(18, 18, 18)
+                .addGroup(appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(username_txt)
+                    .addComponent(oldPass_txt)
+                    .addComponent(newPass_txt)
+                    .addComponent(confirmPass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(1055, Short.MAX_VALUE))
         );
         appointment_panelLayout.setVerticalGroup(
             appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1020, Short.MAX_VALUE)
+            .addGroup(appointment_panelLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addGroup(appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(username_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(appointment_panelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(oldPass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(newPass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(confirmPass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(appointment_panelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel10)
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel6)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel13)))
+                .addContainerGap(708, Short.MAX_VALUE))
         );
 
         cards_panel.add(appointment_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -958,6 +1040,31 @@ public class admin_dashboard extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_viewDoctors_btnActionPerformed
 
+    private void changePass_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changePass_btnMouseEntered
+        // TODO add your handling code here:
+		changePass_btn.setBackground(new Color(82,166,199));
+		changePass_btn.setOpaque(true);
+    }//GEN-LAST:event_changePass_btnMouseEntered
+
+    private void changePass_btnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changePass_btnMouseExited
+        // TODO add your handling code here:
+		changePass_btn.setBackground(new Color(8,128,176));
+    }//GEN-LAST:event_changePass_btnMouseExited
+
+    private void changePass_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changePass_btnMouseClicked
+        // TODO add your handling code here:
+		appointment_panel.setVisible(true);
+		String userName = username_txt.getText();
+		String oldpass = oldPass_txt.getText();
+		String newPass = newPass_txt.getText();
+		String confirmed = confirmPass_txt.getText();
+
+		try{
+			Statement changeStat = con.createStatement();
+			String changeSql = ""
+		}
+    }//GEN-LAST:event_changePass_btnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1005,14 +1112,18 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField appts_txt;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel cards_panel;
+    private javax.swing.JLabel changePass_btn;
+    private javax.swing.JTextField confirmPass_txt;
     private javax.swing.JTable doctorsTableDisplay;
     private javax.swing.JPanel doctors_panel;
     private javax.swing.JTextField fees_txt;
     private javax.swing.JTextField fromTime_txt;
     private javax.swing.JPanel homePage_panel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1023,9 +1134,11 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1043,6 +1156,8 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel manageDoctor_btn;
     private javax.swing.JLabel manageUsers_btn;
     private javax.swing.JTextField name_txt;
+    private javax.swing.JTextField newPass_txt;
+    private javax.swing.JTextField oldPass_txt;
     private javax.swing.JTextField phone_txt;
     private javax.swing.JLabel pm_am_lbl;
     private javax.swing.JLabel refresh_btn;
@@ -1054,6 +1169,7 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField toTime_txt;
     private javax.swing.JButton updateData_btn;
     private javax.swing.JRadioButton update_radBtn;
+    private javax.swing.JTextField username_txt;
     private javax.swing.JPanel users_panel;
     private javax.swing.JLabel viewAllUsers_btn;
     private javax.swing.JButton viewDoctors_btn;
