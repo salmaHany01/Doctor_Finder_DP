@@ -6,6 +6,10 @@
 package adminPackage;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +21,9 @@ public class loginadmin extends javax.swing.JFrame {
     /**
      * Creates new form loginadmin
      */
+	Connection con = DatabaseConnectionDoc.setConnection();
+    PreparedStatement ps = null;
+    ResultSet rs = null;
     public loginadmin() {
         initComponents();
 		login_btn.setBackground(new Color(255,255,255,255));
@@ -127,31 +134,32 @@ public class loginadmin extends javax.swing.JFrame {
 
     private void login_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_btnActionPerformed
         // TODO add your handling code here:
-          if(user_txt.getText().equals("") || pass_txt.getText().equals(""))
-             {
-                  JOptionPane.showMessageDialog(null,"Please enter your username and password");
-       
-             }
-         else
-     {
-         Admin admin = Admin.getInstance();
-        admin.setUsername(user_txt.getText());
-        admin.setPassword(pass_txt.getText());
-    if( admin.Login())
-       { 
-           setVisible(true);
+        String loginAdmin = "SELECT * FROM ADMIN WHERE NAME=? AND PASSWORD =?";
+        try {
+            ps = con.prepareStatement(loginAdmin);
+            ps.setString(1, user_txt.getText());
+            ps.setString(2, pass_txt.getText());
+            rs = ps.executeQuery();
+            while(rs.next())
+            {
+				String username = rs.getString("name");
+				String pass = rs.getString("password");
+				if((user_txt.getText().equals(username)) && (pass_txt.getText().equals(pass))){
+					JOptionPane.showMessageDialog(this, "Login successful!");
+					new admin_dashboard().setVisible(true);
+				}
+				else 
+				{
+					JOptionPane.showMessageDialog(this,"Login unsuccessful!");
+					user_txt.setText("");
+					pass_txt.setText("");
+				}
+            }
            
-           //new Doctor().setVisible(true);
-           
-           //JOptionPane.showMessageDialog(null,"Welcomee");
-		   new admin_dashboard().setVisible(true);
-		   this.setVisible(false);
-       }
-       else
-       {
-           JOptionPane.showMessageDialog(null,"Wrong username or password");
-       }
-     }
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this,e);
+        }
     }//GEN-LAST:event_login_btnActionPerformed
 
     /**
