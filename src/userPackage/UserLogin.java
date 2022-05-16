@@ -6,7 +6,11 @@
 package userPackage;
 
 import java.awt.Color;
-
+import adminPackage.DatabaseConnectionDoc;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Fayroz Tarek
@@ -59,6 +63,11 @@ public class UserLogin extends javax.swing.JFrame {
         });
 
         txt_email.setText("Email");
+        txt_email.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_emailMouseClicked(evt);
+            }
+        });
         txt_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_emailActionPerformed(evt);
@@ -136,6 +145,11 @@ public class UserLogin extends javax.swing.JFrame {
         btn_login.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         btn_login.setForeground(new java.awt.Color(8, 128, 176));
         btn_login.setText("Login");
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
         jPanel3.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 540, 140, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userPackage/womanUserLoginIcon_2.png"))); // NOI18N
@@ -184,6 +198,35 @@ public class UserLogin extends javax.swing.JFrame {
         userRigester.setVisible(true);
         dispose();
     }//GEN-LAST:event_lbl_crtaccMouseClicked
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        
+        try {
+            Connection con = DatabaseConnectionDoc.setConnection();
+            String email = txt_email.getText();
+            String pass = txt_pass.getText();
+            String sql = "select * from User1 where Email = '"+email+"' and Password = '"+pass+"'  ";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next())
+            {
+                dispose();
+                JOptionPane.showMessageDialog(this, "Welcome");
+                
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Invaild Email or Password");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.toString());
+        }
+    }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void txt_emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_emailMouseClicked
+       txt_email.setText("");
+       txt_pass.setText("");
+    }//GEN-LAST:event_txt_emailMouseClicked
 
     /**
      * @param args the command line arguments
