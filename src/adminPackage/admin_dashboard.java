@@ -36,16 +36,19 @@ public class admin_dashboard extends javax.swing.JFrame {
      * Creates new form admin_dashboard
      */
 	Connection con;
-	DefaultTableModel adminModel, viewModel;
+	DefaultTableModel adminModel, viewDoctors, viewUsers;
 	CardLayout cardLayout;
     public admin_dashboard() {
         initComponents();
 		con = DatabaseConnectionDoc.setConnection();
 		adminModel = (DefaultTableModel) doctorsTableDisplay.getModel();
-		viewModel = (DefaultTableModel) viewTable.getModel();
+		viewDoctors = (DefaultTableModel) viewTable.getModel();
+		viewUsers = (DefaultTableModel) viewUsersTable.getModel();
 		displayDoctors();
 		AutoCompleteDecorator.decorate(search_cmbBox);
 		//*ignore* GUI related code
+		userScrollPane.setVisible(false);
+		doctorsScrollPane.setVisible(false);
 		UIManager.put("OptionPane.messageFont", new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
 		homePage_panel.setVisible(true);
 		appointment_panel.setVisible(false);
@@ -54,6 +57,12 @@ public class admin_dashboard extends javax.swing.JFrame {
 		appts_txt.setVisible(false);
 		doctorsTableDisplay.setRowHeight(28);
 		viewTable.setRowHeight(28);
+		viewUsersTable.setRowHeight(28);
+		addDoctor_btn.setBackground(Color.white);
+		removeDoctor_btn.setBackground(Color.white);
+		updateData_btn.setBackground(Color.white);
+		viewDoctors_btn.setBackground(Color.white);
+		viewUsers_btn.setBackground(Color.white);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setSize(screenSize);
@@ -81,8 +90,10 @@ public class admin_dashboard extends javax.swing.JFrame {
         changePass_btn = new javax.swing.JLabel();
         cards_panel = new javax.swing.JPanel();
         homePage_panel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        doctorsScrollPane = new javax.swing.JScrollPane();
         viewTable = new javax.swing.JTable();
+        userScrollPane = new javax.swing.JScrollPane();
+        viewUsersTable = new javax.swing.JTable();
         viewDoctors_btn = new javax.swing.JButton();
         viewUsers_btn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -93,6 +104,7 @@ public class admin_dashboard extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        userView_panel = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
@@ -264,6 +276,7 @@ public class admin_dashboard extends javax.swing.JFrame {
                 "Name", "Address", "Speciality", "Fees", "Appointments", "Phone number", "Rating"
             }
         ));
+        viewTable.setSelectionBackground(new java.awt.Color(204, 204, 255));
         viewTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewTableMouseClicked(evt);
@@ -272,12 +285,46 @@ public class admin_dashboard extends javax.swing.JFrame {
                 viewTableMouseExited(evt);
             }
         });
-        jScrollPane2.setViewportView(viewTable);
+        doctorsScrollPane.setViewportView(viewTable);
 
-        homePage_panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 1490, 390));
+        homePage_panel.add(doctorsScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 1490, 390));
+
+        userScrollPane.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+
+        viewUsersTable.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        viewUsersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "First name", "Last name", "Gender", "Age", "Phone number", "Secondary phone number", "Address", "Email", "Password"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        userScrollPane.setViewportView(viewUsersTable);
+        if (viewUsersTable.getColumnModel().getColumnCount() > 0) {
+            viewUsersTable.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        homePage_panel.add(userScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 1490, 390));
 
         viewDoctors_btn.setBackground(new java.awt.Color(255, 255, 255));
         viewDoctors_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        viewDoctors_btn.setForeground(new java.awt.Color(8, 128, 176));
         viewDoctors_btn.setText("View Doctors");
         viewDoctors_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,7 +335,13 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         viewUsers_btn.setBackground(new java.awt.Color(255, 255, 255));
         viewUsers_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        viewUsers_btn.setForeground(new java.awt.Color(8, 128, 176));
         viewUsers_btn.setText("View Users");
+        viewUsers_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewUsers_btnActionPerformed(evt);
+            }
+        });
         homePage_panel.add(viewUsers_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 490, 174, 50));
 
         jPanel4.setBackground(new java.awt.Color(165, 226, 219));
@@ -331,46 +384,28 @@ public class admin_dashboard extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
         );
 
-        homePage_panel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 40, 440, 250));
+        homePage_panel.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 440, 250));
 
         jPanel5.setBackground(new java.awt.Color(8, 176, 157));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel17.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel17.setText("Appointments for the last week");
+        jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 386, -1));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/deadline.png"))); // NOI18N
+        jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 74)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel19.setText("15");
+        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 153, 108));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(110, 110, 110)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jLabel17)
-                .addGap(22, 22, 22))
-        );
+        userView_panel.setBackground(new java.awt.Color(255, 255, 255));
+        userView_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel5.add(userView_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, 1520, 400));
 
-        homePage_panel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 37, 440, 250));
+        homePage_panel.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 440, 250));
 
         jPanel6.setBackground(new java.awt.Color(106, 207, 196));
 
@@ -413,7 +448,7 @@ public class admin_dashboard extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
         );
 
-        homePage_panel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 440, 250));
+        homePage_panel.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 40, 440, 250));
 
         cards_panel.add(homePage_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1574, 1020));
 
@@ -552,6 +587,7 @@ public class admin_dashboard extends javax.swing.JFrame {
         doctors_panel.add(apptDays_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 330, 180, 37));
 
         updateData_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        updateData_btn.setForeground(new java.awt.Color(8, 128, 176));
         updateData_btn.setText("Update");
         updateData_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -616,6 +652,7 @@ public class admin_dashboard extends javax.swing.JFrame {
         doctors_panel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 890, 50));
 
         addDoctor_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        addDoctor_btn.setForeground(new java.awt.Color(8, 128, 176));
         addDoctor_btn.setText("Add");
         addDoctor_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -625,6 +662,7 @@ public class admin_dashboard extends javax.swing.JFrame {
         doctors_panel.add(addDoctor_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 480, 140, 50));
 
         removeDoctor_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        removeDoctor_btn.setForeground(new java.awt.Color(8, 128, 176));
         removeDoctor_btn.setText("Remove");
         removeDoctor_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -957,6 +995,8 @@ public class admin_dashboard extends javax.swing.JFrame {
 
     private void viewDoctors_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDoctors_btnActionPerformed
         // TODO add your handling code here:
+		userScrollPane.setVisible(false);
+		doctorsScrollPane.setVisible(true);
 		try{
 			Statement displayStat = con.createStatement();
 			String displaySql = "select * from Doctors";
@@ -971,7 +1011,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 				String rating = String.valueOf(rs.getDouble("rating"));
 				//string array to store data into jtable
 				String doctorData[] = {name, address, speciality, fees, appointments, phoneNum, rating};
-				viewModel.addRow(doctorData);
+				viewDoctors.addRow(doctorData);
 			}
 		}
 		catch(SQLException exp){
@@ -994,6 +1034,39 @@ public class admin_dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
 		new admin_change_pass().setVisible(true);
     }//GEN-LAST:event_changePass_btnMouseClicked
+
+    private void viewUsers_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewUsers_btnActionPerformed
+        // TODO add your handling code here:
+		userScrollPane.setVisible(true);
+		doctorsScrollPane.setVisible(false);
+		try{
+			Statement viewUsersStat = con.createStatement();
+			String viewSql = "select * from user1";
+			ResultSet rs = viewUsersStat.executeQuery(viewSql);
+			while(rs.next()){
+				int id = rs.getInt("id");
+				String first_name = rs.getString("fname");
+				String last_name = rs.getString("lname");
+				String gender = rs.getString("gender");
+				String age = String.valueOf(rs.getInt("age"));
+				String phoneno_1 = String.valueOf(rs.getInt("phoneno1"));
+				String phoneno_2 = String.valueOf(rs.getInt("phoneno2"));
+				if(phoneno_1 == null || phoneno_2 == null){
+					phoneno_1 = "-";
+					phoneno_2 = "-";
+				}
+				String user_address = rs.getString("address");
+				String email = rs.getString("email");
+				String password = "Data Encrypted";
+				//string array to store data into jtable
+				String userData[] = {first_name, last_name, gender, age, phoneno_1, phoneno_2, user_address, email, password};
+				viewUsers.addRow(userData);
+			}
+		}
+		catch(SQLException exp){
+			JOptionPane.showMessageDialog(this, exp.toString());
+		}
+    }//GEN-LAST:event_viewUsers_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1043,6 +1116,7 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel cards_panel;
     private javax.swing.JLabel changePass_btn;
+    private javax.swing.JScrollPane doctorsScrollPane;
     private javax.swing.JTable doctorsTableDisplay;
     private javax.swing.JPanel doctors_panel;
     private javax.swing.JTextField fees_txt;
@@ -1074,7 +1148,6 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JLabel logout_btn;
     private javax.swing.JLabel manageAppt_btn;
@@ -1092,10 +1165,13 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField toTime_txt;
     private javax.swing.JButton updateData_btn;
     private javax.swing.JRadioButton update_radBtn;
+    private javax.swing.JScrollPane userScrollPane;
+    private javax.swing.JPanel userView_panel;
     private javax.swing.JPanel users_panel;
     private javax.swing.JLabel viewAllUsers_btn;
     private javax.swing.JButton viewDoctors_btn;
     private javax.swing.JTable viewTable;
+    private javax.swing.JTable viewUsersTable;
     private javax.swing.JButton viewUsers_btn;
     // End of variables declaration//GEN-END:variables
 }
