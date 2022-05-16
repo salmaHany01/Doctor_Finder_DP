@@ -5,6 +5,7 @@
  */
 package userPackage;
 
+import java.awt.Color;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -19,8 +20,16 @@ public class UserProfile extends javax.swing.JFrame {
      */
     public UserProfile() {
         initComponents();
+		//GUI related *ignore*
         lbl_img.setIcon(new ImageIcon("D:\\Software_Engineering\\Semester_6\\Design patterns\\Project\\DoctorFinderProject\\src\\main\\java\\com\\mycompany\\doctorFinder\\user\\pp2.png"));
-    }
+		panel_homepage.setVisible(true);
+        panel_chngInfo.setVisible(false);
+        panel_chngPass.setVisible(false);
+        panel_appointments.setVisible(false);
+        panel_payments.setVisible(false);
+		btn_out.setBackground(Color.white);
+		btn_update.setBackground(Color.white);
+	}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,18 +42,35 @@ public class UserProfile extends javax.swing.JFrame {
 
         jFrame1 = new javax.swing.JFrame();
         jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
+        panel_Profile = new javax.swing.JPanel();
         lbl_img = new javax.swing.JLabel();
         lbl_name = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_homepage = new javax.swing.JLabel();
+        lbl_chnginfo1 = new javax.swing.JLabel();
+        lbl_chngPass = new javax.swing.JLabel();
+        lbl_Appoin = new javax.swing.JLabel();
+        lbl_payments = new javax.swing.JLabel();
         btn_out = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        panel_homepage = new javax.swing.JPanel();
+        panel_chngInfo = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        btn_update = new javax.swing.JButton();
+        panel_chngPass = new javax.swing.JPanel();
+        panel_appointments = new javax.swing.JPanel();
+        panel_payments = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -59,92 +85,216 @@ public class UserProfile extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 204, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jSplitPane1.setDividerSize(1);
+
+        panel_Profile.setBackground(new java.awt.Color(102, 204, 255));
+        panel_Profile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbl_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userPackage/pp2.png"))); // NOI18N
-        jPanel1.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 34, -1, -1));
+        panel_Profile.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 34, -1, -1));
 
         lbl_name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_name.setText("User   Name");
         lbl_name.setAlignmentX(0.5F);
-        jPanel1.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 147, 123, 31));
+        panel_Profile.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 123, 31));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel1.setText("Change Info");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 254, 191, -1));
+        lbl_homepage.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
+        lbl_homepage.setText("Home Page");
+        lbl_homepage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_homepage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_homepageMouseClicked(evt);
+            }
+        });
+        panel_Profile.add(lbl_homepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 191, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel3.setText("Change Password");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 311, 191, -1));
+        lbl_chnginfo1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
+        lbl_chnginfo1.setText("Change Info");
+        lbl_chnginfo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_chnginfo1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_chnginfo1MouseClicked(evt);
+            }
+        });
+        panel_Profile.add(lbl_chnginfo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 191, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel4.setText("Payments");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 425, 191, -1));
+        lbl_chngPass.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
+        lbl_chngPass.setText("Change Password");
+        lbl_chngPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_chngPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_chngPassMouseClicked(evt);
+            }
+        });
+        panel_Profile.add(lbl_chngPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 191, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel2.setText("Appointments");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 368, 191, -1));
+        lbl_Appoin.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
+        lbl_Appoin.setText("Appointments");
+        lbl_Appoin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_Appoin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_AppoinMouseClicked(evt);
+            }
+        });
+        panel_Profile.add(lbl_Appoin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 200, 30));
 
+        lbl_payments.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
+        lbl_payments.setText("Payments");
+        lbl_payments.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_payments.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_paymentsMouseClicked(evt);
+            }
+        });
+        panel_Profile.add(lbl_payments, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 191, -1));
+
+        btn_out.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        btn_out.setForeground(new java.awt.Color(8, 128, 176));
         btn_out.setText("Logout");
         btn_out.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_outActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_out, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 766, 134, -1));
+        panel_Profile.add(btn_out, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 760, 130, 40));
 
-        jSplitPane1.setLeftComponent(jPanel1);
+        jSplitPane1.setLeftComponent(panel_Profile);
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panel_homepage.setBackground(new java.awt.Color(255, 255, 255));
+        panel_homepage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 51, 51));
+        panel_chngInfo.setBackground(new java.awt.Color(204, 255, 255));
+        panel_chngInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel5.setText("First Name");
+        panel_chngInfo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 119, 30));
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        panel_chngInfo.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 189, -1));
+
+        jLabel6.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel6.setText("Gender");
+        panel_chngInfo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 119, 30));
+
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        panel_chngInfo.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 189, -1));
+
+        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel7.setText("Phone No2");
+        panel_chngInfo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 119, 30));
+
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
+        panel_chngInfo.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, 189, -1));
+
+        jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel8.setText("Email");
+        panel_chngInfo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, 119, 30));
+
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+        panel_chngInfo.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 600, 189, -1));
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+        panel_chngInfo.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 470, 189, -1));
+
+        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel9.setText("Address");
+        panel_chngInfo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 390, 119, 30));
+
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        panel_chngInfo.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 310, 189, -1));
+
+        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel10.setText("Phone No1");
+        panel_chngInfo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 119, 30));
+        panel_chngInfo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, 189, -1));
+
+        jLabel11.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel11.setText("Last Name");
+        panel_chngInfo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 119, 30));
+
+        btn_update.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        btn_update.setForeground(new java.awt.Color(8, 128, 176));
+        btn_update.setText("Update");
+        btn_update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_updateActionPerformed(evt);
+            }
+        });
+        panel_chngInfo.add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 580, 203, 53));
+
+        panel_homepage.add(panel_chngInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 810));
+
+        panel_chngPass.setBackground(new java.awt.Color(255, 51, 51));
+
+        javax.swing.GroupLayout panel_chngPassLayout = new javax.swing.GroupLayout(panel_chngPass);
+        panel_chngPass.setLayout(panel_chngPassLayout);
+        panel_chngPassLayout.setHorizontalGroup(
+            panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1048, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panel_chngPassLayout.setVerticalGroup(
+            panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 804, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panel_homepage.add(panel_chngPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel5.setBackground(new java.awt.Color(204, 255, 153));
+        panel_appointments.setBackground(new java.awt.Color(204, 255, 153));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panel_appointmentsLayout = new javax.swing.GroupLayout(panel_appointments);
+        panel_appointments.setLayout(panel_appointmentsLayout);
+        panel_appointmentsLayout.setHorizontalGroup(
+            panel_appointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1048, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panel_appointmentsLayout.setVerticalGroup(
+            panel_appointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 497, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panel_homepage.add(panel_appointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 51));
+        panel_payments.setBackground(new java.awt.Color(255, 255, 51));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panel_paymentsLayout = new javax.swing.GroupLayout(panel_payments);
+        panel_payments.setLayout(panel_paymentsLayout);
+        panel_paymentsLayout.setHorizontalGroup(
+            panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1048, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panel_paymentsLayout.setVerticalGroup(
+            panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 804, Short.MAX_VALUE)
         );
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panel_homepage.add(panel_payments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jSplitPane1.setRightComponent(jPanel4);
+        jSplitPane1.setRightComponent(panel_homepage);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,6 +309,74 @@ public class UserProfile extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
+        // TODO add your handling code here:
+       
+
+    }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void lbl_homepageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_homepageMouseClicked
+        // TODO add your handling code here:
+        panel_homepage.setVisible(true);
+        panel_payments.setVisible(false);
+        panel_appointments.setVisible(false);
+        panel_chngPass.setVisible(false);
+        panel_chngInfo.setVisible(false);
+    }//GEN-LAST:event_lbl_homepageMouseClicked
+
+    private void lbl_chnginfo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_chnginfo1MouseClicked
+        // TODO add your handling code here:
+        panel_chngInfo.setVisible(true);
+    }//GEN-LAST:event_lbl_chnginfo1MouseClicked
+
+    private void lbl_chngPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_chngPassMouseClicked
+        // TODO add your handling code here:
+        panel_chngPass.setVisible(true);
+        panel_chngInfo.setVisible(false);
+
+    }//GEN-LAST:event_lbl_chngPassMouseClicked
+
+    private void lbl_AppoinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_AppoinMouseClicked
+        // TODO add your handling code here:
+        panel_appointments.setVisible(true);
+        panel_chngPass.setVisible(false);
+        panel_chngInfo.setVisible(false);
+
+    }//GEN-LAST:event_lbl_AppoinMouseClicked
+
+    private void lbl_paymentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_paymentsMouseClicked
+        // TODO add your handling code here:
+        panel_payments.setVisible(true);
+        panel_appointments.setVisible(false);
+        panel_chngPass.setVisible(false);
+        panel_chngInfo.setVisible(false);
+
+    }//GEN-LAST:event_lbl_paymentsMouseClicked
 
     private void btn_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_outActionPerformed
         // TODO add your handling code here:
@@ -205,18 +423,35 @@ public class UserProfile extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_out;
+    private javax.swing.JButton btn_update;
     private javax.swing.JFrame jFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JLabel lbl_Appoin;
+    private javax.swing.JLabel lbl_chngPass;
+    private javax.swing.JLabel lbl_chnginfo1;
+    private javax.swing.JLabel lbl_homepage;
     private javax.swing.JLabel lbl_img;
     private javax.swing.JLabel lbl_name;
+    private javax.swing.JLabel lbl_payments;
+    private javax.swing.JPanel panel_Profile;
+    private javax.swing.JPanel panel_appointments;
+    private javax.swing.JPanel panel_chngInfo;
+    private javax.swing.JPanel panel_chngPass;
+    private javax.swing.JPanel panel_homepage;
+    private javax.swing.JPanel panel_payments;
     // End of variables declaration//GEN-END:variables
 }
