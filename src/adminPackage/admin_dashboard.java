@@ -36,7 +36,7 @@ public class admin_dashboard extends javax.swing.JFrame {
      * Creates new form admin_dashboard
      */
 	Connection con;
-	DefaultTableModel adminModel, viewDoctors, viewUsers;
+	DefaultTableModel adminModel, viewDoctors, viewUsers, apptsModel;
 	CardLayout cardLayout;
     public admin_dashboard() {
         initComponents();
@@ -44,7 +44,9 @@ public class admin_dashboard extends javax.swing.JFrame {
 		adminModel = (DefaultTableModel) doctorsTableDisplay.getModel();
 		viewDoctors = (DefaultTableModel) viewTable.getModel();
 		viewUsers = (DefaultTableModel) viewUsersTable.getModel();
+		apptsModel = (DefaultTableModel) apptsTable.getModel();
 		displayDoctors();
+		view_user_appointments();
 		AutoCompleteDecorator.decorate(search_cmbBox);
 		//*ignore* GUI related code
 		userScrollPane.setVisible(false);
@@ -58,11 +60,14 @@ public class admin_dashboard extends javax.swing.JFrame {
 		doctorsTableDisplay.setRowHeight(28);
 		viewTable.setRowHeight(28);
 		viewUsersTable.setRowHeight(28);
+		apptsTable.setRowHeight(28);
 		addDoctor_btn.setBackground(Color.white);
 		removeDoctor_btn.setBackground(Color.white);
 		updateData_btn.setBackground(Color.white);
 		viewDoctors_btn.setBackground(Color.white);
 		viewUsers_btn.setBackground(Color.white);
+		confirmAppt_btn.setBackground(Color.white);
+		cancelAppts_btn.setBackground(Color.white);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setSize(screenSize);
@@ -110,6 +115,18 @@ public class admin_dashboard extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         appointment_panel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        apptsTable = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        appt_time_txt = new javax.swing.JTextField();
+        patientName_txt = new javax.swing.JTextField();
+        doctorName_txt = new javax.swing.JTextField();
+        appt_date_txt = new javax.swing.JTextField();
+        cancelAppts_btn = new javax.swing.JButton();
+        confirmAppt_btn = new javax.swing.JButton();
         doctors_panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         doctorsTableDisplay = new javax.swing.JTable();
@@ -276,7 +293,8 @@ public class admin_dashboard extends javax.swing.JFrame {
                 "Name", "Address", "Speciality", "Fees", "Appointments", "Phone number", "Rating"
             }
         ));
-        viewTable.setSelectionBackground(new java.awt.Color(204, 204, 255));
+        viewTable.setRowHeight(28);
+        viewTable.setSelectionBackground(new java.awt.Color(165, 226, 219));
         viewTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 viewTableMouseClicked(evt);
@@ -315,6 +333,7 @@ public class admin_dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        viewUsersTable.setSelectionBackground(new java.awt.Color(165, 226, 219));
         userScrollPane.setViewportView(viewUsersTable);
         if (viewUsersTable.getColumnModel().getColumnCount() > 0) {
             viewUsersTable.getColumnModel().getColumn(0).setResizable(false);
@@ -452,20 +471,93 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         cards_panel.add(homePage_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1574, 1020));
 
-        appointment_panel.setBackground(new java.awt.Color(204, 0, 204));
+        appointment_panel.setBackground(new java.awt.Color(255, 255, 255));
+        appointment_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout appointment_panelLayout = new javax.swing.GroupLayout(appointment_panel);
-        appointment_panel.setLayout(appointment_panelLayout);
-        appointment_panelLayout.setHorizontalGroup(
-            appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1579, Short.MAX_VALUE)
-        );
-        appointment_panelLayout.setVerticalGroup(
-            appointment_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1020, Short.MAX_VALUE)
-        );
+        apptsTable.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        apptsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        cards_panel.add(appointment_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+            },
+            new String [] {
+                "Patient first name", "Patient last name", "Doctor name", "Date", "Time", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        apptsTable.setPreferredSize(new java.awt.Dimension(525, 525));
+        apptsTable.setSelectionBackground(new java.awt.Color(165, 226, 219));
+        apptsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                apptsTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(apptsTable);
+
+        appointment_panel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 518, 1420, 390));
+
+        jLabel6.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel6.setText("Appointment Time");
+        appointment_panel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel10.setText("Patient name");
+        appointment_panel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel13.setText("Doctor name");
+        appointment_panel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
+
+        jLabel23.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel23.setText("Appointment Date");
+        appointment_panel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+
+        appt_time_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        appointment_panel.add(appt_time_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 290, 37));
+
+        patientName_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        appointment_panel.add(patientName_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 290, 37));
+
+        doctorName_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        appointment_panel.add(doctorName_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 290, 37));
+
+        appt_date_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        appointment_panel.add(appt_date_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 290, 37));
+
+        cancelAppts_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        cancelAppts_btn.setForeground(new java.awt.Color(8, 128, 176));
+        cancelAppts_btn.setText("Cancel");
+        cancelAppts_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelAppts_btnActionPerformed(evt);
+            }
+        });
+        appointment_panel.add(cancelAppts_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 140, 60));
+
+        confirmAppt_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        confirmAppt_btn.setForeground(new java.awt.Color(8, 128, 176));
+        confirmAppt_btn.setText("Confirm");
+        confirmAppt_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmAppt_btnActionPerformed(evt);
+            }
+        });
+        appointment_panel.add(confirmAppt_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 140, 60));
+
+        cards_panel.add(appointment_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1579, 1020));
 
         doctors_panel.setBackground(new java.awt.Color(255, 255, 255));
         doctors_panel.setPreferredSize(new java.awt.Dimension(1574, 1020));
@@ -480,6 +572,7 @@ public class admin_dashboard extends javax.swing.JFrame {
                 "Name", "Address", "Speciality", "Fees", "Appointments", "Phone number", "Rating"
             }
         ));
+        doctorsTableDisplay.setSelectionBackground(new java.awt.Color(165, 226, 219));
         doctorsTableDisplay.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 doctorsTableDisplayMouseClicked(evt);
@@ -499,6 +592,11 @@ public class admin_dashboard extends javax.swing.JFrame {
         name_txt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 name_txtMouseClicked(evt);
+            }
+        });
+        name_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                name_txtActionPerformed(evt);
             }
         });
         doctors_panel.add(name_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 310, 37));
@@ -698,7 +796,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         cards_panel.add(doctors_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1574, 1020));
 
-        users_panel.setBackground(new java.awt.Color(0, 102, 153));
+        users_panel.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout users_panelLayout = new javax.swing.GroupLayout(users_panel);
         users_panel.setLayout(users_panelLayout);
@@ -742,6 +840,75 @@ public class admin_dashboard extends javax.swing.JFrame {
 		}
 		catch(SQLException exp){
 			JOptionPane.showMessageDialog(this, exp.toString());
+		}
+	}
+	public String getDoctorNameFromDB(int doctor_id){
+		try{
+			Statement getDocname = con.createStatement();
+			String getDoctorName = "select name from doctors where id = "+doctor_id+"";
+			ResultSet docName = getDocname.executeQuery(getDoctorName);
+			while(docName.next()){
+				String doctor_name = docName.getString("name");
+				return doctor_name;
+			}
+		}
+		catch(SQLException ex){
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
+		}
+		return null;
+	}
+	public String getUserFNameFromDB(int patient_id){
+		try{
+			Statement getUsername = con.createStatement();
+			String getPatientName = "select fname from user1 where id = "+patient_id+"";
+			ResultSet patName = getUsername.executeQuery(getPatientName);
+			while(patName.next()){
+				String first_name = patName.getString("fname");
+				return first_name;
+			}
+		}
+		catch(SQLException ex){
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
+		}
+		return null;
+	}
+	public String getUserLNameFromDB(int patient_id){
+		try{
+			Statement getUsername = con.createStatement();
+			String getPatientName = "select lname from user1 where id = "+patient_id+"";
+			ResultSet patName = getUsername.executeQuery(getPatientName);
+			while(patName.next()){
+				String last_name = patName.getString("lname");
+				return last_name;
+			}
+		}
+		catch(SQLException ex){
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
+		}
+		return null;
+	}
+	public void view_user_appointments(){
+		Statement viewApptsStat = null;
+		String viewApptsSql;
+		try{
+			viewApptsStat = con.createStatement();
+			viewApptsSql = "Select * from appointments";
+			ResultSet appts = viewApptsStat.executeQuery(viewApptsSql);
+			while(appts.next()){
+				String date = String.valueOf(appts.getDate("date"));
+				String time = appts.getString("time");
+				int patient_id = appts.getInt("patient_id");
+				int doctor_id = appts.getInt("doctor_id");
+				String appt_status = appts.getString("status");
+				String patient_fname = getUserFNameFromDB(patient_id);
+				String patient_lname = getUserLNameFromDB(patient_id);
+				String doctor_name = getDoctorNameFromDB(doctor_id);
+				String apptsArr[] = {patient_fname,patient_lname, doctor_name, date, time, appt_status};
+				apptsModel.addRow(apptsArr);
+			}
+		}
+		catch(SQLException ex){
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
 		}
 	}
     private void viewAllUsers_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewAllUsers_btnMouseClicked
@@ -863,7 +1030,6 @@ public class admin_dashboard extends javax.swing.JFrame {
     private void doctorsTableDisplayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorsTableDisplayMouseClicked
         // TODO add your handling code here:
 		appts_txt.setVisible(true);
-		toTime_txt.setVisible(false);
 		name_txt.setText(adminModel.getValueAt(doctorsTableDisplay.getSelectedRow(),0).toString());
 		speciality_comboBox.setSelectedItem(adminModel.getValueAt(doctorsTableDisplay.getSelectedRow(),2).toString());
 		fees_txt.setText(adminModel.getValueAt(doctorsTableDisplay.getSelectedRow(),3).toString());
@@ -875,7 +1041,6 @@ public class admin_dashboard extends javax.swing.JFrame {
     private void doctorsTableDisplayMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorsTableDisplayMouseExited
         // TODO add your handling code here:
 		appts_txt.setVisible(false);
-		toTime_txt.setVisible(true);
     }//GEN-LAST:event_doctorsTableDisplayMouseExited
 
     private void name_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name_txtMouseClicked
@@ -893,11 +1058,12 @@ public class admin_dashboard extends javax.swing.JFrame {
 				String spec = speciality_comboBox.getSelectedItem().toString();
 				String updateSQL = "update doctors set address = '"+address_txt.getText()+"', speciality = '"+spec+"', fees= "+fees_txt.getText()+", phoneno= "+phone_txt.getText()+"where name like '"+name_txt.getText()+"'";
 				updateStat.executeUpdate(updateSQL);
+				adminModel.setRowCount(0);
 				displayDoctors();
 				JOptionPane.showMessageDialog(this, "Doctor information updated successfully.");
 			}
 			catch(SQLException ex){
-				JOptionPane.showMessageDialog(this, ex.toString());
+				JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
 			}
 		}
     }//GEN-LAST:event_updateData_btnActionPerformed
@@ -942,7 +1108,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 			
         }
         catch(SQLException exp){
-            JOptionPane.showMessageDialog(this, exp.toString());
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
         }
     }//GEN-LAST:event_addDoctor_btnActionPerformed
 
@@ -957,7 +1123,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 			
 		}
 		catch(SQLException ex){
-			JOptionPane.showMessageDialog(this, ex.toString());
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
 		}
     }//GEN-LAST:event_removeDoctor_btnActionPerformed
 
@@ -1015,7 +1181,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 			}
 		}
 		catch(SQLException exp){
-			JOptionPane.showMessageDialog(this, exp.toString());
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
 		}
     }//GEN-LAST:event_viewDoctors_btnActionPerformed
 
@@ -1064,9 +1230,72 @@ public class admin_dashboard extends javax.swing.JFrame {
 			}
 		}
 		catch(SQLException exp){
-			JOptionPane.showMessageDialog(this, exp.toString());
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
 		}
     }//GEN-LAST:event_viewUsers_btnActionPerformed
+
+    private void name_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_name_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_name_txtActionPerformed
+
+    private void apptsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_apptsTableMouseClicked
+        // TODO add your handling code here:
+		patientName_txt.setText(apptsModel.getValueAt(apptsTable.getSelectedRow(),0).toString()+" "+ apptsModel.getValueAt(apptsTable.getSelectedRow(), 1).toString());
+		doctorName_txt.setText(apptsModel.getValueAt(apptsTable.getSelectedRow(),2).toString());
+		appt_date_txt.setText(apptsModel.getValueAt(apptsTable.getSelectedRow(),3).toString());
+		appt_time_txt.setText(apptsModel.getValueAt(apptsTable.getSelectedRow(),4).toString());
+    }//GEN-LAST:event_apptsTableMouseClicked
+
+    private void confirmAppt_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAppt_btnActionPerformed
+        // TODO add your handling code here:
+		Statement st = null;
+		Statement another = null;
+		String sql, selectSql;
+		String userFirstName = apptsModel.getValueAt(apptsTable.getSelectedRow(),0).toString();
+		try{
+			st = con.createStatement();
+			another = con.createStatement();
+			selectSql = "select id from user1 where fname like '"+userFirstName+"'";
+			ResultSet rs = st.executeQuery(selectSql);
+			while(rs.next()){
+				int pt_id = rs.getInt("id");
+				sql = "update appointments set status = 'CONFIRMED' where patient_id = "+pt_id+"";
+				another.executeUpdate(sql);
+				//apptsModel.fireTableCellUpdated(apptsTable.getSelectedRow(), 5);
+				apptsModel.setRowCount(0);
+				view_user_appointments();
+			}
+			con.setAutoCommit(false);
+		}
+		catch(SQLException ex){
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
+		}
+    }//GEN-LAST:event_confirmAppt_btnActionPerformed
+
+    private void cancelAppts_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelAppts_btnActionPerformed
+        // TODO add your handling code here:
+		Statement st = null;
+		Statement another = null;
+		String sql, selectSql;
+		String userFirstName = apptsModel.getValueAt(apptsTable.getSelectedRow(),0).toString();
+		try{
+			st = con.createStatement();
+			another = con.createStatement();
+			selectSql = "select id from user1 where fname like '"+userFirstName+"'";
+			ResultSet rs = st.executeQuery(selectSql);
+			while(rs.next()){
+				int pt_id = rs.getInt("id");
+				sql = "update appointments set status = 'CANCELLED' where patient_id = "+pt_id+"";
+				another.executeUpdate(sql);
+				apptsModel.setRowCount(0);
+				view_user_appointments();
+			}
+			con.setAutoCommit(false);
+		}
+		catch(SQLException ex){
+			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
+		}
+    }//GEN-LAST:event_cancelAppts_btnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1112,10 +1341,16 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel am_pm_lbl;
     private javax.swing.JPanel appointment_panel;
     private javax.swing.JComboBox<String> apptDays_combo;
+    private javax.swing.JTextField appt_date_txt;
+    private javax.swing.JTextField appt_time_txt;
+    private javax.swing.JTable apptsTable;
     private javax.swing.JTextField appts_txt;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton cancelAppts_btn;
     private javax.swing.JPanel cards_panel;
     private javax.swing.JLabel changePass_btn;
+    private javax.swing.JButton confirmAppt_btn;
+    private javax.swing.JTextField doctorName_txt;
     private javax.swing.JScrollPane doctorsScrollPane;
     private javax.swing.JTable doctorsTableDisplay;
     private javax.swing.JPanel doctors_panel;
@@ -1123,8 +1358,10 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField fromTime_txt;
     private javax.swing.JPanel homePage_panel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1135,9 +1372,11 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1148,12 +1387,14 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane2;
     private javax.swing.JLabel logout_btn;
     private javax.swing.JLabel manageAppt_btn;
     private javax.swing.JLabel manageDoctor_btn;
     private javax.swing.JLabel manageUsers_btn;
     private javax.swing.JTextField name_txt;
+    private javax.swing.JTextField patientName_txt;
     private javax.swing.JTextField phone_txt;
     private javax.swing.JLabel pm_am_lbl;
     private javax.swing.JLabel refresh_btn;
