@@ -286,7 +286,7 @@ public class UserRigester extends javax.swing.JFrame {
            //int id = Integer.parseInt(Id_txt.getText().trim());
             
             
-            Connection con = DatabaseConnectionDoc.getConn();
+            Connection con = DatabaseConnectionDoc.setConnection();
              Statement st = con.createStatement();
             st.execute("insert into Users (Fname,Lname,Gender,DOB,PhoneNo1,PhoneNo2,Address,Email,Password) values ('"+fname+"','"+lname+"' ,'"+gender+"', '"+DOB+"', "+phone1+", "+phone2+",'"+add+"', '"+email+"', '"+pass+"')");
             //st.execute("insert into User1 (Fname,Lname,Gender,Age,PhoneNo1,PhoneNo2,Address,Email,Password) values ('" +u.getFname()+ "','" +u.getLname()+ "','"+ u.getGender()+"', " + u.getAge()+",'" +u.getAddress()+"'," + u.getPhoneNo1()+ "," + u.getPhoneNo2()+",'" + u.getEmail()+ "','" + u.getPass() +"')");
