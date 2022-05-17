@@ -32,7 +32,7 @@ public class Admin {
        {
             //Connection con = DatabaseConnectionDoc.setConnection();
             Statement st = con.createStatement();
-            String sql = "insert into Users values ("+u.getId()+",'" +u.getFname()+ "','" +u.getLname()+ "', " + u.getAge()+",'"+ u.getGender()+"','" +u.getAddress()+ "'," + u.getPhoneNo1()+ "," + u.getPhoneNo2()+"," +u.getVisa() +",'" + u.getEmail()+ "','" + u.getPass() +"')";
+            String sql = "insert into User1 values ('" +u.getFname()+ "','" +u.getLname()+ "','" + u.getGender()+"',"+ u.getAge()+"," + u.getPhoneNo1()+ "," + u.getPhoneNo2()+",'" +u.getAddress()+ "','" + u.getEmail()+ "','" + u.getPass() +"')";
             st.executeUpdate(sql); 
             con.close();
             return true;

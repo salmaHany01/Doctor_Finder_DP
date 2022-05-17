@@ -6,10 +6,10 @@
 package adminPackage;
 //import com.mycompany.doctorFinder.admin;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+
+
+
 
 /**
  *
@@ -17,11 +17,7 @@ import java.sql.Statement;
  */
 public class DatabaseConnectionDoc {
     
-   // private static DatabaseConnectionDoc instance = new DatabaseConnectionDoc();
-    
-    
    
-    
     private DatabaseConnectionDoc() {}
 
  private static Connection con;
@@ -29,26 +25,28 @@ public class DatabaseConnectionDoc {
     public static Connection setConnection()
     {
         try{
+            if(con==null)
+			{
              
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/DoctorFinder", "doctor","123");
             System.out.println("Connected");
-            return con;
+            
+                        }
         }
         catch (SQLException e)
         {
              System.out.println("Not connected");
             
-            return null;
+           
             
         }
+        return con;
             
-       
+    
         
 
+
 }
-    public static Connection getConn(){
-        return con;
-        
-    }
+   
 
 }

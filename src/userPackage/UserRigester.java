@@ -5,6 +5,10 @@
  */
 package userPackage;
 
+import javax.swing.JOptionPane;
+import adminPackage.*;
+import java.sql.*;
+
 /**
  *
  * @author Fayroz Tarek
@@ -27,22 +31,326 @@ public class UserRigester extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Email_txt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        Pass_txt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        Add_btn = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        FName_txt = new javax.swing.JTextField();
+        LName_txt = new javax.swing.JTextField();
+        Age_txt = new javax.swing.JTextField();
+        Add_txt = new javax.swing.JTextField();
+        PhoneNo2_txt = new javax.swing.JTextField();
+        PhoneNo1_txt = new javax.swing.JTextField();
+        Gender_cmb = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        Date_txt = new com.toedter.calendar.JDateChooser();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create New Account");
+
+        Email_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel1.setText("First Name");
+
+        jLabel6.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel6.setText("Phone Number 1");
+
+        Pass_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Pass_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Pass_txtActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel2.setText("Age");
+
+        jLabel3.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel3.setText("Gender");
+
+        jLabel10.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel10.setText("Email");
+
+        Add_btn.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Add_btn.setText("Register");
+        Add_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Add_btnActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel4.setText("Phone Number 2");
+
+        jLabel11.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel11.setText("Password");
+
+        jLabel8.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel8.setText("Last Name");
+
+        jLabel5.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel5.setText("Address");
+
+        FName_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        FName_txt.setName(""); // NOI18N
+
+        LName_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        LName_txt.setName(""); // NOI18N
+
+        Age_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Age_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Age_txtActionPerformed(evt);
+            }
+        });
+
+        Add_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+
+        PhoneNo2_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+
+        PhoneNo1_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+
+        Gender_cmb.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Gender_cmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        Gender_cmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Gender_cmbActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel7.setText("Date");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 819, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(163, 163, 163)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(247, 247, 247)
+                        .addComponent(Gender_cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(146, 146, 146)
+                        .addComponent(PhoneNo1_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addGap(146, 146, 146)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Pass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Email_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Add_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PhoneNo2_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(225, 225, 225)
+                                .addComponent(Date_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LName_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(189, 189, 189)
+                                .addComponent(FName_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Age_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(FName_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel8)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel7)
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(LName_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Date_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(Age_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Gender_cmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel6))
+                    .addComponent(PhoneNo1_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(PhoneNo2_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(Add_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(Email_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(Pass_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addComponent(Add_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Pass_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pass_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Pass_txtActionPerformed
+
+    private void Add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_btnActionPerformed
+
+        Admin ad = new Admin();
+        Userfarah u = new Userfarah();
+       
+        
+           String fname =FName_txt.getText();
+            String lname =LName_txt.getText();
+            String gender =Gender_cmb.getSelectedItem().toString();
+           // int age= Integer.parseInt(Age_txt.getText());
+           String DOB = Date_txt.getDate().toString();
+            int phone1= Integer.parseInt(PhoneNo1_txt.getText());
+            int phone2= Integer.parseInt(PhoneNo2_txt.getText());
+            String add =Add_txt.getText();
+            //String i= Visa_txt.getText().trim();
+            String email =Email_txt.getText();
+            String pass = Pass_txt.getText();
+        if(FName_txt.equals("") || LName_txt.equals("") || Add_txt.equals("") ||PhoneNo1_txt.equals("") || PhoneNo2_txt.equals("")  || Email_txt.equals("") || Pass_txt.equals("")  )
+        {
+            JOptionPane.showMessageDialog(rootPane , "Please Fill in All the Information","ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
+           
+          
+        try {
+            /*
+            u.setFname(FName_txt.getText());
+            u.setFname(LName_txt.getText());
+             u.setGender(Gender_txt.getText());
+            //u.setGender(Gender_cmb.getSelectedItem().toString());
+            u.setAge(Integer.parseInt(Age_txt.getText()));
+            
+            u.setPhoneNo1(Integer.parseInt(PhoneNo1_txt.getText()));
+            u.setPhoneNo2(Integer.parseInt(PhoneNo2_txt.getText()));
+            u.setAddress(Add_txt.getText());
+            
+            u.setEmail(Email_txt.getText());
+            u.setPass(Pass_txt.getText());
+            */
+            
+           //int id = Integer.parseInt(Id_txt.getText().trim());
+            
+            
+            Connection con = DatabaseConnectionDoc.getConn();
+             Statement st = con.createStatement();
+            st.execute("insert into Users (Fname,Lname,Gender,DOB,PhoneNo1,PhoneNo2,Address,Email,Password) values ('"+fname+"','"+lname+"' ,'"+gender+"', '"+DOB+"', "+phone1+", "+phone2+",'"+add+"', '"+email+"', '"+pass+"')");
+            //st.execute("insert into User1 (Fname,Lname,Gender,Age,PhoneNo1,PhoneNo2,Address,Email,Password) values ('" +u.getFname()+ "','" +u.getLname()+ "','"+ u.getGender()+"', " + u.getAge()+",'" +u.getAddress()+"'," + u.getPhoneNo1()+ "," + u.getPhoneNo2()+",'" + u.getEmail()+ "','" + u.getPass() +"')");
+
+            //if(ad.AddUser(u))
+            //{
+                JOptionPane.showMessageDialog(this, "Record Inserted");
+                
+            //}
+          //  else
+            //{
+               // JOptionPane.showMessageDialog(this, "NOT INSERTED");
+                //JOptionPane.showMessageDialog(rootPane , "NOT INSERTED","ERROR", JOptionPane.ERROR_MESSAGE);
+            //}
+            
+            
+            /*
+             int patkey = 1;
+            PreparedStatement add = con.prepareStatement("insert into Users values(?,?,?,?,?,?,?,?,?,?)");
+            add.setInt(1, patkey);
+            add.setString(2, FName_txt.getText());
+            add.setString(3, LName_txt.getText());
+            add.setString(4, Gender_txt.getText());
+            add.setInt(5,Integer.parseInt(Age_txt.getText()));
+            
+            add.setInt(6,Integer.parseInt(PhoneNo1_txt.getText()));
+            add.setInt(7,Integer.parseInt(PhoneNo2_txt.getText()));
+            add.setString(8, Add_txt.getText());
+            //add.setString(9, Visa_txt.getText());
+            add.setString(9, Email_txt.getText());
+            add.setString(10,Pass_txt.getText());
+            int row = add.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Record Inserted");
+            
+            
+*/
+            con.close();
+        } catch (Exception ex) {
+            //JOptionPane.showMessageDialog(rootPane , "ERROR","ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.toString());
+        }
+        
+        FName_txt.setText("");
+        LName_txt.setText("");
+        //Gender_txt.setText("");
+        //Age_txt.setText("");
+        //Date_txt.setDate("");
+        PhoneNo1_txt.setText("");
+        PhoneNo2_txt.setText("");
+        Add_txt.setText("");
+        Email_txt.setText("");
+        Pass_txt.setText("");
+        
+        
+        
+    }//GEN-LAST:event_Add_btnActionPerformed
+
+    private void Age_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Age_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Age_txtActionPerformed
+
+    private void Gender_cmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Gender_cmbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Gender_cmbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -81,5 +389,26 @@ public class UserRigester extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Add_btn;
+    private javax.swing.JTextField Add_txt;
+    private javax.swing.JTextField Age_txt;
+    private com.toedter.calendar.JDateChooser Date_txt;
+    private javax.swing.JTextField Email_txt;
+    private javax.swing.JTextField FName_txt;
+    private javax.swing.JComboBox<String> Gender_cmb;
+    private javax.swing.JTextField LName_txt;
+    private javax.swing.JTextField Pass_txt;
+    private javax.swing.JTextField PhoneNo1_txt;
+    private javax.swing.JTextField PhoneNo2_txt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }

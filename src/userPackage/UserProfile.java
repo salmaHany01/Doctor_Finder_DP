@@ -5,9 +5,14 @@
  */
 package userPackage;
 
+import adminPackage.DatabaseConnectionDoc;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -71,6 +76,22 @@ public class UserProfile extends javax.swing.JFrame {
         panel_chngPass = new javax.swing.JPanel();
         panel_appointments = new javax.swing.JPanel();
         panel_payments = new javax.swing.JPanel();
+        Amount_lbl = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        Pay_btn = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        Lname_txt = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        Amount_txt = new javax.swing.JTextField();
+        CardNo_txt = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        Fname_txt = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        Verify_btn = new javax.swing.JButton();
+        cvv_txt = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -89,9 +110,7 @@ public class UserProfile extends javax.swing.JFrame {
 
         panel_Profile.setBackground(new java.awt.Color(102, 204, 255));
         panel_Profile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lbl_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userPackage/pp2.png"))); // NOI18N
-        panel_Profile.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 34, -1, -1));
+        panel_Profile.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 34, 110, 90));
 
         lbl_name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbl_name.setText("User   Name");
@@ -281,15 +300,192 @@ public class UserProfile extends javax.swing.JFrame {
 
         panel_payments.setBackground(new java.awt.Color(255, 255, 51));
 
+        Amount_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Amount_lbl.setText("Amount");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("CVV");
+
+        Pay_btn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Pay_btn.setText("Pay");
+        Pay_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Pay_btnActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setText("First Name");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel3.setText("Payment");
+
+        Lname_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Lname_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Lname_txtMouseClicked(evt);
+            }
+        });
+        Lname_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Lname_txtKeyTyped(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Card Number");
+
+        Amount_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Amount_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Amount_txtActionPerformed(evt);
+            }
+        });
+
+        CardNo_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        CardNo_txt.setText("xxxx-xxxx-xxxx-xxxx");
+        CardNo_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CardNo_txtMouseClicked(evt);
+            }
+        });
+        CardNo_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CardNo_txtKeyTyped(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel13.setText("Last Name");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Expiration Date");
+
+        Fname_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Fname_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Fname_txtMouseClicked(evt);
+            }
+        });
+        Fname_txt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Fname_txtKeyTyped(evt);
+            }
+        });
+
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
+
+        Verify_btn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        Verify_btn.setText("Verify");
+        Verify_btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Verify_btnMouseClicked(evt);
+            }
+        });
+        Verify_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Verify_btnActionPerformed(evt);
+            }
+        });
+
+        cvv_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        cvv_txt.setText("xxx");
+        cvv_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cvv_txtMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panel_paymentsLayout = new javax.swing.GroupLayout(panel_payments);
         panel_payments.setLayout(panel_paymentsLayout);
         panel_paymentsLayout.setHorizontalGroup(
             panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1048, Short.MAX_VALUE)
+            .addGroup(panel_paymentsLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(113, 113, 113)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(panel_paymentsLayout.createSequentialGroup()
+                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_paymentsLayout.createSequentialGroup()
+                        .addGap(340, 340, 340)
+                        .addComponent(jLabel3))
+                    .addGroup(panel_paymentsLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CardNo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(Lname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_paymentsLayout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cvv_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)))
+                            .addGroup(panel_paymentsLayout.createSequentialGroup()
+                                .addGap(104, 104, 104)
+                                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Fname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel13)))))
+                    .addGroup(panel_paymentsLayout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_paymentsLayout.createSequentialGroup()
+                                .addComponent(Amount_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(58, 58, 58)
+                                .addComponent(Amount_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(119, 119, 119))
+                            .addComponent(Pay_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Verify_btn, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap(501, Short.MAX_VALUE))
         );
         panel_paymentsLayout.setVerticalGroup(
             panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 804, Short.MAX_VALUE)
+            .addGroup(panel_paymentsLayout.createSequentialGroup()
+                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_paymentsLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel3)
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel1)
+                        .addGap(26, 26, 26)
+                        .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CardNo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cvv_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panel_paymentsLayout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(jLabel4)))
+                .addGap(41, 41, 41)
+                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addGap(26, 26, 26)
+                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Lname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Fname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addComponent(Verify_btn)
+                .addGap(47, 47, 47)
+                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Amount_lbl)
+                    .addComponent(Amount_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addComponent(Pay_btn)
+                .addGap(27, 27, 27))
         );
 
         panel_homepage.add(panel_payments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -385,6 +581,111 @@ public class UserProfile extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btn_outActionPerformed
 
+    private void Pay_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pay_btnActionPerformed
+
+        JOptionPane.showMessageDialog(this,Amount_txt.getText()+ "has been Withdrawed");
+    }//GEN-LAST:event_Pay_btnActionPerformed
+
+    private void Lname_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lname_txtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Lname_txtMouseClicked
+
+    private void Lname_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Lname_txtKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Lname_txtKeyTyped
+
+    private void Amount_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Amount_txtActionPerformed
+
+    }//GEN-LAST:event_Amount_txtActionPerformed
+
+    private void CardNo_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CardNo_txtMouseClicked
+        CardNo_txt.setText(null);
+    }//GEN-LAST:event_CardNo_txtMouseClicked
+
+    private void CardNo_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CardNo_txtKeyTyped
+
+    }//GEN-LAST:event_CardNo_txtKeyTyped
+
+    private void Fname_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Fname_txtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Fname_txtMouseClicked
+
+    private void Fname_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Fname_txtKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Fname_txtKeyTyped
+
+    private void Verify_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Verify_btnMouseClicked
+
+    }//GEN-LAST:event_Verify_btnMouseClicked
+
+    private void Verify_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Verify_btnActionPerformed
+
+        String card,cvv;
+        card = CardNo_txt.getText();
+        cvv= cvv_txt.getText();
+        if(card.length()>16 || card.length()<16)
+        {
+            JOptionPane.showMessageDialog(this, "Unvalid Number");
+        }
+        if(cvv.length()>3 || cvv.length()<3)
+        {
+            JOptionPane.showMessageDialog(this, "Unvalid Number");
+
+        }
+
+        try {
+            Connection conn = DatabaseConnectionDoc.setConnection();
+            String fname = Fname_txt.getText();
+            String lname = Lname_txt.getText();
+            //String Amount = Lname_txt.getText();
+            String sql2 = "select fees from doctors where Fname = '"+fname+"' and Lname = '"+lname+"'  ";
+            Statement stt = conn.createStatement();
+            ResultSet rss = stt.executeQuery(sql2);
+            if(rss.next())
+            {
+                dispose();
+                //JOptionPane.showMessageDialog(this, "Welcome");
+
+                Amount_txt.setText(Integer.toString(rss.getInt("fees")));
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.toString());
+        }
+
+        /*
+        try {
+            Connection con = DatabaseConnectionDoc.setConnection();
+            String fname = Fname_txt.getText();
+            String lname = Lname_txt.getText();
+            String sql = "select * from User1 where Fname = '"+fname+"' and Lname = '"+lname+"'  ";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next())
+            {
+                dispose();
+                //JOptionPane.showMessageDialog(this, "Welcome");
+                Amount_lbl.setVisible(true);
+                Amount_txt.setVisible(true);
+                Pay_btn.setVisible(true);
+                //Amount_txt.setText(Integer.toString(rs.getInt("fees")));
+
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "User not found");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.toString());
+        }
+        */
+
+    }//GEN-LAST:event_Verify_btnActionPerformed
+
+    private void cvv_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cvv_txtMouseClicked
+        cvv_txt.setText(null);
+    }//GEN-LAST:event_cvv_txtMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -422,11 +723,27 @@ public class UserProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Amount_lbl;
+    private javax.swing.JTextField Amount_txt;
+    private javax.swing.JTextField CardNo_txt;
+    private javax.swing.JTextField Fname_txt;
+    private javax.swing.JTextField Lname_txt;
+    private javax.swing.JButton Pay_btn;
+    private javax.swing.JButton Verify_btn;
     private javax.swing.JButton btn_out;
     private javax.swing.JButton btn_update;
+    private javax.swing.JTextField cvv_txt;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

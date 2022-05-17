@@ -272,7 +272,8 @@ public class UserPayment extends javax.swing.JFrame {
             if(card.length()>16 || card.length()<16)
             {
                 JOptionPane.showMessageDialog(this, "Unvalid Number");
-            }   if(cvv.length()>3 || cvv.length()<3)
+            } 
+            if(cvv.length()>3 || cvv.length()<3)
             {
                 JOptionPane.showMessageDialog(this, "Unvalid Number");
                 
