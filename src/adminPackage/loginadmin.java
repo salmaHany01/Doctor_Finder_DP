@@ -21,12 +21,14 @@ public class loginadmin extends javax.swing.JFrame {
     /**
      * Creates new form loginadmin
      */
-	Connection con = DatabaseConnectionDoc.setConnection();
+    Connection con;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    
     public loginadmin() {
         initComponents();
-		login_btn.setBackground(new Color(255,255,255,255));
+        con = DatabaseConnectionDoc.setConnection();
+        login_btn.setBackground(new Color(255,255,255,255));
     }
 
     /**

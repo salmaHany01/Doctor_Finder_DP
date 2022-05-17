@@ -20,9 +20,11 @@ public class UserLogin extends javax.swing.JFrame {
     /**
      * Creates new form UserLogin
      */
+    Connection con ;
     public UserLogin() {
         initComponents();
-		btn_login.setBackground(Color.white);
+        con = DatabaseConnectionDoc.setConnection();
+        btn_login.setBackground(Color.white);
     }
 
     /**
@@ -202,7 +204,7 @@ public class UserLogin extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         
         try {
-            Connection con = DatabaseConnectionDoc.setConnection();
+            
             String email = txt_email.getText();
             String pass = txt_pass.getText();
             String sql = "select * from User1 where Email = '"+email+"' and Password = '"+pass+"'  ";
@@ -219,7 +221,7 @@ public class UserLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Invaild Email or Password");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.toString());
+            JOptionPane.showMessageDialog(this, "login ex"+ex.toString());
         }
     }//GEN-LAST:event_btn_loginActionPerformed
 

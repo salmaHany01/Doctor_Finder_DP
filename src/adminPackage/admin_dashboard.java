@@ -174,8 +174,6 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(8, 128, 176));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        adminProfile_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/adminLoginIcon.png"))); // NOI18N
         jPanel2.add(adminProfile_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 200, 210));
 
         logout_btn.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 24)); // NOI18N
@@ -368,8 +366,6 @@ public class admin_dashboard extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel14.setText("Online payments weekly");
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/online-payment.png"))); // NOI18N
-
         jLabel16.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 74)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("53");
@@ -411,8 +407,6 @@ public class admin_dashboard extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel17.setText("Appointments for the last week");
         jPanel5.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 386, -1));
-
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/deadline.png"))); // NOI18N
         jPanel5.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 74)); // NOI18N
@@ -430,8 +424,6 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
         jLabel20.setText("New users monthly registered");
-
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/manpic.png"))); // NOI18N
 
         jLabel22.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 74)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -778,7 +770,6 @@ public class admin_dashboard extends javax.swing.JFrame {
         doctors_panel.add(search_cmbBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 440, 40));
 
         search_btn.setBackground(new java.awt.Color(255, 255, 255));
-        search_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/search (1).png"))); // NOI18N
         search_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_btnActionPerformed(evt);
@@ -786,7 +777,6 @@ public class admin_dashboard extends javax.swing.JFrame {
         });
         doctors_panel.add(search_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, 41));
 
-        refresh_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/adminPackage/refresh-button (1).png"))); // NOI18N
         refresh_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 refresh_btnMouseClicked(evt);
