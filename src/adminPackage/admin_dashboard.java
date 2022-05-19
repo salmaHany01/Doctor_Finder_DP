@@ -130,37 +130,38 @@ public class admin_dashboard extends javax.swing.JFrame {
         doctors_panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         doctorsTableDisplay = new javax.swing.JTable();
-        appts_txt = new javax.swing.JTextField();
-        name_txt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        fees_txt = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        toTime_txt = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        am_pm_lbl = new javax.swing.JLabel();
-        speciality_comboBox = new javax.swing.JComboBox<>();
-        phone_txt = new javax.swing.JTextField();
-        fromTime_txt = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        pm_am_lbl = new javax.swing.JLabel();
-        apptDays_combo = new javax.swing.JComboBox<>();
-        updateData_btn = new javax.swing.JButton();
-        address_txt = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         add_radBtn = new javax.swing.JRadioButton();
         remove_radBtn = new javax.swing.JRadioButton();
         update_radBtn = new javax.swing.JRadioButton();
-        addDoctor_btn = new javax.swing.JButton();
-        removeDoctor_btn = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
         search_cmbBox = new javax.swing.JComboBox<>();
         search_btn = new javax.swing.JButton();
         refresh_btn = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        name_txt = new javax.swing.JTextField();
+        speciality_comboBox = new javax.swing.JComboBox<>();
+        fees_txt = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        address_txt = new javax.swing.JTextField();
+        appts_txt = new javax.swing.JTextField();
+        phone_txt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        addDoctor_btn = new javax.swing.JButton();
+        removeDoctor_btn = new javax.swing.JButton();
+        apptDays_combo = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        fromTime_txt = new javax.swing.JTextField();
+        pm_am_lbl = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        toTime_txt = new javax.swing.JTextField();
+        am_pm_lbl = new javax.swing.JLabel();
+        updateData_btn = new javax.swing.JButton();
+        add_appts_btn = new javax.swing.JButton();
         users_panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -577,117 +578,9 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         doctors_panel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 1490, 390));
 
-        appts_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        doctors_panel.add(appts_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 330, 480, 40));
-
-        name_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        name_txt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                name_txtMouseClicked(evt);
-            }
-        });
-        name_txt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                name_txtActionPerformed(evt);
-            }
-        });
-        doctors_panel.add(name_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 310, 37));
-
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 20)); // NOI18N
         jLabel1.setText("Choose the action you want to take ");
         doctors_panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
-
-        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        jLabel2.setText("Speciality");
-        doctors_panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
-
-        fees_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        doctors_panel.add(fees_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 210, 37));
-
-        jLabel3.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        jLabel3.setText("Fees");
-        doctors_panel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, -1, -1));
-
-        toTime_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        toTime_txt.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        toTime_txt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toTime_txtActionPerformed(evt);
-            }
-        });
-        doctors_panel.add(toTime_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 330, 50, 37));
-
-        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        jLabel4.setText("Phone Number");
-        doctors_panel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 410, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        jLabel5.setText("Address");
-        doctors_panel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, -1, -1));
-
-        am_pm_lbl.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        am_pm_lbl.setForeground(new java.awt.Color(102, 102, 255));
-        am_pm_lbl.setText("AM");
-        am_pm_lbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                am_pm_lblMouseClicked(evt);
-            }
-        });
-        doctors_panel.add(am_pm_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 340, -1, -1));
-
-        speciality_comboBox.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        speciality_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allergy and Immunology", "Audiology", "Cardiology", "Ear, Nose and Throat ", "Endocrinology", "Dermatology", "Dentistry", "Dietitian and Nutrition", "Gastroenterology ", "Genel Surgery", "Hematology", "Hepatology", "Internal Medicine", "IVF and Infertility", "Neurologist", "Oncology", "Opthalmology", "Osteopathy ", "Orthopedics", "Pediatrician", "Physiotherapy", "Psychiatry", "Rheumatology", "Urology", " ", " " }));
-        doctors_panel.add(speciality_comboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 310, 37));
-
-        phone_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        doctors_panel.add(phone_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 400, 180, 37));
-
-        fromTime_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        fromTime_txt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fromTime_txtActionPerformed(evt);
-            }
-        });
-        doctors_panel.add(fromTime_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 330, 50, 37));
-
-        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        jLabel7.setText("Appointments");
-        doctors_panel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 340, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        jLabel8.setText("from");
-        doctors_panel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 340, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        jLabel9.setText("to");
-        doctors_panel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 340, -1, -1));
-
-        pm_am_lbl.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        pm_am_lbl.setForeground(new java.awt.Color(102, 102, 255));
-        pm_am_lbl.setText("PM");
-        pm_am_lbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pm_am_lblMouseClicked(evt);
-            }
-        });
-        doctors_panel.add(pm_am_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 340, -1, -1));
-
-        apptDays_combo.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        apptDays_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturdays", "Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thrusdays", "Fridays", "All Weekdays Except..." }));
-        doctors_panel.add(apptDays_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 330, 180, 37));
-
-        updateData_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
-        updateData_btn.setForeground(new java.awt.Color(8, 128, 176));
-        updateData_btn.setText("Update");
-        updateData_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateData_btnActionPerformed(evt);
-            }
-        });
-        doctors_panel.add(updateData_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 480, 140, 50));
-
-        address_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        doctors_panel.add(address_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 270, 480, 37));
 
         jLabel11.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 20)); // NOI18N
         jLabel11.setText("Search by Speciality");
@@ -726,7 +619,7 @@ public class admin_dashboard extends javax.swing.JFrame {
                 .addComponent(remove_radBtn)
                 .addGap(30, 30, 30)
                 .addComponent(update_radBtn)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -739,31 +632,7 @@ public class admin_dashboard extends javax.swing.JFrame {
                 .addGap(56, 56, 56))
         );
 
-        doctors_panel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 890, 50));
-
-        addDoctor_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
-        addDoctor_btn.setForeground(new java.awt.Color(8, 128, 176));
-        addDoctor_btn.setText("Add");
-        addDoctor_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addDoctor_btnActionPerformed(evt);
-            }
-        });
-        doctors_panel.add(addDoctor_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 480, 140, 50));
-
-        removeDoctor_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
-        removeDoctor_btn.setForeground(new java.awt.Color(8, 128, 176));
-        removeDoctor_btn.setText("Remove");
-        removeDoctor_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeDoctor_btnActionPerformed(evt);
-            }
-        });
-        doctors_panel.add(removeDoctor_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 480, 140, 50));
-
-        jLabel12.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        jLabel12.setText("Name");
-        doctors_panel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
+        doctors_panel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 640, 50));
 
         search_cmbBox.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 18)); // NOI18N
         search_cmbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allergy and Immunology", "Audiology", "Cardiology", "Ear, Nose and Throat ", "Endocrinology", "Dermatology", "Dentistry", "Dietitian and Nutrition", "Gastroenterology ", "Genel Surgery", "Hematology", "Hepatology", "Internal Medicine", "IVF and Infertility", "Neurologist", "Oncology", "Opthalmology", "Osteopathy ", "Orthopedics", "Pediatrician", "Physiotherapy", "Psychiatry", "Rheumatology", "Urology", " ", " " }));
@@ -783,6 +652,148 @@ public class admin_dashboard extends javax.swing.JFrame {
             }
         });
         doctors_panel.add(refresh_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 70, 80));
+
+        jLabel12.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel12.setText("Name");
+        doctors_panel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel2.setText("Speciality");
+        doctors_panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel3.setText("Fees");
+        doctors_panel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
+
+        name_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        name_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                name_txtMouseClicked(evt);
+            }
+        });
+        name_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                name_txtActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(name_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 310, 37));
+
+        speciality_comboBox.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        speciality_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allergy and Immunology", "Audiology", "Cardiology", "Ear, Nose and Throat ", "Endocrinology", "Dermatology", "Dentistry", "Dietitian and Nutrition", "Gastroenterology ", "Genel Surgery", "Hematology", "Hepatology", "Internal Medicine", "IVF and Infertility", "Neurologist", "Oncology", "Opthalmology", "Osteopathy ", "Orthopedics", "Pediatrician", "Physiotherapy", "Psychiatry", "Rheumatology", "Urology", " ", " " }));
+        doctors_panel.add(speciality_comboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 310, 37));
+
+        fees_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        doctors_panel.add(fees_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 210, 37));
+
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel5.setText("Address");
+        doctors_panel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel7.setText("Appointments");
+        doctors_panel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 360, -1, -1));
+
+        address_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        doctors_panel.add(address_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 290, 480, 37));
+
+        appts_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        doctors_panel.add(appts_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 480, 40));
+
+        phone_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        doctors_panel.add(phone_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 420, 180, 37));
+
+        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel4.setText("Phone Number");
+        doctors_panel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 430, -1, -1));
+
+        addDoctor_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        addDoctor_btn.setForeground(new java.awt.Color(8, 128, 176));
+        addDoctor_btn.setText("Add");
+        addDoctor_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDoctor_btnActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(addDoctor_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 480, 140, 50));
+
+        removeDoctor_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        removeDoctor_btn.setForeground(new java.awt.Color(8, 128, 176));
+        removeDoctor_btn.setText("Remove");
+        removeDoctor_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeDoctor_btnActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(removeDoctor_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 480, 140, 50));
+
+        apptDays_combo.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        apptDays_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturdays", "Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thrusdays", "Fridays", "All Weekdays Except..." }));
+        doctors_panel.add(apptDays_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 180, 37));
+
+        jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel8.setText("from");
+        doctors_panel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 360, -1, -1));
+
+        fromTime_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        fromTime_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fromTime_txtActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(fromTime_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 350, 50, 37));
+
+        pm_am_lbl.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        pm_am_lbl.setForeground(new java.awt.Color(102, 102, 255));
+        pm_am_lbl.setText("PM");
+        pm_am_lbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pm_am_lblMouseClicked(evt);
+            }
+        });
+        doctors_panel.add(pm_am_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 360, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel9.setText("to");
+        doctors_panel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 360, -1, -1));
+
+        toTime_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        toTime_txt.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        toTime_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toTime_txtActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(toTime_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1340, 350, 50, 37));
+
+        am_pm_lbl.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        am_pm_lbl.setForeground(new java.awt.Color(102, 102, 255));
+        am_pm_lbl.setText("AM");
+        am_pm_lbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                am_pm_lblMouseClicked(evt);
+            }
+        });
+        doctors_panel.add(am_pm_lbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 360, -1, -1));
+
+        updateData_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
+        updateData_btn.setForeground(new java.awt.Color(8, 128, 176));
+        updateData_btn.setText("Update");
+        updateData_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateData_btnActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(updateData_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1300, 480, 140, 50));
+
+        add_appts_btn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        add_appts_btn.setForeground(new java.awt.Color(8, 128, 176));
+        add_appts_btn.setText("Add");
+        add_appts_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_appts_btnActionPerformed(evt);
+            }
+        });
+        doctors_panel.add(add_appts_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 350, 80, 40));
 
         cards_panel.add(doctors_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1574, 1020));
 
@@ -1060,6 +1071,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 
     private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
         // TODO add your handling code here:
+
 		if(add_radBtn.isSelected()){
 			name_txt.setText("");
 			fees_txt.setText("");
@@ -1072,6 +1084,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 			updateData_btn.setVisible(false);
 		}
 		else if(remove_radBtn.isSelected()){
+			
 			name_txt.setEditable(false);
 			name_txt.setBackground(new Color(234,234,234));
 			removeDoctor_btn.setVisible(true);
@@ -1079,12 +1092,14 @@ public class admin_dashboard extends javax.swing.JFrame {
 			updateData_btn.setVisible(false);
 		}
 		else if(update_radBtn.isSelected()){
+			
 			name_txt.setEditable(false);
 			name_txt.setBackground(new Color(234,234,234));
 			removeDoctor_btn.setVisible(false);
 			addDoctor_btn.setVisible(false);
 			updateData_btn.setVisible(true);
 		}
+		
     }//GEN-LAST:event_jPanel3MouseEntered
 
     private void addDoctor_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctor_btnActionPerformed
@@ -1287,6 +1302,10 @@ public class admin_dashboard extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_cancelAppts_btnActionPerformed
 
+    private void add_appts_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_appts_btnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_add_appts_btnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1325,6 +1344,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDoctor_btn;
+    private javax.swing.JButton add_appts_btn;
     private javax.swing.JRadioButton add_radBtn;
     private javax.swing.JTextField address_txt;
     private javax.swing.JLabel adminProfile_btn;
