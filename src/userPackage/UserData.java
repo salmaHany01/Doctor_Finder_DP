@@ -17,7 +17,7 @@ import java.sql.Statement;
  *
  * @author Fayroz Tarek
  */
-public class UserData {
+public class UserData extends UserBuilder {
     static ArrayList<User> users = new ArrayList<User>();
     Connection con;
     public UserData() {
@@ -27,7 +27,7 @@ public class UserData {
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(sql);
         
-        if(rs.next()){
+        while(rs.next()){
             UserBuilder user = new UserBuilder();
             user.setId(rs.getInt("id"));
             user.setName(rs.getString("fname"));
@@ -51,7 +51,7 @@ public class UserData {
     {
         for(int i=0; i<users.size(); i++)
         {
-            System.out.println("Car " + i + ": ");
+            System.out.println("User " + i + ": ");
             System.out.println(users.get(i).getId()
             + "\t" + users.get(i).getName()
             + "\t" + users.get(i).getLname()
@@ -65,6 +65,15 @@ public class UserData {
             
             System.out.println();
         }
+    }
+    
+    public User getCertainUser(int id){
+        for(int i=0; i<users.size(); i++){
+            if(id == users.get(i).getId()){
+                return users.get(i);
+            }
+        }
+        return null;
     }
     
     

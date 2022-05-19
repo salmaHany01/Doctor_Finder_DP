@@ -23,18 +23,35 @@ public class UserProfile extends javax.swing.JFrame {
     /**
      * Creates new form UserProfile
      */
+    
+    UserData udata;
+    UserBuilder userBuilder;
+    User user;
+    
     public UserProfile() {
         initComponents();
 		//GUI related *ignore*
         lbl_img.setIcon(new ImageIcon("D:\\Software_Engineering\\Semester_6\\Design patterns\\Project\\DoctorFinderProject\\src\\main\\java\\com\\mycompany\\doctorFinder\\user\\pp2.png"));
-		panel_homepage.setVisible(true);
+        panel_homepage.setVisible(true);
         panel_chngInfo.setVisible(false);
         panel_chngPass.setVisible(false);
         panel_appointments.setVisible(false);
         panel_payments.setVisible(false);
-		btn_out.setBackground(Color.white);
-		btn_update.setBackground(Color.white);
-	}
+	btn_out.setBackground(Color.white);
+        btn_update.setBackground(Color.white);
+        
+        //Intialize vars
+        udata = new UserData();
+        userBuilder = new UserBuilder();
+        user = userBuilder.createUser();
+
+        //Intializing user info
+        user = udata.getCertainUser(UserLogin.userID);
+        
+        if(user != null){
+            lbl_name.setText(user.getName() + " " + user.getLname());    
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +65,6 @@ public class UserProfile extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jSplitPane1 = new javax.swing.JSplitPane();
         panel_Profile = new javax.swing.JPanel();
-        lbl_img = new javax.swing.JLabel();
         lbl_name = new javax.swing.JLabel();
         lbl_homepage = new javax.swing.JLabel();
         lbl_chnginfo1 = new javax.swing.JLabel();
@@ -56,6 +72,7 @@ public class UserProfile extends javax.swing.JFrame {
         lbl_Appoin = new javax.swing.JLabel();
         lbl_payments = new javax.swing.JLabel();
         btn_out = new javax.swing.JButton();
+        lbl_img = new javax.swing.JLabel();
         panel_homepage = new javax.swing.JPanel();
         panel_chngInfo = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -110,12 +127,12 @@ public class UserProfile extends javax.swing.JFrame {
 
         panel_Profile.setBackground(new java.awt.Color(102, 204, 255));
         panel_Profile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panel_Profile.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 34, 110, 90));
 
         lbl_name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_name.setText("User   Name");
         lbl_name.setAlignmentX(0.5F);
-        panel_Profile.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 123, 31));
+        panel_Profile.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 140, 31));
 
         lbl_homepage.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
         lbl_homepage.setText("Home Page");
@@ -176,6 +193,9 @@ public class UserProfile extends javax.swing.JFrame {
             }
         });
         panel_Profile.add(btn_out, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 760, 130, 40));
+
+        lbl_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userPackage/pp2.png"))); // NOI18N
+        panel_Profile.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 110));
 
         jSplitPane1.setLeftComponent(panel_Profile);
 

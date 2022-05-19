@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
  */
 public class UserLogin extends javax.swing.JFrame {
 
+    //saved for efficiency
+    static int userID;
     /**
      * Creates new form UserLogin
      */
@@ -213,7 +215,13 @@ public class UserLogin extends javax.swing.JFrame {
             if(rs.next())
             {
                 dispose();
+                
+                userID = rs.getInt("id");
+                System.out.println(" " + rs.getInt("id") + " " + userID);
                 JOptionPane.showMessageDialog(this, "Welcome");
+                
+                UserProfile userProfile = new UserProfile();
+                userProfile.setVisible(true);                    
                 
             }
             else
@@ -221,7 +229,7 @@ public class UserLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Invaild Email or Password");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "login ex"+ex.toString());
+            JOptionPane.showMessageDialog(this, "login ex: here "+ex.toString());
         }
     }//GEN-LAST:event_btn_loginActionPerformed
 
