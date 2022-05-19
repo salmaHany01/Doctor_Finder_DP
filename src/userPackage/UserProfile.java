@@ -100,6 +100,17 @@ public class UserProfile extends javax.swing.JFrame {
         }
     }
     
+    private void updatePass(User u, String newP){
+        try{
+                Statement updateStat = con.createStatement();
+		String sql = "update user1 set password = '"+newP+"' where id = "+ UserLogin.userID +" ";
+                updateStat.executeUpdate(sql);
+                JOptionPane.showMessageDialog(this, "Changed Successfully");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Update database " + e.toString());
+        }
+    }
+    
     private String getGender(){
         if(r_male.isSelected()){
             return "Male";
@@ -147,10 +158,10 @@ public class UserProfile extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        btn_confirm = new javax.swing.JButton();
+        txt_oldpass = new javax.swing.JPasswordField();
+        txt_newpass = new javax.swing.JPasswordField();
+        txt_confirm = new javax.swing.JPasswordField();
         panel_appointments = new javax.swing.JPanel();
         panel_payments = new javax.swing.JPanel();
         Amount_lbl = new javax.swing.JLabel();
@@ -366,12 +377,23 @@ public class UserProfile extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel15.setText("Confirm password");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Confirm");
+        btn_confirm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_confirm.setText("Confirm");
+        btn_confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_confirmActionPerformed(evt);
+            }
+        });
 
-        jPasswordField2.setEditable(false);
+        txt_oldpass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_oldpassMouseClicked(evt);
+            }
+        });
 
-        jPasswordField3.setEditable(false);
+        txt_newpass.setEditable(false);
+
+        txt_confirm.setEditable(false);
 
         javax.swing.GroupLayout panel_chngPassLayout = new javax.swing.GroupLayout(panel_chngPass);
         panel_chngPass.setLayout(panel_chngPassLayout);
@@ -385,13 +407,13 @@ public class UserProfile extends javax.swing.JFrame {
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(81, 81, 81)
                 .addGroup(panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(626, Short.MAX_VALUE))
+                    .addComponent(txt_oldpass, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_newpass, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(443, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_chngPassLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(217, 217, 217))
         );
         panel_chngPassLayout.setVerticalGroup(
@@ -400,17 +422,17 @@ public class UserProfile extends javax.swing.JFrame {
                 .addGap(219, 219, 219)
                 .addGroup(panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_oldpass, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(86, 86, 86)
                 .addGroup(panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_newpass, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(70, 70, 70)
                 .addGroup(panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                .addComponent(btn_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(109, 109, 109))
         );
 
@@ -840,6 +862,38 @@ public class UserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_r_maleActionPerformed
 
+    private void btn_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmActionPerformed
+        // TODO add your handling code here:
+        String oldPass, newPass, confrimPass;
+        oldPass = txt_oldpass.getText();
+        newPass = txt_newpass.getText();
+        confrimPass = txt_confirm.getText();
+        if( !oldPass.equalsIgnoreCase(user.getPass()) ){
+            JOptionPane.showMessageDialog(this, "You are entering wrong password, it may be a wrong user", "Error", JOptionPane.ERROR_MESSAGE);
+            txt_oldpass.setText("");
+            txt_newpass.setText("");
+            txt_confirm.setText("");
+        }else if(newPass.length() < 8){
+            JOptionPane.showMessageDialog(this, "The max size of password is 8 or more", "Error", JOptionPane.ERROR_MESSAGE);
+            txt_newpass.setText("");
+            txt_confirm.setText("");
+        }
+        else if( !newPass.equalsIgnoreCase(confrimPass)){
+            JOptionPane.showMessageDialog(this, "Confirm password is wrong", "Error", JOptionPane.ERROR_MESSAGE);
+            txt_confirm.setText("");      
+        }
+        else{
+            user.setPass(newPass);
+            updatePass(user, newPass);
+        }
+    }//GEN-LAST:event_btn_confirmActionPerformed
+
+    private void txt_oldpassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_oldpassMouseClicked
+        // TODO add your handling code here:
+        txt_newpass.setEditable(true);
+        txt_confirm.setEditable(true);
+    }//GEN-LAST:event_txt_oldpassMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -884,11 +938,11 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JTextField Lname_txt;
     private javax.swing.JButton Pay_btn;
     private javax.swing.JButton Verify_btn;
+    private javax.swing.JButton btn_confirm;
     private javax.swing.JButton btn_out;
     private javax.swing.JButton btn_update;
     private javax.swing.JTextField cvv_txt;
     private javax.swing.JLabel gender;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFrame jFrame1;
@@ -907,9 +961,6 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lbl_Appoin;
     private javax.swing.JTextField lbl_add;
@@ -933,5 +984,8 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JRadioButton r_female;
     private javax.swing.JRadioButton r_male;
     private javax.swing.ButtonGroup radio_group;
+    private javax.swing.JPasswordField txt_confirm;
+    private javax.swing.JPasswordField txt_newpass;
+    private javax.swing.JPasswordField txt_oldpass;
     // End of variables declaration//GEN-END:variables
 }
