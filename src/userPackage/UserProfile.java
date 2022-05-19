@@ -171,7 +171,7 @@ public class UserProfile extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         exYearText = new javax.swing.JTextField();
         cardNumberText = new javax.swing.JTextField();
-        exMonth = new javax.swing.JComboBox<String>();
+        exMonth = new javax.swing.JComboBox<>();
         secCodeText = new javax.swing.JPasswordField();
         jLabel18 = new javax.swing.JLabel();
         payBtn = new javax.swing.JButton();
@@ -486,7 +486,7 @@ public class UserProfile extends javax.swing.JFrame {
         cardNumberText.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
 
         exMonth.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        exMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        exMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         exMonth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exMonthActionPerformed(evt);
@@ -703,7 +703,7 @@ public class UserProfile extends javax.swing.JFrame {
                 .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel23)
                 .addContainerGap())
         );
@@ -905,26 +905,33 @@ public class UserProfile extends javax.swing.JFrame {
         // tableDetails();
         int checkId = 0;
         int Userid = Integer.parseInt(IDtxt.getText());
-        int docId = Integer.parseInt(DocTxt.getText());
+        //int docId;
         try {
             Connection con = DatabaseConnectionDoc.setConnection();
             Statement st = con.createStatement();
             Statement st2 = con.createStatement();
-            ResultSet rs = st.executeQuery("select patiet_id , doctor_id from appointments where patient_id= "+Userid+"");
-            ResultSet rs1 = st.executeQuery("select fees from doctors where id= "+docId+"");
+            ResultSet rs = st.executeQuery("select patient_id , doctor_id from appointments where patient_id= "+Userid+"");
+            ResultSet rs1; 
             while(rs.next())
             {
-                checkId = 1;
-                int fees = rs1.getInt("fees");
+				int docId = rs.getInt("doctor_id");
+				rs1 = st.executeQuery("select fees from doctors where id= "+docId+"");
+				while(rs1.next()){
+				
+				
+				int fees = rs1.getInt("fees");
                 FeesTxt.setText(String.valueOf(fees));
-
-                IDtxt.setEditable(false);
+				DocTxt.setText(String.valueOf(docId));
+				}
+				checkId = 1;
+                
+                //IDtxt.setEditable(false);
                 JOptionPane.showMessageDialog(this , "User exists!");
-
+				con.setAutoCommit(false);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-
+            //JOptionPane.showMessageDialog(null, e);
+			//do nothing
         }
 
     }//GEN-LAST:event_SearchBtnActionPerformed
