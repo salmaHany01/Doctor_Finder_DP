@@ -67,7 +67,7 @@ public class UserData extends UserBuilder {
         }
     }
     
-    public User getCertainUser(int id){
+    static public User getCertainUser(int id){
         for(int i=0; i<users.size(); i++){
             if(id == users.get(i).getId()){
                 return users.get(i);
