@@ -8,8 +8,10 @@ package userPackage;
 import javax.swing.JOptionPane;
 import adminPackage.DatabaseConnectionDoc;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,10 +25,31 @@ public class UserPayment extends javax.swing.JFrame {
      */
     public UserPayment() {
         initComponents();
-        Amount_lbl.setVisible(false);
-         Amount_txt.setVisible(false);
-          Pay_btn.setVisible(false);
+      
     }
+/*public void tableDetails()
+{
+    DefaultTableModel dtm = (DefaultTableModel)jTable1.getModel();
+    dtm.setRowCount(0);
+    String id = IdTxt.getText();
+    try 
+    {
+        Connection con = DatabaseConnectionDoc.setConnection();
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery("select * from user1 where id=' "+id+"'");
+        while(rs.next())
+        {
+            dtm.addRow(new Object[] {rs.getString(2) , rs.getString(3)});
+            
+        }
+    }
+    catch (Exception e )
+    {
+        JOptionPane.showMessageDialog(null, e);
+    }
+    
+    
+}*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,322 +60,404 @@ public class UserPayment extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Pay_btn = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        CardNo_txt = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        Verify_btn = new javax.swing.JButton();
-        cvv_txt = new javax.swing.JTextField();
-        Amount_lbl = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        exYearText = new javax.swing.JTextField();
+        cardNumberText = new javax.swing.JTextField();
+        exMonth = new javax.swing.JComboBox<String>();
+        secCodeText = new javax.swing.JPasswordField();
+        jLabel16 = new javax.swing.JLabel();
+        payBtn = new javax.swing.JButton();
+        detailsPaymentPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        Lname_txt = new javax.swing.JTextField();
-        Amount_txt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        Fname_txt = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        creditRadBtn = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        DocTxt = new javax.swing.JTextField();
+        SearchBtn = new javax.swing.JButton();
+        cashRadBtn2 = new javax.swing.JRadioButton();
+        CurrCombo = new javax.swing.JComboBox();
+        FeesTxt = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        IDtxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 204, 204));
 
-        Pay_btn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Pay_btn.setText("Pay");
-        Pay_btn.addActionListener(new java.awt.event.ActionListener() {
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel9.setText("Card Number");
+
+        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel10.setText("Expiry Month");
+
+        jLabel11.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel11.setText("Security Code ");
+
+        jLabel12.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel12.setText("Expiry Year");
+
+        exYearText.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+
+        cardNumberText.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+
+        exMonth.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        exMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        exMonth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Pay_btnActionPerformed(evt);
+                exMonthActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel3.setText("Payment");
+        secCodeText.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Card Number");
+        jLabel16.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 33)); // NOI18N
+        jLabel16.setText("Card Information");
 
-        CardNo_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        CardNo_txt.setText("xxxx-xxxx-xxxx-xxxx");
-        CardNo_txt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CardNo_txtMouseClicked(evt);
-            }
-        });
-        CardNo_txt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                CardNo_txtKeyTyped(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Expiration Date");
-
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-
-        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
-
-        Verify_btn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Verify_btn.setText("Verify");
-        Verify_btn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Verify_btnMouseClicked(evt);
-            }
-        });
-        Verify_btn.addActionListener(new java.awt.event.ActionListener() {
+        payBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        payBtn.setText("Pay ");
+        payBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Verify_btnActionPerformed(evt);
+                payBtnActionPerformed(evt);
             }
         });
 
-        cvv_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        cvv_txt.setText("xxx");
-        cvv_txt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cvv_txtMouseClicked(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel16))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel12)
+                                    .addGap(99, 99, 99)
+                                    .addComponent(jLabel10))
+                                .addComponent(cardNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(exYearText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(222, 222, 222)
+                                .addComponent(exMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(secCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 33, Short.MAX_VALUE))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(payBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(cardNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel10))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exYearText, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addGap(18, 18, 18)
+                .addComponent(secCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(payBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1285, 1285, 1285))
+        );
 
-        Amount_lbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Amount_lbl.setText("Amount");
+        detailsPaymentPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("CVV");
+        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel4.setText("Doctor ID :");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("First Name");
+        jLabel6.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 34)); // NOI18N
+        jLabel6.setText("User Details");
 
-        Lname_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Lname_txt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Lname_txtMouseClicked(evt);
-            }
-        });
-        Lname_txt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                Lname_txtKeyTyped(evt);
-            }
-        });
+        jLabel3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 33)); // NOI18N
+        jLabel3.setText("Payment Method");
 
-        Amount_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Amount_txt.addActionListener(new java.awt.event.ActionListener() {
+        creditRadBtn.setBackground(new java.awt.Color(255, 255, 255));
+        creditRadBtn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        creditRadBtn.setSelected(true);
+        creditRadBtn.setText("Credit Card");
+        creditRadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Amount_txtActionPerformed(evt);
+                creditRadBtnActionPerformed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Last Name");
+        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel7.setText("Fees");
 
-        Fname_txt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        Fname_txt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Fname_txtMouseClicked(evt);
+        jLabel22.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+
+        SearchBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        SearchBtn.setText("Search");
+        SearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchBtnActionPerformed(evt);
             }
         });
-        Fname_txt.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                Fname_txtKeyTyped(evt);
+
+        cashRadBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        cashRadBtn2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        cashRadBtn2.setText("Cash");
+        cashRadBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cashRadBtn2ActionPerformed(evt);
             }
         });
+
+        CurrCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "EgyPound", "Dollar" }));
+        CurrCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CurrComboActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel5.setText("ID :");
+
+        javax.swing.GroupLayout detailsPaymentPanelLayout = new javax.swing.GroupLayout(detailsPaymentPanel);
+        detailsPaymentPanel.setLayout(detailsPaymentPanelLayout);
+        detailsPaymentPanelLayout.setHorizontalGroup(
+            detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailsPaymentPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel22)
+                .addGap(539, 539, 539))
+            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(cashRadBtn2))
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                        .addComponent(creditRadBtn)
+                        .addGap(246, 246, 246))
+                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                                                .addGap(218, 218, 218)
+                                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                                                .addGap(87, 87, 87)
+                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(FeesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(CurrCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(DocTxt)
+                                            .addComponent(IDtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                                        .addGap(32, 32, 32)
+                                        .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        detailsPaymentPanelLayout.setVerticalGroup(
+            detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel6)
+                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SearchBtn)
+                            .addComponent(IDtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailsPaymentPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(DocTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                                .addComponent(creditRadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(67, 67, 67)
+                                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE))
+                            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(FeesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(CurrCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addComponent(jLabel22)
+                        .addContainerGap())
+                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
+                        .addComponent(cashRadBtn2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(80, 80, 80))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(113, 113, 113)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(340, 340, 340)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CardNo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(Lname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(132, 132, 132)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cvv_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Fname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Amount_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(58, 58, 58)
-                                .addComponent(Amount_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(119, 119, 119))
-                            .addComponent(Pay_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Verify_btn, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addComponent(detailsPaymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jLabel3)
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel1)
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CardNo_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cvv_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(59, 59, 59)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(jLabel4)))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Lname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Fname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(Verify_btn)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Amount_lbl)
-                    .addComponent(Amount_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addComponent(Pay_btn)
-                .addGap(27, 27, 27))
+                        .addGap(29, 29, 29)
+                        .addComponent(detailsPaymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Pay_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pay_btnActionPerformed
-
-        JOptionPane.showMessageDialog(this,Amount_txt.getText()+ "has been Withdrawed");
-    }//GEN-LAST:event_Pay_btnActionPerformed
-
-    private void CardNo_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CardNo_txtMouseClicked
-        CardNo_txt.setText(null);
-    }//GEN-LAST:event_CardNo_txtMouseClicked
-
-    private void CardNo_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CardNo_txtKeyTyped
-
-    }//GEN-LAST:event_CardNo_txtKeyTyped
-
-    private void Verify_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Verify_btnMouseClicked
-       
-    }//GEN-LAST:event_Verify_btnMouseClicked
-
-    private void Verify_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Verify_btnActionPerformed
-        
-            String card,cvv;
-            card = CardNo_txt.getText();
-            cvv= cvv_txt.getText();
-            if(card.length()>16 || card.length()<16)
-            {
-                JOptionPane.showMessageDialog(this, "Unvalid Number");
-            } 
-            if(cvv.length()>3 || cvv.length()<3)
-            {
-                JOptionPane.showMessageDialog(this, "Unvalid Number");
-                
-            } 
-            
-            try {
-            Connection conn = DatabaseConnectionDoc.setConnection();
-            String fname = Fname_txt.getText();
-            String lname = Lname_txt.getText();
-            //String Amount = Lname_txt.getText();
-            String sql2 = "select fees from doctors where Fname = '"+fname+"' and Lname = '"+lname+"'  ";
-            Statement stt = conn.createStatement();
-            ResultSet rss = stt.executeQuery(sql2);
-            if(rss.next())
-            {
-                dispose();
-                //JOptionPane.showMessageDialog(this, "Welcome");
-                
-                 Amount_txt.setText(Integer.toString(rss.getInt("fees")));
-            }
-            
-                 } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.toString());
-          }
-            
-            /*
-           try {
-            Connection con = DatabaseConnectionDoc.setConnection();
-            String fname = Fname_txt.getText();
-            String lname = Lname_txt.getText();
-            String sql = "select * from User1 where Fname = '"+fname+"' and Lname = '"+lname+"'  ";
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            if(rs.next())
-            {
-                dispose();
-                //JOptionPane.showMessageDialog(this, "Welcome");
-                 Amount_lbl.setVisible(true);
-                 Amount_txt.setVisible(true);
-                 Pay_btn.setVisible(true);
-                 //Amount_txt.setText(Integer.toString(rs.getInt("fees")));
-                 
-          
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(this, "User not found");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.toString());
+    private void creditRadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditRadBtnActionPerformed
+        // TODO add your handling code here:
+        String securityCode = new String(secCodeText.getPassword());
+        if ((creditRadBtn.isSelected())&&(cardNumberText.getText().isEmpty() ||exYearText.getText().isEmpty()|| securityCode.isEmpty())){
+            cardNumberText.setEditable(true);
+            exYearText.setEditable(true);
+            exMonth.setEditable(true);
+            secCodeText.setEditable(true);
+            JOptionPane.showMessageDialog(this, "Your data is incomplete.");
         }
-            */
+    }//GEN-LAST:event_creditRadBtnActionPerformed
+
+    private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
+        // TODO add your handling code here:
         
-    }//GEN-LAST:event_Verify_btnActionPerformed
+        
+    }//GEN-LAST:event_payBtnActionPerformed
 
-    private void Lname_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Lname_txtMouseClicked
+    private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Lname_txtMouseClicked
+       // tableDetails();
+        int checkId = 0;
+        int Userid = Integer.parseInt(IDtxt.getText());
+        int docId = Integer.parseInt(DocTxt.getText());
+        try {
+            Connection con = DatabaseConnectionDoc.setConnection();
+            Statement st = con.createStatement();
+            Statement st2 = con.createStatement();
+            ResultSet rs = st.executeQuery("select patiet_id , doctor_id from appointments where patient_id= "+Userid+"");
+            ResultSet rs1 = st.executeQuery("select fees from doctors where id= "+docId+"");
+             while(rs.next())
+        {
+            int fees = rs1.getInt("fees");
+            FeesTxt.setText(String.valueOf(fees));
+            
+             checkId = 1;
+              IDtxt.setEditable(false);
+              JOptionPane.showMessageDialog(this , "User exists!");
 
-    private void Lname_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Lname_txtKeyTyped
+        }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            
+        }
+        
+    }//GEN-LAST:event_SearchBtnActionPerformed
+
+    private void exMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exMonthActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Lname_txtKeyTyped
+    }//GEN-LAST:event_exMonthActionPerformed
 
-    private void Amount_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Amount_txtActionPerformed
-
-    }//GEN-LAST:event_Amount_txtActionPerformed
-
-    private void cvv_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cvv_txtMouseClicked
-        cvv_txt.setText(null);
-    }//GEN-LAST:event_cvv_txtMouseClicked
-
-    private void Fname_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Fname_txtMouseClicked
+    private void cashRadBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashRadBtn2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Fname_txtMouseClicked
+    }//GEN-LAST:event_cashRadBtn2ActionPerformed
 
-    private void Fname_txtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Fname_txtKeyTyped
+    private void CurrComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrComboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Fname_txtKeyTyped
+        String selectedItem = CurrCombo.getSelectedItem().toString();
+        CurrDollars curr = new CurrDollars();
+        double fees = Double.parseDouble(FeesTxt.getText());
+        double value = curr.money(selectedItem, fees);
+        FeesTxt.setText(String.valueOf(value));
+        
+    }//GEN-LAST:event_CurrComboActionPerformed
 
+    public void ValidateCardNumber(){
+		if(cardNumberText.getText().length() != 16 && creditRadBtn.isSelected()){
+			JOptionPane.showMessageDialog(this, "Invalid Card Number."+ "\n"+ "Please check again.");	
+		}
+	}
+	//it gives an exception if nothing was entered in the field "NumberFormatException"
+	public void ValidateExpiryYear(){
+		int exYear = Integer.parseInt(exYearText.getText());
+		//no max expiry year
+		try{
+		if (exYear < 2022){
+			JOptionPane.showMessageDialog(this, "Invalid Expiry date.");
+		}
+		}catch(NumberFormatException nfe){
+			System.out.println(nfe.getMessage());
+		}
+	}
+	
+	public void ValidateSecurityCode(){
+		String securityCode = new String(secCodeText.getPassword());
+		if (securityCode.length() != 3){
+			JOptionPane.showMessageDialog(this, "Invalid Security Code. Please check again.");
+		} 
+	}
+	
+	
     /**
      * @param args the command line arguments
      */
@@ -389,21 +494,35 @@ public class UserPayment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Amount_lbl;
-    private javax.swing.JTextField Amount_txt;
-    private javax.swing.JTextField CardNo_txt;
-    private javax.swing.JTextField Fname_txt;
-    private javax.swing.JTextField Lname_txt;
-    private javax.swing.JButton Pay_btn;
-    private javax.swing.JButton Verify_btn;
-    private javax.swing.JTextField cvv_txt;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox CurrCombo;
+    private javax.swing.JTextField DocTxt;
+    private javax.swing.JTextField FeesTxt;
+    private javax.swing.JTextField IDtxt;
+    private javax.swing.JButton SearchBtn;
+    private javax.swing.JTextField cardNumberText;
+    private javax.swing.JRadioButton cashRadBtn2;
+    private javax.swing.JRadioButton creditRadBtn;
+    private javax.swing.JPanel detailsPaymentPanel;
+    private javax.swing.JComboBox<String> exMonth;
+    private javax.swing.JTextField exYearText;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton payBtn;
+    private javax.swing.JPasswordField secCodeText;
+    private javax.swing.JButton submitBtn;
+    private javax.swing.JButton submitBtn1;
+    private javax.swing.JButton submitBtn2;
     // End of variables declaration//GEN-END:variables
 }

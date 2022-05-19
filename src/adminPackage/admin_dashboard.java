@@ -1041,7 +1041,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 
     private void doctorsTableDisplayMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorsTableDisplayMouseExited
         // TODO add your handling code here:
-		appts_txt.setVisible(false);
+		appts_txt.setVisible(true);
     }//GEN-LAST:event_doctorsTableDisplayMouseExited
 
     private void name_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_name_txtMouseClicked
@@ -1304,6 +1304,22 @@ public class admin_dashboard extends javax.swing.JFrame {
 
     private void add_appts_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_appts_btnActionPerformed
         // TODO add your handling code here:
+      if(doctorsTableDisplay.getSelectedRowCount() == 1){
+			
+			try{
+				//Connection con = DatabaseConnectionDoc.setConnection();
+				Statement updateStat = con.createStatement();
+				String spec = speciality_comboBox.getSelectedItem().toString();
+				String updateSQL = "update doctors set address = '"+address_txt.getText()+"', speciality = '"+spec+"', fees= "+fees_txt.getText()+", phoneno= "+phone_txt.getText()+"where name like '"+name_txt.getText()+", APPOINTME= "+appts_txt.getText()+"'";
+				updateStat.executeUpdate(updateSQL);
+				adminModel.setRowCount(0);
+				displayDoctors();
+				JOptionPane.showMessageDialog(this, "Doctor information updated successfully.");
+			}
+			catch(SQLException ex){
+				JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
+			}
+		}
     }//GEN-LAST:event_add_appts_btnActionPerformed
 
     /**

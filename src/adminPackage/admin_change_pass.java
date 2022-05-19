@@ -26,7 +26,7 @@ public class admin_change_pass extends javax.swing.JFrame {
 	public admin_change_pass() {
 		initComponents();
 		UIManager.put("OptionPane.messageFont", new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
-		updatebtn4.setBackground(Color.white);
+		updatebtn.setBackground(Color.white);
 		clearbtn4.setBackground(Color.white);
 	}
 	public void validateField()
@@ -52,21 +52,20 @@ public class admin_change_pass extends javax.swing.JFrame {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        confirmPass_txt4 = new javax.swing.JPasswordField();
         jLabel18 = new javax.swing.JLabel();
-        oldPass_txt4 = new javax.swing.JPasswordField();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        updatebtn4 = new javax.swing.JButton();
-        passNew_txt4 = new javax.swing.JPasswordField();
-        user_txt4 = new javax.swing.JTextField();
+        updatebtn = new javax.swing.JButton();
         clearbtn4 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
+        user_txt = new javax.swing.JTextField();
+        confirmPass_txt = new javax.swing.JPasswordField();
+        oldPass_txt = new javax.swing.JPasswordField();
+        passNew_txt = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(488, 674));
         setSize(new java.awt.Dimension(488, 674));
 
         jPanel4.setBackground(new java.awt.Color(8, 128, 176));
@@ -79,26 +78,10 @@ public class admin_change_pass extends javax.swing.JFrame {
         jLabel17.setText("Old password");
         jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
 
-        confirmPass_txt4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        confirmPass_txt4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                confirmPass_txt4KeyReleased(evt);
-            }
-        });
-        jPanel4.add(confirmPass_txt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 199, -1));
-
         jLabel18.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("New Password");
         jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, -1, -1));
-
-        oldPass_txt4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        oldPass_txt4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                oldPass_txt4KeyReleased(evt);
-            }
-        });
-        jPanel4.add(oldPass_txt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 199, -1));
 
         jLabel19.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,26 +93,15 @@ public class admin_change_pass extends javax.swing.JFrame {
         jLabel20.setText("User Name");
         jPanel4.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
-        updatebtn4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        updatebtn4.setForeground(new java.awt.Color(8, 128, 176));
-        updatebtn4.setText("Reset Password");
-        updatebtn4.addActionListener(new java.awt.event.ActionListener() {
+        updatebtn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        updatebtn.setForeground(new java.awt.Color(8, 128, 176));
+        updatebtn.setText("Reset Password");
+        updatebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatebtn4ActionPerformed(evt);
+                updatebtnActionPerformed(evt);
             }
         });
-        jPanel4.add(updatebtn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 170, 68));
-
-        passNew_txt4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        passNew_txt4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                passNew_txt4KeyReleased(evt);
-            }
-        });
-        jPanel4.add(passNew_txt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, 199, -1));
-
-        user_txt4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        jPanel4.add(user_txt4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 199, -1));
+        jPanel4.add(updatebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 170, 68));
 
         clearbtn4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         clearbtn4.setForeground(new java.awt.Color(8, 128, 176));
@@ -153,6 +125,10 @@ public class admin_change_pass extends javax.swing.JFrame {
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("____________");
         jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, 60));
+        jPanel4.add(user_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 140, -1));
+        jPanel4.add(confirmPass_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 140, -1));
+        jPanel4.add(oldPass_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 140, -1));
+        jPanel4.add(passNew_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,17 +145,7 @@ public class admin_change_pass extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void confirmPass_txt4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_confirmPass_txt4KeyReleased
-        // TODO add your handling code here:
-        validateField();
-    }//GEN-LAST:event_confirmPass_txt4KeyReleased
-
-    private void oldPass_txt4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_oldPass_txt4KeyReleased
-        // TODO add your handling code here:
-        validateField();
-    }//GEN-LAST:event_oldPass_txt4KeyReleased
-
-    private void updatebtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtn4ActionPerformed
+    private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
         // TODO add your handling code here:
         String userName = user_txt.getText();
         String oldpass = oldPass_txt.getText();
@@ -222,12 +188,7 @@ public class admin_change_pass extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Database error occurred.\n Please return to the Database Manager");
             this.setVisible(false);
         }
-    }//GEN-LAST:event_updatebtn4ActionPerformed
-
-    private void passNew_txt4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passNew_txt4KeyReleased
-        // TODO add your handling code here:
-        validateField();
-    }//GEN-LAST:event_passNew_txt4KeyReleased
+    }//GEN-LAST:event_updatebtnActionPerformed
 
     private void clearbtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearbtn4ActionPerformed
         // TODO add your handling code here:
@@ -269,63 +230,19 @@ public class admin_change_pass extends javax.swing.JFrame {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton clearbtn;
-    private javax.swing.JButton clearbtn1;
-    private javax.swing.JButton clearbtn2;
-    private javax.swing.JButton clearbtn3;
     private javax.swing.JButton clearbtn4;
     private javax.swing.JPasswordField confirmPass_txt;
-    private javax.swing.JPasswordField confirmPass_txt1;
-    private javax.swing.JPasswordField confirmPass_txt2;
-    private javax.swing.JPasswordField confirmPass_txt3;
-    private javax.swing.JPasswordField confirmPass_txt4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPasswordField oldPass_txt;
-    private javax.swing.JPasswordField oldPass_txt1;
-    private javax.swing.JPasswordField oldPass_txt2;
-    private javax.swing.JPasswordField oldPass_txt3;
-    private javax.swing.JPasswordField oldPass_txt4;
     private javax.swing.JPasswordField passNew_txt;
-    private javax.swing.JPasswordField passNew_txt1;
-    private javax.swing.JPasswordField passNew_txt2;
-    private javax.swing.JPasswordField passNew_txt3;
-    private javax.swing.JPasswordField passNew_txt4;
     private javax.swing.JButton updatebtn;
-    private javax.swing.JButton updatebtn1;
-    private javax.swing.JButton updatebtn2;
-    private javax.swing.JButton updatebtn3;
-    private javax.swing.JButton updatebtn4;
     private javax.swing.JTextField user_txt;
-    private javax.swing.JTextField user_txt1;
-    private javax.swing.JTextField user_txt2;
-    private javax.swing.JTextField user_txt3;
-    private javax.swing.JTextField user_txt4;
     // End of variables declaration//GEN-END:variables
 }
