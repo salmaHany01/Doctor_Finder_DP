@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -909,10 +911,9 @@ public class UserProfile extends javax.swing.JFrame {
 
             //Connection con = DatabaseConnectionDoc.setConnection();
             Statement st = con.createStatement();
-            String sql = "INSERT INTO PAYMENT VALUES  ("+user_id+", "+doc_id+", "+fees1+", '"+currType+"', '"+pay_type+"')";
+            String sql = "INSERT INTO PAYMENT (PATIENT_ID,DOCTOR_ID,FEES,FEESTYPE,paytype) VALUES  ("+user_id+", "+doc_id+", "+fees1+", '"+currType+"', '"+pay_type+"')";
             st.executeUpdate(sql);
             
-           
             if(pay_type.equalsIgnoreCase("credit"))
                {
                 JOptionPane.showMessageDialog(this, "you payed successfuly");
@@ -929,7 +930,7 @@ public class UserProfile extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.toString());
         }
        
-   
+    
        /*
         IDtxt.setText("");
         DocTxt.setText("");
