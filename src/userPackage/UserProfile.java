@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -732,8 +734,12 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         // TODO add your handling code here:
+        if(lbl_fname.getText().equals("") || lbl_lname.getText().equals("") || lbl_add.getText().equals("") || lbl_phone1.getText().equals("") || lbl_email.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "You have to fill all the information", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
        try{
            user = UserData.getCertainUser(UserLogin.userID);
+
            int yesOrno = JOptionPane.showConfirmDialog(this, "Are you sure you wanna update?", "Confirm ", JOptionPane.YES_NO_OPTION);
            if(yesOrno == JOptionPane.YES_OPTION){
                user.setName(lbl_fname.getText());
@@ -743,17 +749,21 @@ public class UserProfile extends javax.swing.JFrame {
                user.setPhoneNo( Integer.valueOf(lbl_phone1.getText()) );
                user.setPhoneNo2( Integer.valueOf(lbl_phone2.getText()) );
                user.setEmail(lbl_email.getText());
-               
+
                UserData.display();
+               uploadData(user);               
                updateDataDB(user);
-               uploadData(user);
                lbl_name.setText(user.getName() + " " + user.getLname());
-            }else{
-               JOptionPane.showMessageDialog(this, "No updates");
-           }
-       }catch(Exception e){
-           JOptionPane.showMessageDialog(this, "update button : " + e.toString());
-       }
+            }
+            else{
+              JOptionPane.showMessageDialog(this, "No updates");
+               uploadData(user);
+            }
+    
+        }catch(Exception e){
+           JOptionPane.showMessageDialog(this, "update button : " + e.getMessage());
+        }
+        }
 
     }//GEN-LAST:event_btn_updateActionPerformed
 
@@ -909,10 +919,9 @@ public class UserProfile extends javax.swing.JFrame {
 
             //Connection con = DatabaseConnectionDoc.setConnection();
             Statement st = con.createStatement();
-            String sql = "INSERT INTO PAYMENT VALUES  ("+user_id+", "+doc_id+", "+fees1+", '"+currType+"', '"+pay_type+"')";
+            String sql = "INSERT INTO PAYMENT (PATIENT_ID,DOCTOR_ID,FEES,FEESTYPE,paytype) VALUES  ("+user_id+", "+doc_id+", "+fees1+", '"+currType+"', '"+pay_type+"')";
             st.executeUpdate(sql);
             
-           
             if(pay_type.equalsIgnoreCase("credit"))
                {
                 JOptionPane.showMessageDialog(this, "you payed successfuly");
@@ -929,7 +938,7 @@ public class UserProfile extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.toString());
         }
        
-   
+    
        /*
         IDtxt.setText("");
         DocTxt.setText("");
