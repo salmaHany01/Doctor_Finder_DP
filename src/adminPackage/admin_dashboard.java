@@ -21,11 +21,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.JTextComponent;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+import userPackage.User;
 /**
  *
  * @author DELL
@@ -36,7 +39,7 @@ public class admin_dashboard extends javax.swing.JFrame {
      * Creates new form admin_dashboard
      */
 	Connection con;
-	DefaultTableModel adminModel, viewDoctors, viewUsers, apptsModel;
+	DefaultTableModel adminModel, viewDoctors, viewUsers, apptsModel,usersModel, paymentModel;
 	CardLayout cardLayout;
     public admin_dashboard() {
         initComponents();
@@ -45,6 +48,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 		viewDoctors = (DefaultTableModel) viewTable.getModel();
 		viewUsers = (DefaultTableModel) viewUsersTable.getModel();
 		apptsModel = (DefaultTableModel) apptsTable.getModel();
+                
 		displayDoctors();
 		view_user_appointments();
 		AutoCompleteDecorator.decorate(search_cmbBox);
@@ -71,6 +75,7 @@ public class admin_dashboard extends javax.swing.JFrame {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setSize(screenSize);
+                updateCombo();
     }
 	
     /**
@@ -136,14 +141,14 @@ public class admin_dashboard extends javax.swing.JFrame {
         add_radBtn = new javax.swing.JRadioButton();
         remove_radBtn = new javax.swing.JRadioButton();
         update_radBtn = new javax.swing.JRadioButton();
-        search_cmbBox = new javax.swing.JComboBox<>();
+        search_cmbBox = new javax.swing.JComboBox<String>();
         search_btn = new javax.swing.JButton();
         refresh_btn = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         name_txt = new javax.swing.JTextField();
-        speciality_comboBox = new javax.swing.JComboBox<>();
+        speciality_comboBox = new javax.swing.JComboBox<String>();
         fees_txt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -153,7 +158,7 @@ public class admin_dashboard extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         addDoctor_btn = new javax.swing.JButton();
         removeDoctor_btn = new javax.swing.JButton();
-        apptDays_combo = new javax.swing.JComboBox<>();
+        apptDays_combo = new javax.swing.JComboBox<String>();
         jLabel8 = new javax.swing.JLabel();
         fromTime_txt = new javax.swing.JTextField();
         pm_am_lbl = new javax.swing.JLabel();
@@ -163,6 +168,32 @@ public class admin_dashboard extends javax.swing.JFrame {
         updateData_btn = new javax.swing.JButton();
         add_appts_btn = new javax.swing.JButton();
         users_panel = new javax.swing.JPanel();
+        IdCombo = new javax.swing.JComboBox();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        fname_txt = new javax.swing.JTextField();
+        lname_txt = new javax.swing.JTextField();
+        age_txt = new javax.swing.JTextField();
+        gender_txt = new javax.swing.JTextField();
+        user_address_txt = new javax.swing.JTextField();
+        user_phone_txt = new javax.swing.JTextField();
+        email_txt = new javax.swing.JTextField();
+        docIdTxt = new javax.swing.JTextField();
+        FeesTxt = new javax.swing.JTextField();
+        feesTypeTxt = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        payTypeTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -635,7 +666,12 @@ public class admin_dashboard extends javax.swing.JFrame {
         doctors_panel.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 640, 50));
 
         search_cmbBox.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 18)); // NOI18N
-        search_cmbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allergy and Immunology", "Audiology", "Cardiology", "Ear, Nose and Throat ", "Endocrinology", "Dermatology", "Dentistry", "Dietitian and Nutrition", "Gastroenterology ", "Genel Surgery", "Hematology", "Hepatology", "Internal Medicine", "IVF and Infertility", "Neurologist", "Oncology", "Opthalmology", "Osteopathy ", "Orthopedics", "Pediatrician", "Physiotherapy", "Psychiatry", "Rheumatology", "Urology", " ", " " }));
+        search_cmbBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Allergy and Immunology", "Audiology", "Cardiology", "Ear, Nose and Throat ", "Endocrinology", "Dermatology", "Dentistry", "Dietitian and Nutrition", "Gastroenterology ", "Genel Surgery", "Hematology", "Hepatology", "Internal Medicine", "IVF and Infertility", "Neurologist", "Oncology", "Opthalmology", "Osteopathy ", "Orthopedics", "Pediatrician", "Physiotherapy", "Psychiatry", "Rheumatology", "Urology", " ", " " }));
+        search_cmbBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_cmbBoxActionPerformed(evt);
+            }
+        });
         doctors_panel.add(search_cmbBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 440, 40));
 
         search_btn.setBackground(new java.awt.Color(255, 255, 255));
@@ -679,7 +715,7 @@ public class admin_dashboard extends javax.swing.JFrame {
         doctors_panel.add(name_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 310, 37));
 
         speciality_comboBox.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        speciality_comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Allergy and Immunology", "Audiology", "Cardiology", "Ear, Nose and Throat ", "Endocrinology", "Dermatology", "Dentistry", "Dietitian and Nutrition", "Gastroenterology ", "Genel Surgery", "Hematology", "Hepatology", "Internal Medicine", "IVF and Infertility", "Neurologist", "Oncology", "Opthalmology", "Osteopathy ", "Orthopedics", "Pediatrician", "Physiotherapy", "Psychiatry", "Rheumatology", "Urology", " ", " " }));
+        speciality_comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Allergy and Immunology", "Audiology", "Cardiology", "Ear, Nose and Throat ", "Endocrinology", "Dermatology", "Dentistry", "Dietitian and Nutrition", "Gastroenterology ", "Genel Surgery", "Hematology", "Hepatology", "Internal Medicine", "IVF and Infertility", "Neurologist", "Oncology", "Opthalmology", "Osteopathy ", "Orthopedics", "Pediatrician", "Physiotherapy", "Psychiatry", "Rheumatology", "Urology", " ", " " }));
         doctors_panel.add(speciality_comboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 310, 37));
 
         fees_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
@@ -727,7 +763,7 @@ public class admin_dashboard extends javax.swing.JFrame {
         doctors_panel.add(removeDoctor_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 480, 140, 50));
 
         apptDays_combo.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        apptDays_combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturdays", "Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thrusdays", "Fridays", "All Weekdays Except..." }));
+        apptDays_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Saturdays", "Sundays", "Mondays", "Tuesdays", "Wednesdays", "Thrusdays", "Fridays", "All Weekdays Except..." }));
         doctors_panel.add(apptDays_combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 350, 180, 37));
 
         jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
@@ -799,15 +835,304 @@ public class admin_dashboard extends javax.swing.JFrame {
 
         users_panel.setBackground(new java.awt.Color(255, 255, 255));
 
+        IdCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IdComboActionPerformed(evt);
+            }
+        });
+
+        jLabel24.setText("last Payements Data");
+
+        jLabel25.setText("first name");
+
+        jLabel26.setText("id :");
+
+        fname_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        fname_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fname_txtMouseClicked(evt);
+            }
+        });
+        fname_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fname_txtActionPerformed(evt);
+            }
+        });
+
+        lname_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        lname_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lname_txtMouseClicked(evt);
+            }
+        });
+        lname_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lname_txtActionPerformed(evt);
+            }
+        });
+
+        age_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        age_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                age_txtMouseClicked(evt);
+            }
+        });
+        age_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                age_txtActionPerformed(evt);
+            }
+        });
+
+        gender_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        gender_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gender_txtMouseClicked(evt);
+            }
+        });
+        gender_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gender_txtActionPerformed(evt);
+            }
+        });
+
+        user_address_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        user_address_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                user_address_txtMouseClicked(evt);
+            }
+        });
+        user_address_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                user_address_txtActionPerformed(evt);
+            }
+        });
+
+        user_phone_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        user_phone_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                user_phone_txtMouseClicked(evt);
+            }
+        });
+        user_phone_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                user_phone_txtActionPerformed(evt);
+            }
+        });
+
+        email_txt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        email_txt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                email_txtMouseClicked(evt);
+            }
+        });
+        email_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                email_txtActionPerformed(evt);
+            }
+        });
+
+        docIdTxt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        docIdTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                docIdTxtMouseClicked(evt);
+            }
+        });
+        docIdTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                docIdTxtActionPerformed(evt);
+            }
+        });
+
+        FeesTxt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        FeesTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FeesTxtMouseClicked(evt);
+            }
+        });
+        FeesTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FeesTxtActionPerformed(evt);
+            }
+        });
+
+        feesTypeTxt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        feesTypeTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                feesTypeTxtMouseClicked(evt);
+            }
+        });
+        feesTypeTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                feesTypeTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel27.setText("phone no");
+
+        jLabel28.setText("User Data");
+
+        jLabel29.setText("gender");
+
+        jLabel30.setText("last name");
+
+        jLabel31.setText("age");
+
+        jLabel32.setText("email");
+
+        jLabel33.setText("address");
+
+        jLabel35.setText("Fees");
+
+        jLabel36.setText("Doctor Id");
+
+        jLabel37.setText("Pay Type");
+
+        jLabel38.setText("Fees Type");
+
+        payTypeTxt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        payTypeTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                payTypeTxtMouseClicked(evt);
+            }
+        });
+        payTypeTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payTypeTxtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout users_panelLayout = new javax.swing.GroupLayout(users_panel);
         users_panel.setLayout(users_panelLayout);
         users_panelLayout.setHorizontalGroup(
             users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1574, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, users_panelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(700, 700, 700))
+            .addGroup(users_panelLayout.createSequentialGroup()
+                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(users_panelLayout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(IdCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(users_panelLayout.createSequentialGroup()
+                        .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(users_panelLayout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(users_panelLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(user_phone_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(users_panelLayout.createSequentialGroup()
+                                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(users_panelLayout.createSequentialGroup()
+                                        .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(fname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(age_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(28, 28, 28)
+                                        .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(users_panelLayout.createSequentialGroup()
+                                        .addComponent(gender_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(payTypeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(FeesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(docIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(feesTypeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(user_address_txt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                                .addComponent(email_txt, javax.swing.GroupLayout.Alignment.LEADING)))))
+                .addContainerGap(659, Short.MAX_VALUE))
+            .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(users_panelLayout.createSequentialGroup()
+                    .addGap(193, 193, 193)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(1224, Short.MAX_VALUE)))
+            .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(users_panelLayout.createSequentialGroup()
+                    .addGap(495, 495, 495)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(922, Short.MAX_VALUE)))
         );
         users_panelLayout.setVerticalGroup(
             users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1020, Short.MAX_VALUE)
+            .addGroup(users_panelLayout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IdCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(users_panelLayout.createSequentialGroup()
+                        .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(users_panelLayout.createSequentialGroup()
+                                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(fname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lname_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(age_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(users_panelLayout.createSequentialGroup()
+                        .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(docIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FeesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(feesTypeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(gender_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(payTypeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(user_phone_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(user_address_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(email_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(364, Short.MAX_VALUE))
+            .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(users_panelLayout.createSequentialGroup()
+                    .addGap(205, 205, 205)
+                    .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(773, Short.MAX_VALUE)))
+            .addGroup(users_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(users_panelLayout.createSequentialGroup()
+                    .addGap(387, 387, 387)
+                    .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(591, Short.MAX_VALUE)))
         );
 
         cards_panel.add(users_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1574, 1020));
@@ -1131,7 +1456,22 @@ public class admin_dashboard extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
 		}
     }//GEN-LAST:event_removeDoctor_btnActionPerformed
-
+//update combobox
+    
+    private void updateCombo()
+    {
+        String sq1 = "select *from user1";
+        try {
+            Statement displayStat = con.createStatement();
+			ResultSet rs = displayStat.executeQuery(sq1);
+                        while(rs.next())
+                        {
+                            IdCombo.addItem(rs.getString("id"));
+                        }
+        } catch (Exception e) {
+        }
+    
+    }
     private void viewAllUsers_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewAllUsers_btnMouseEntered
         // TODO add your handling code here:
 		viewAllUsers_btn.setBackground(new Color(82,166,199));
@@ -1322,6 +1662,169 @@ public class admin_dashboard extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_add_appts_btnActionPerformed
 
+    private void search_cmbBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_cmbBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_cmbBoxActionPerformed
+
+    private void IdComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdComboActionPerformed
+        // TODO add your handling code here:
+        String selectedItem = IdCombo.getSelectedItem().toString();
+        int Id = Integer.parseInt(selectedItem);
+        
+            try {
+                Statement updateStat = con.createStatement();
+                String sq1  = "select* from user1 where id ="+Id+"";
+ 
+                ResultSet rs = updateStat.executeQuery(sq1);
+
+               while(rs.next()){
+				String Fname = rs.getString("fname");
+                                String Lname = rs.getString("lname");
+				String gender = rs.getString("gender");
+				String age = String.valueOf(rs.getInt("age"));
+                                
+				String phoneNo1 =String.valueOf(rs.getInt("phoneno1")) ;
+				String address = rs.getString("address");
+				String email = rs.getString("email");
+                                
+                             
+				//string array to store data into jtable
+                                fname_txt.setText(Fname);
+                                lname_txt.setText(Lname);
+                                gender_txt.setText(gender);
+                                age_txt.setText(age);
+                                user_phone_txt.setText(phoneNo1);
+                                user_address_txt.setText(address);
+                                email_txt.setText(email);
+                                
+ 	
+			}
+              
+               
+                 
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "No User Data Found!");
+            }
+            //for the payment
+              try {
+                Statement updateStat1 = con.createStatement();
+                String sq2  = "select* from payment where patient_id ="+Id+"";
+ 
+                ResultSet rs1 = updateStat1.executeQuery(sq2);
+
+           
+               while(rs1.next())
+               {
+                      String doctor_id =  String.valueOf(rs1.getInt("doctor_id"));
+                                
+				String fees = String.valueOf(rs1.getInt("fees"));
+                                String feesType =  rs1.getString("feestype");
+                                String payType =  rs1.getString("paytype");
+
+                   
+                               docIdTxt.setText(doctor_id);
+                                FeesTxt.setText(fees);
+                                feesTypeTxt.setText(feesType);
+                                payTypeTxt.setText(payType);
+               }
+               
+                 
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "No Payment Found!");
+            }
+
+       
+       
+    }//GEN-LAST:event_IdComboActionPerformed
+
+    private void fname_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fname_txtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fname_txtMouseClicked
+
+    private void fname_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fname_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fname_txtActionPerformed
+
+    private void lname_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lname_txtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lname_txtMouseClicked
+
+    private void lname_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lname_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lname_txtActionPerformed
+
+    private void age_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_age_txtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_age_txtMouseClicked
+
+    private void age_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_age_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_age_txtActionPerformed
+
+    private void gender_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gender_txtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gender_txtMouseClicked
+
+    private void gender_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gender_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gender_txtActionPerformed
+
+    private void user_address_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_user_address_txtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_user_address_txtMouseClicked
+
+    private void user_address_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_address_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_user_address_txtActionPerformed
+
+    private void user_phone_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_user_phone_txtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_user_phone_txtMouseClicked
+
+    private void user_phone_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_phone_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_user_phone_txtActionPerformed
+
+    private void email_txtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_email_txtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email_txtMouseClicked
+
+    private void email_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email_txtActionPerformed
+
+    private void docIdTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docIdTxtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_docIdTxtMouseClicked
+
+    private void docIdTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_docIdTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_docIdTxtActionPerformed
+
+    private void FeesTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FeesTxtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FeesTxtMouseClicked
+
+    private void FeesTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FeesTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FeesTxtActionPerformed
+
+    private void feesTypeTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feesTypeTxtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_feesTypeTxtMouseClicked
+
+    private void feesTypeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_feesTypeTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_feesTypeTxtActionPerformed
+
+    private void payTypeTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payTypeTxtMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_payTypeTxtMouseClicked
+
+    private void payTypeTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payTypeTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_payTypeTxtActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1359,11 +1862,14 @@ public class admin_dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField FeesTxt;
+    private javax.swing.JComboBox IdCombo;
     private javax.swing.JButton addDoctor_btn;
     private javax.swing.JButton add_appts_btn;
     private javax.swing.JRadioButton add_radBtn;
     private javax.swing.JTextField address_txt;
     private javax.swing.JLabel adminProfile_btn;
+    private javax.swing.JTextField age_txt;
     private javax.swing.JLabel am_pm_lbl;
     private javax.swing.JPanel appointment_panel;
     private javax.swing.JComboBox<String> apptDays_combo;
@@ -1376,12 +1882,17 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel cards_panel;
     private javax.swing.JLabel changePass_btn;
     private javax.swing.JButton confirmAppt_btn;
+    private javax.swing.JTextField docIdTxt;
     private javax.swing.JTextField doctorName_txt;
     private javax.swing.JScrollPane doctorsScrollPane;
     private javax.swing.JTable doctorsTableDisplay;
     private javax.swing.JPanel doctors_panel;
+    private javax.swing.JTextField email_txt;
+    private javax.swing.JTextField feesTypeTxt;
     private javax.swing.JTextField fees_txt;
+    private javax.swing.JTextField fname_txt;
     private javax.swing.JTextField fromTime_txt;
+    private javax.swing.JTextField gender_txt;
     private javax.swing.JPanel homePage_panel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1399,7 +1910,21 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1415,12 +1940,14 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JTextField lname_txt;
     private javax.swing.JLabel logout_btn;
     private javax.swing.JLabel manageAppt_btn;
     private javax.swing.JLabel manageDoctor_btn;
     private javax.swing.JLabel manageUsers_btn;
     private javax.swing.JTextField name_txt;
     private javax.swing.JTextField patientName_txt;
+    private javax.swing.JTextField payTypeTxt;
     private javax.swing.JTextField phone_txt;
     private javax.swing.JLabel pm_am_lbl;
     private javax.swing.JLabel refresh_btn;
@@ -1434,6 +1961,8 @@ public class admin_dashboard extends javax.swing.JFrame {
     private javax.swing.JRadioButton update_radBtn;
     private javax.swing.JScrollPane userScrollPane;
     private javax.swing.JPanel userView_panel;
+    private javax.swing.JTextField user_address_txt;
+    private javax.swing.JTextField user_phone_txt;
     private javax.swing.JPanel users_panel;
     private javax.swing.JLabel viewAllUsers_btn;
     private javax.swing.JButton viewDoctors_btn;
