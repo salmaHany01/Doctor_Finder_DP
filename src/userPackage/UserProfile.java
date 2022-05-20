@@ -796,6 +796,31 @@ public class UserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_r_maleActionPerformed
 
+    public void ValidateCardNumber(){
+		if(cardNumberText.getText().length() != 16 && creditRadBtn.isSelected()){
+			JOptionPane.showMessageDialog(this, "Invalid Card Number."+ "\n"+ "Please check again.");	
+		}
+	}
+	//it gives an exception if nothing was entered in the field "NumberFormatException"
+	public void ValidateExpiryYear(){
+		int exYear = Integer.parseInt(exYearText.getText());
+		//no max expiry year
+		try{
+		if (exYear < 2022){
+			JOptionPane.showMessageDialog(this, "Invalid Expiry date.");
+		}
+		}catch(NumberFormatException nfe){
+			System.out.println(nfe.getMessage());
+		}
+	}
+	
+	public void ValidateSecurityCode(){
+		String securityCode = new String(secCodeText.getPassword());
+		if (securityCode.length() != 3){
+			JOptionPane.showMessageDialog(this, "Invalid Security Code. Please check again.");
+		} 
+	}
+	
     private void btn_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmActionPerformed
         // TODO add your handling code here:
         String oldPass, newPass, confrimPass;
@@ -834,7 +859,73 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
         // TODO add your handling code here:
+         int user_id =Integer.parseInt(IDtxt.getText());
+            int doc_id =Integer.parseInt(DocTxt.getText());
+            int fees = Integer.parseInt(FeesTxt.getText());
+            String currType = CurrCombo.getSelectedItem().toString();
+            String pay_type = null;
+            	if(creditRadBtn.isSelected()){
+			pay_type="credit";
+		}
+                
+                else if(creditRadBtn.isSelected()){
+			pay_type="cash";
+		}
+                
+              //int expire_date= Integer.parseInt(exYearText.getText()); 
+            //  int cridet_card=Integer.parseInt(cardNumberText.getText()); 
+            //  int secCode=Integer.parseInt(secCodeText.getText());
+              
+          
+        if(IDtxt.equals("") || DocTxt.equals("") || FeesTxt.equals("")   )
+        {
+            JOptionPane.showMessageDialog(rootPane , "Please Fill in All the Information","ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        
+      if(creditRadBtn.isSelected())
+      {
+         if(exYearText.equals("")) 
+            { JOptionPane.showMessageDialog(rootPane , "Please Fill in All the Information","ERROR", JOptionPane.ERROR_MESSAGE);  } 
+         ValidateCardNumber();
+         ValidateExpiryYear();
+         ValidateSecurityCode(); 
+      }
+       
+        try {
 
+            Connection con = DatabaseConnectionDoc.setConnection();
+             Statement st = con.createStatement();
+            st.executeQuery("insert into PAYMENT (PATIENT_ID,DOCTOR_ID,FEES,FEESTYPE,paytype) values ("+user_id+","+doc_id+" ,"+fees+", "+currType+",  "+pay_type+")");
+           
+
+            if(pay_type.equalsIgnoreCase("credit"))
+               {
+                JOptionPane.showMessageDialog(this, "you payed successfuly");
+               }
+                
+           else if (pay_type.equalsIgnoreCase("cash"))
+               {
+              JOptionPane.showMessageDialog(this, "you can pay in the clinic");
+               }
+       
+          
+
+        } catch (Exception ex) {
+            //JOptionPane.showMessageDialog(rootPane , "ERROR","ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.toString());
+        }
+       
+   
+       
+        IDtxt.setText("");
+        DocTxt.setText("");
+        FeesTxt.setText("");
+        CurrCombo.setSelectedIndex(0);
+        exYearText.setText("");
+        cardNumberText.setText("");
+        secCodeText.setText("");
+             
+        
     }//GEN-LAST:event_payBtnActionPerformed
 
     private void creditRadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditRadBtnActionPerformed
@@ -887,6 +978,7 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void cashRadBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashRadBtn2ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_cashRadBtn2ActionPerformed
 
     private void CurrComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrComboActionPerformed
