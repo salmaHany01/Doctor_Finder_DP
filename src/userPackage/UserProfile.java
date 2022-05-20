@@ -882,6 +882,8 @@ public class UserProfile extends javax.swing.JFrame {
          int user_id =Integer.parseInt(IDtxt.getText());
             int doc_id =Integer.parseInt(DocTxt.getText());
             double fees = Double.parseDouble(FeesTxt.getText());
+                        int fees1 =Integer.parseInt(FeesTxt.getText());
+
             String currType = CurrCombo.getSelectedItem().toString();
             String pay_type = null;
             if(creditRadBtn.isSelected()){
@@ -905,12 +907,12 @@ public class UserProfile extends javax.swing.JFrame {
        
         try {
 
-            Connection con = DatabaseConnectionDoc.setConnection();
-             Statement st = con.createStatement();
-            String sql = "INSERT INTO PAYMENT (PATIENT_ID, DOCTOR_ID, FEES, FEESTYPE, PAYTYPE) VALUES ("+user_id+", "+doc_id+", "+fees+", '"+currType+"', '"+pay_type+"')";
+            //Connection con = DatabaseConnectionDoc.setConnection();
+            Statement st = con.createStatement();
+            String sql = "INSERT INTO PAYMENT VALUES  ("+user_id+", "+doc_id+", "+fees1+", '"+currType+"', '"+pay_type+"')";
             st.executeUpdate(sql);
+            
            
-
             if(pay_type.equalsIgnoreCase("credit"))
                {
                 JOptionPane.showMessageDialog(this, "you payed successfuly");
@@ -920,10 +922,9 @@ public class UserProfile extends javax.swing.JFrame {
                {
 				 JOptionPane.showMessageDialog(this, "you can pay in the clinic");
                }
-       
-          
+            
 
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(rootPane , "ERROR","ERROR", JOptionPane.ERROR_MESSAGE);
             JOptionPane.showMessageDialog(this, ex.toString());
         }
@@ -986,7 +987,7 @@ public class UserProfile extends javax.swing.JFrame {
 				con.setAutoCommit(false);
             }
         } catch (Exception e) {
-            //JOptionPane.showMessageDialog(null, e);
+           // JOptionPane.showMessageDialog(this, "User Doesnt exist!");
 			//do nothing
         }
 
@@ -1004,7 +1005,7 @@ public class UserProfile extends javax.swing.JFrame {
         double fees = Double.parseDouble(FeesTxt.getText());
         double value = curr.money(selectedItem, fees);
         FeesTxt.setText(String.valueOf(value));
-
+        
     }//GEN-LAST:event_CurrComboActionPerformed
 
     private void lbl_homepageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_homepageMouseEntered
