@@ -44,6 +44,7 @@ public class UserProfile extends javax.swing.JFrame {
         panel_chngPass.setVisible(false);
         panel_appointments.setVisible(false);
         panel_payments.setVisible(false);
+		payBtn.setVisible(false);
 		btn_out.setBackground(Color.white);
         btn_update.setBackground(Color.white);
 		btn_confirm.setBackground(Color.white);
@@ -320,8 +321,6 @@ public class UserProfile extends javax.swing.JFrame {
             }
         });
         panel_Profile.add(btn_out, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 240, 60));
-
-        lbl_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userPackage/user.png"))); // NOI18N
         panel_Profile.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 130, 140));
 
         jSplitPane1.setLeftComponent(panel_Profile);
@@ -530,6 +529,11 @@ public class UserProfile extends javax.swing.JFrame {
         });
 
         secCodeText.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+        secCodeText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                secCodeTextFocusLost(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 33)); // NOI18N
         jLabel18.setText("Card Information");
@@ -552,25 +556,31 @@ public class UserProfile extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel18))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(payBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jLabel17)
-                                    .addGap(99, 99, 99)
-                                    .addComponent(jLabel13))
-                                .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(secCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(exYearText, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(112, 112, 112)
-                                    .addComponent(exMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(secCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cardNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 71, Short.MAX_VALUE))))
+                                    .addComponent(jLabel17))
+                                .addGap(99, 99, 99)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(exMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(60, 71, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel18))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(payBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(cardNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -593,9 +603,9 @@ public class UserProfile extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(secCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
+                .addGap(2, 2, 2)
                 .addComponent(payBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1186, 1186, 1186))
+                .addGap(1264, 1264, 1264))
         );
 
         panel_payments.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 470, 560));
@@ -796,30 +806,40 @@ public class UserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_r_maleActionPerformed
 
-    public void ValidateCardNumber(){
+     public boolean ValidateCardNumber(){
 		if(cardNumberText.getText().length() != 16 && creditRadBtn.isSelected()){
 			JOptionPane.showMessageDialog(this, "Invalid Card Number."+ "\n"+ "Please check again.");	
+			return false;
+		}
+		else{
+		return true;
 		}
 	}
 	//it gives an exception if nothing was entered in the field "NumberFormatException"
-	public void ValidateExpiryYear(){
+	public boolean ValidateExpiryYear(){
 		int exYear = Integer.parseInt(exYearText.getText());
 		//no max expiry year
 		try{
 		if (exYear < 2022){
 			JOptionPane.showMessageDialog(this, "Invalid Expiry date.");
+			return false;
 		}
+		else{return true;}
 		}catch(NumberFormatException nfe){
 			System.out.println(nfe.getMessage());
 		}
+		return false;
 	}
 	
-	public void ValidateSecurityCode(){
+	public boolean ValidateSecurityCode(){
 		String securityCode = new String(secCodeText.getPassword());
 		if (securityCode.length() != 3){
 			JOptionPane.showMessageDialog(this, "Invalid Security Code. Please check again.");
+			return false;
 		} 
+		else{return true;}
 	}
+	
 	
     private void btn_confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_confirmActionPerformed
         // TODO add your handling code here:
@@ -861,16 +881,16 @@ public class UserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
          int user_id =Integer.parseInt(IDtxt.getText());
             int doc_id =Integer.parseInt(DocTxt.getText());
-            int fees = Integer.parseInt(FeesTxt.getText());
+            double fees = Double.parseDouble(FeesTxt.getText());
             String currType = CurrCombo.getSelectedItem().toString();
             String pay_type = null;
-            	if(creditRadBtn.isSelected()){
-			pay_type="credit";
-		}
+            if(creditRadBtn.isSelected()){
+				pay_type="credit";
+			}
                 
-                else if(creditRadBtn.isSelected()){
-			pay_type="cash";
-		}
+            else if(cashRadBtn2.isSelected()){
+				pay_type="cash";
+			}
                 
               //int expire_date= Integer.parseInt(exYearText.getText()); 
             //  int cridet_card=Integer.parseInt(cardNumberText.getText()); 
@@ -882,20 +902,13 @@ public class UserProfile extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane , "Please Fill in All the Information","ERROR", JOptionPane.ERROR_MESSAGE);
         }
         
-      if(creditRadBtn.isSelected())
-      {
-         if(exYearText.equals("")) 
-            { JOptionPane.showMessageDialog(rootPane , "Please Fill in All the Information","ERROR", JOptionPane.ERROR_MESSAGE);  } 
-         ValidateCardNumber();
-         ValidateExpiryYear();
-         ValidateSecurityCode(); 
-      }
        
         try {
 
             Connection con = DatabaseConnectionDoc.setConnection();
              Statement st = con.createStatement();
-            st.executeQuery("insert into PAYMENT (PATIENT_ID,DOCTOR_ID,FEES,FEESTYPE,paytype) values ("+user_id+","+doc_id+" ,"+fees+", "+currType+",  "+pay_type+")");
+            String sql = "INSERT INTO PAYMENT (PATIENT_ID, DOCTOR_ID, FEES, FEESTYPE, PAYTYPE) VALUES ("+user_id+", "+doc_id+", "+fees+", '"+currType+"', '"+pay_type+"')";
+            st.executeUpdate(sql);
            
 
             if(pay_type.equalsIgnoreCase("credit"))
@@ -916,7 +929,7 @@ public class UserProfile extends javax.swing.JFrame {
         }
        
    
-       
+       /*
         IDtxt.setText("");
         DocTxt.setText("");
         FeesTxt.setText("");
@@ -924,7 +937,7 @@ public class UserProfile extends javax.swing.JFrame {
         exYearText.setText("");
         cardNumberText.setText("");
         secCodeText.setText("");
-             
+         */    
         
     }//GEN-LAST:event_payBtnActionPerformed
 
@@ -936,8 +949,11 @@ public class UserProfile extends javax.swing.JFrame {
             exYearText.setEditable(true);
             exMonth.setEditable(true);
             secCodeText.setEditable(true);
-            JOptionPane.showMessageDialog(this, "Your data is incomplete.");
+            
         }
+		else{
+			JOptionPane.showMessageDialog(this, "Your data is incomplete.");
+		}
     }//GEN-LAST:event_creditRadBtnActionPerformed
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
@@ -978,7 +994,7 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void cashRadBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashRadBtn2ActionPerformed
         // TODO add your handling code here:
-        
+        payBtn.setVisible(true);
     }//GEN-LAST:event_cashRadBtn2ActionPerformed
 
     private void CurrComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CurrComboActionPerformed
@@ -1055,6 +1071,22 @@ public class UserProfile extends javax.swing.JFrame {
 		lbl_payments.setBackground(new Color(0,112,205));
 		lbl_payments.setForeground(Color.white);
     }//GEN-LAST:event_lbl_paymentsMouseExited
+
+    private void secCodeTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_secCodeTextFocusLost
+        // TODO add your handling code here:
+		boolean cardNoResult = false, expiryResult = false, cvvResult = false;
+		cardNoResult = ValidateCardNumber();
+        expiryResult = ValidateExpiryYear();
+        cvvResult = ValidateSecurityCode(); 
+		
+       if(cardNoResult && expiryResult && cvvResult){
+		   payBtn.setVisible(true);
+		   
+	   }
+	   else{
+		   secCodeText.setText("");
+	   }
+    }//GEN-LAST:event_secCodeTextFocusLost
 
     /**
      * @param args the command line arguments
