@@ -7,10 +7,12 @@ package userPackage;
 
 import java.awt.Color;
 import adminPackage.DatabaseConnectionDoc;
+import java.awt.Font;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 /**
  *
  * @author Fayroz Tarek
@@ -26,6 +28,7 @@ public class UserLogin extends javax.swing.JFrame {
     public UserLogin() {
         initComponents();
         con = DatabaseConnectionDoc.setConnection();
+		UIManager.put("OptionPane.messageFont", new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
         btn_login.setBackground(Color.white);
     }
 
@@ -40,11 +43,11 @@ public class UserLogin extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        txt_pass = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
         lbl_frgpass = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbl_crtacc = new javax.swing.JLabel();
+        txt_pass = new javax.swing.JPasswordField();
         btn_login = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -59,26 +62,16 @@ public class UserLogin extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(5, 89, 123));
 
-        txt_pass.setText("Password");
-        txt_pass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_passActionPerformed(evt);
-            }
-        });
-
+        txt_email.setFont(new java.awt.Font("Microsoft JhengHei UI", 2, 14)); // NOI18N
+        txt_email.setForeground(new java.awt.Color(153, 153, 153));
         txt_email.setText("Email");
         txt_email.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txt_emailMouseClicked(evt);
             }
         });
-        txt_email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_emailActionPerformed(evt);
-            }
-        });
 
-        lbl_frgpass.setFont(new java.awt.Font("Microsoft JhengHei UI", 2, 12)); // NOI18N
+        lbl_frgpass.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 13)); // NOI18N
         lbl_frgpass.setForeground(new java.awt.Color(255, 255, 255));
         lbl_frgpass.setText("Forget Password?");
         lbl_frgpass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -89,14 +82,9 @@ public class UserLogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 2, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Not registered yet?");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
 
         lbl_crtacc.setFont(new java.awt.Font("Microsoft JhengHei", 1, 12)); // NOI18N
         lbl_crtacc.setForeground(new java.awt.Color(180, 216, 231));
@@ -108,6 +96,10 @@ public class UserLogin extends javax.swing.JFrame {
             }
         });
 
+        txt_pass.setFont(new java.awt.Font("Microsoft JhengHei UI", 2, 14)); // NOI18N
+        txt_pass.setForeground(new java.awt.Color(153, 153, 153));
+        txt_pass.setText("Password");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,28 +107,30 @@ public class UserLogin extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_crtacc)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_pass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_frgpass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))))
+                        .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbl_frgpass, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lbl_crtacc))
+                                .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_frgpass)
-                .addGap(33, 33, 33)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lbl_crtacc))
@@ -180,21 +174,10 @@ public class UserLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_passActionPerformed
-
-    private void txt_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_emailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_emailActionPerformed
-
     private void lbl_frgpassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_frgpassMouseClicked
         // TODO add your handling code here:
+		JOptionPane.showMessageDialog(this, "Please contact the system admin to retrieve your data.");
     }//GEN-LAST:event_lbl_frgpassMouseClicked
-
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel2MouseClicked
 
     private void lbl_crtaccMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_crtaccMouseClicked
         // TODO add your handling code here:
@@ -218,7 +201,7 @@ public class UserLogin extends javax.swing.JFrame {
                 
                 userID = rs.getInt("id");
                 System.out.println(" " + rs.getInt("id") + " " + userID);
-                JOptionPane.showMessageDialog(this, "Welcome");
+                //JOptionPane.showMessageDialog(this, "Welcome");
                 
                 UserProfile userProfile = new UserProfile();
                 userProfile.setVisible(true);                    
@@ -229,13 +212,17 @@ public class UserLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Invaild Email or Password");
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "login ex: here "+ex.toString());
+            JOptionPane.showMessageDialog(this, "Database error occurred.\n Please return to the Database Manager");
         }
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void txt_emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_emailMouseClicked
        txt_email.setText("");
        txt_pass.setText("");
+	   txt_email.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+	   txt_pass.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+	   txt_email.setForeground(Color.black);
+	   txt_pass.setForeground(Color.black);
     }//GEN-LAST:event_txt_emailMouseClicked
 
     /**
@@ -285,6 +272,6 @@ public class UserLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_crtacc;
     private javax.swing.JLabel lbl_frgpass;
     private javax.swing.JTextField txt_email;
-    private javax.swing.JTextField txt_pass;
+    private javax.swing.JPasswordField txt_pass;
     // End of variables declaration//GEN-END:variables
 }

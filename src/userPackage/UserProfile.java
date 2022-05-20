@@ -16,6 +16,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.*;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -35,15 +36,19 @@ public class UserProfile extends javax.swing.JFrame {
     public UserProfile() {
         initComponents();
 		//GUI related *ignore*
-        lbl_img.setIcon(new ImageIcon("D:\\Software_Engineering\\Semester_6\\Design patterns\\Project\\DoctorFinderProject\\src\\main\\java\\com\\mycompany\\doctorFinder\\user\\pp2.png"));
-        panel_homepage.setVisible(true);
+		//lbl_img.setIcon(new ImageIcon("D:\\Software_Engineering\\Semester_6\\Design patterns\\Project\\DoctorFinderProject\\src\\main\\java\\com\\mycompany\\doctorFinder\\user\\pp2.png"));
+        //System.out.println(getClass().getResource("C:\\Users\\Salma\\OneDrive\\Documents\\GitHub\\yay\\Doctor_Finder_DP\\src\\userPackage\\user.png"));
+		//lbl_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("user.png")));
+		panel_homepage.setVisible(true);
         panel_chngInfo.setVisible(false);
         panel_chngPass.setVisible(false);
         panel_appointments.setVisible(false);
         panel_payments.setVisible(false);
-	btn_out.setBackground(Color.white);
+		btn_out.setBackground(Color.white);
         btn_update.setBackground(Color.white);
-        
+		btn_confirm.setBackground(Color.white);
+		SearchBtn.setBackground(Color.white);
+		payBtn.setBackground(Color.white);
         //display connection
         con = DatabaseConnectionDoc.setConnection();
         
@@ -126,6 +131,7 @@ public class UserProfile extends javax.swing.JFrame {
 
         jFrame1 = new javax.swing.JFrame();
         radio_group = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jSplitPane1 = new javax.swing.JSplitPane();
         panel_Profile = new javax.swing.JPanel();
         lbl_name = new javax.swing.JLabel();
@@ -162,6 +168,8 @@ public class UserProfile extends javax.swing.JFrame {
         txt_oldpass = new javax.swing.JPasswordField();
         txt_newpass = new javax.swing.JPasswordField();
         txt_confirm = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         panel_appointments = new javax.swing.JPanel();
         panel_payments = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -207,264 +215,292 @@ public class UserProfile extends javax.swing.JFrame {
 
         jSplitPane1.setDividerSize(1);
 
-        panel_Profile.setBackground(new java.awt.Color(102, 204, 255));
+        panel_Profile.setBackground(new java.awt.Color(0, 112, 205));
         panel_Profile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbl_name.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbl_name.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 14)); // NOI18N
+        lbl_name.setForeground(new java.awt.Color(255, 255, 255));
         lbl_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_name.setText("User   Name");
+        lbl_name.setText("User Name");
         lbl_name.setAlignmentX(0.5F);
-        panel_Profile.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 140, 31));
+        panel_Profile.add(lbl_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 140, 31));
 
         lbl_homepage.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
-        lbl_homepage.setText("Home Page");
+        lbl_homepage.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_homepage.setText(" Home Page");
         lbl_homepage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_homepage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_homepageMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_homepageMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_homepageMouseExited(evt);
+            }
         });
-        panel_Profile.add(lbl_homepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 191, -1));
+        panel_Profile.add(lbl_homepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 249, 240, 50));
 
         lbl_chnginfo1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
-        lbl_chnginfo1.setText("Change Info");
+        lbl_chnginfo1.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_chnginfo1.setText(" Change Info");
         lbl_chnginfo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_chnginfo1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_chnginfo1MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_chnginfo1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_chnginfo1MouseExited(evt);
+            }
         });
-        panel_Profile.add(lbl_chnginfo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 191, -1));
+        panel_Profile.add(lbl_chnginfo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 240, 50));
 
         lbl_chngPass.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
-        lbl_chngPass.setText("Change Password");
+        lbl_chngPass.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_chngPass.setText(" Change Password");
         lbl_chngPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_chngPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_chngPassMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_chngPassMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_chngPassMouseExited(evt);
+            }
         });
-        panel_Profile.add(lbl_chngPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 191, -1));
+        panel_Profile.add(lbl_chngPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, 50));
 
         lbl_Appoin.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
-        lbl_Appoin.setText("Appointments");
+        lbl_Appoin.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_Appoin.setText(" Appointments");
         lbl_Appoin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_Appoin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_AppoinMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_AppoinMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_AppoinMouseExited(evt);
+            }
         });
-        panel_Profile.add(lbl_Appoin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 200, 30));
+        panel_Profile.add(lbl_Appoin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 240, 50));
 
         lbl_payments.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
-        lbl_payments.setText("Payments");
+        lbl_payments.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_payments.setText(" Payments");
         lbl_payments.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbl_payments.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_paymentsMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_paymentsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_paymentsMouseExited(evt);
+            }
         });
-        panel_Profile.add(lbl_payments, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 191, -1));
+        panel_Profile.add(lbl_payments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 240, 50));
 
         btn_out.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
-        btn_out.setForeground(new java.awt.Color(8, 128, 176));
+        btn_out.setForeground(new java.awt.Color(0, 112, 205));
         btn_out.setText("Logout");
+        btn_out.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btn_out.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_outActionPerformed(evt);
             }
         });
-        panel_Profile.add(btn_out, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 760, 130, 40));
+        panel_Profile.add(btn_out, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 240, 60));
 
-        lbl_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userPackage/pp2.png"))); // NOI18N
-        panel_Profile.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 110));
+        lbl_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userPackage/user.png"))); // NOI18N
+        panel_Profile.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 130, 140));
 
         jSplitPane1.setLeftComponent(panel_Profile);
 
         panel_homepage.setBackground(new java.awt.Color(255, 255, 255));
         panel_homepage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panel_chngInfo.setBackground(new java.awt.Color(204, 255, 255));
+        panel_chngInfo.setBackground(new java.awt.Color(255, 255, 255));
         panel_chngInfo.setName("gender"); // NOI18N
         panel_chngInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel5.setText("First Name");
-        panel_chngInfo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 119, 30));
+        panel_chngInfo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 150, 30));
 
+        lbl_fname.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         lbl_fname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lbl_fnameActionPerformed(evt);
             }
         });
-        panel_chngInfo.add(lbl_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 189, -1));
+        panel_chngInfo.add(lbl_fname, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 220, 40));
 
-        gender.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        gender.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         gender.setText("Gender");
-        panel_chngInfo.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 119, 30));
+        panel_chngInfo.add(gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, 150, 30));
 
-        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel7.setText("Phone No2");
-        panel_chngInfo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 119, 30));
+        panel_chngInfo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 150, 30));
 
+        lbl_phone2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         lbl_phone2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lbl_phone2ActionPerformed(evt);
             }
         });
-        panel_chngInfo.add(lbl_phone2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 470, 189, -1));
+        panel_chngInfo.add(lbl_phone2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 220, 40));
 
-        jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel8.setText("Email");
-        panel_chngInfo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, 119, 30));
+        panel_chngInfo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 150, 30));
 
+        lbl_email.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         lbl_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lbl_emailActionPerformed(evt);
             }
         });
-        panel_chngInfo.add(lbl_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 600, 189, -1));
+        panel_chngInfo.add(lbl_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 590, 220, 40));
 
+        lbl_add.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         lbl_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lbl_addActionPerformed(evt);
             }
         });
-        panel_chngInfo.add(lbl_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 470, 189, -1));
+        panel_chngInfo.add(lbl_add, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 460, 220, 40));
 
-        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel9.setText("Address");
-        panel_chngInfo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 390, 119, 30));
+        panel_chngInfo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 400, 150, 30));
 
+        lbl_phone1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         lbl_phone1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lbl_phone1ActionPerformed(evt);
             }
         });
-        panel_chngInfo.add(lbl_phone1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 310, 189, -1));
+        panel_chngInfo.add(lbl_phone1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, 220, 40));
 
-        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel10.setText("Phone No1");
-        panel_chngInfo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 119, 30));
-        panel_chngInfo.add(lbl_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, 189, -1));
+        panel_chngInfo.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 280, 150, 30));
 
-        jLabel11.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        lbl_lname.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        panel_chngInfo.add(lbl_lname, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 190, 220, 40));
+
+        jLabel11.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel11.setText("Last Name");
-        panel_chngInfo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 140, 119, 30));
+        panel_chngInfo.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 150, 150, 30));
 
-        btn_update.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
-        btn_update.setForeground(new java.awt.Color(8, 128, 176));
+        btn_update.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 24)); // NOI18N
+        btn_update.setForeground(new java.awt.Color(0, 112, 205));
         btn_update.setText("Update");
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_updateActionPerformed(evt);
             }
         });
-        panel_chngInfo.add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 580, 203, 53));
+        panel_chngInfo.add(btn_update, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 590, 162, 71));
 
+        r_female.setBackground(new java.awt.Color(255, 255, 255));
         radio_group.add(r_female);
+        r_female.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         r_female.setText("Female");
-        panel_chngInfo.add(r_female, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));
+        panel_chngInfo.add(r_female, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
 
+        r_male.setBackground(new java.awt.Color(255, 255, 255));
         radio_group.add(r_male);
+        r_male.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         r_male.setText("Male");
         r_male.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 r_maleActionPerformed(evt);
             }
         });
-        panel_chngInfo.add(r_male, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, -1, -1));
+        panel_chngInfo.add(r_male, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, -1, -1));
 
-        panel_homepage.add(panel_chngInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 810));
+        panel_homepage.add(panel_chngInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 810));
 
-        panel_chngPass.setBackground(new java.awt.Color(255, 51, 51));
+        panel_chngPass.setBackground(new java.awt.Color(255, 255, 255));
+        panel_chngPass.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panel_chngPass.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel6.setText("Enter your old password");
+        panel_chngPass.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 289, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel14.setText("Enter New password");
+        panel_chngPass.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 412, 273, -1));
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel15.setText("Confirm password");
+        panel_chngPass.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 519, 273, -1));
 
-        btn_confirm.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btn_confirm.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        btn_confirm.setForeground(new java.awt.Color(0, 112, 205));
         btn_confirm.setText("Confirm");
         btn_confirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_confirmActionPerformed(evt);
             }
         });
+        panel_chngPass.add(btn_confirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 604, 162, 71));
 
+        txt_oldpass.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         txt_oldpass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txt_oldpassMouseClicked(evt);
             }
         });
+        panel_chngPass.add(txt_oldpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(439, 289, 309, 37));
 
         txt_newpass.setEditable(false);
+        txt_newpass.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        panel_chngPass.add(txt_newpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(439, 412, 309, 37));
 
         txt_confirm.setEditable(false);
+        txt_confirm.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        panel_chngPass.add(txt_confirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(439, 519, 309, 37));
 
-        javax.swing.GroupLayout panel_chngPassLayout = new javax.swing.GroupLayout(panel_chngPass);
-        panel_chngPass.setLayout(panel_chngPassLayout);
-        panel_chngPassLayout.setHorizontalGroup(
-            panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_chngPassLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addGroup(panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(81, 81, 81)
-                .addGroup(panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_oldpass, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_newpass, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(443, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_chngPassLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(217, 217, 217))
-        );
-        panel_chngPassLayout.setVerticalGroup(
-            panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_chngPassLayout.createSequentialGroup()
-                .addGap(219, 219, 219)
-                .addGroup(panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_oldpass, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(86, 86, 86)
-                .addGroup(panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txt_newpass, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
-                .addGroup(panel_chngPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(txt_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
-                .addComponent(btn_confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109))
-        );
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 48)); // NOI18N
+        jLabel1.setText("  Change Password");
+        panel_chngPass.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 526, 90));
 
-        panel_homepage.add(panel_chngPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 810));
+        jLabel2.setText("_________________________________________________________");
+        panel_chngPass.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 445, -1));
 
-        panel_appointments.setBackground(new java.awt.Color(204, 255, 153));
+        panel_homepage.add(panel_chngPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 810));
+
+        panel_appointments.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panel_appointmentsLayout = new javax.swing.GroupLayout(panel_appointments);
         panel_appointments.setLayout(panel_appointmentsLayout);
         panel_appointmentsLayout.setHorizontalGroup(
             panel_appointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1048, Short.MAX_VALUE)
+            .addGap(0, 1300, Short.MAX_VALUE)
         );
         panel_appointmentsLayout.setVerticalGroup(
             panel_appointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+            .addGap(0, 810, Short.MAX_VALUE)
         );
 
-        panel_homepage.add(panel_appointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panel_homepage.add(panel_appointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 810));
 
-        panel_payments.setBackground(new java.awt.Color(255, 255, 51));
+        panel_payments.setBackground(new java.awt.Color(255, 255, 255));
+        panel_payments.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -498,7 +534,8 @@ public class UserProfile extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 33)); // NOI18N
         jLabel18.setText("Card Information");
 
-        payBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        payBtn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        payBtn.setForeground(new java.awt.Color(0, 112, 205));
         payBtn.setText("Pay ");
         payBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -520,23 +557,20 @@ public class UserProfile extends javax.swing.JFrame {
                             .addComponent(jLabel18))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(payBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel17)
                                     .addGap(99, 99, 99)
                                     .addComponent(jLabel13))
-                                .addComponent(cardNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(exYearText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(222, 222, 222)
-                                .addComponent(exMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(secCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 33, Short.MAX_VALUE))))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(payBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(exYearText, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(112, 112, 112)
+                                    .addComponent(exMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(secCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cardNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 71, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -559,23 +593,30 @@ public class UserProfile extends javax.swing.JFrame {
                 .addComponent(jLabel16)
                 .addGap(18, 18, 18)
                 .addComponent(secCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(payBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(1285, 1285, 1285))
+                .addGap(80, 80, 80)
+                .addComponent(payBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1186, 1186, 1186))
         );
 
+        panel_payments.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 50, 470, 560));
+
         detailsPaymentPanel.setBackground(new java.awt.Color(255, 255, 255));
+        detailsPaymentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel4.setText("Doctor ID :");
+        detailsPaymentPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 243, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 34)); // NOI18N
         jLabel19.setText("User Details");
+        detailsPaymentPanel.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 34, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 33)); // NOI18N
         jLabel3.setText("Payment Method");
+        detailsPaymentPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 395, -1, -1));
 
         creditRadBtn.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(creditRadBtn);
         creditRadBtn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         creditRadBtn.setSelected(true);
         creditRadBtn.setText("Credit Card");
@@ -584,21 +625,32 @@ public class UserProfile extends javax.swing.JFrame {
                 creditRadBtnActionPerformed(evt);
             }
         });
+        detailsPaymentPanel.add(creditRadBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 470, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel20.setText("Fees");
+        detailsPaymentPanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, 70, -1));
+        detailsPaymentPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 734, 43, 41));
+        detailsPaymentPanel.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(786, 734, 45, 41));
 
         jLabel23.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        detailsPaymentPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 782, -1, -1));
 
-        SearchBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        DocTxt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        detailsPaymentPanel.add(DocTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 232, 163, 43));
+
+        SearchBtn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        SearchBtn.setForeground(new java.awt.Color(0, 112, 205));
         SearchBtn.setText("Search");
         SearchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchBtnActionPerformed(evt);
             }
         });
+        detailsPaymentPanel.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(363, 154, 160, 50));
 
         cashRadBtn2.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(cashRadBtn2);
         cashRadBtn2.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         cashRadBtn2.setText("Cash");
         cashRadBtn2.addActionListener(new java.awt.event.ActionListener() {
@@ -606,131 +658,28 @@ public class UserProfile extends javax.swing.JFrame {
                 cashRadBtn2ActionPerformed(evt);
             }
         });
+        detailsPaymentPanel.add(cashRadBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, -1));
 
+        CurrCombo.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
         CurrCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "EgyPound", "Dollar" }));
         CurrCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CurrComboActionPerformed(evt);
             }
         });
+        detailsPaymentPanel.add(CurrCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 550, 155, 41));
+
+        FeesTxt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        detailsPaymentPanel.add(FeesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 550, 163, 43));
 
         jLabel24.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
         jLabel24.setText("ID :");
+        detailsPaymentPanel.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 162, -1, -1));
 
-        javax.swing.GroupLayout detailsPaymentPanelLayout = new javax.swing.GroupLayout(detailsPaymentPanel);
-        detailsPaymentPanel.setLayout(detailsPaymentPanelLayout);
-        detailsPaymentPanelLayout.setHorizontalGroup(
-            detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailsPaymentPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel23)
-                .addGap(539, 539, 539))
-            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(cashRadBtn2)
-                                .addGap(282, 282, 282)
-                                .addComponent(creditRadBtn))
-                            .addComponent(jLabel3))
-                        .addGap(246, 284, Short.MAX_VALUE))
-                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                                        .addGap(218, 218, 218)
-                                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel24))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(DocTxt)
-                                            .addComponent(IDtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
-                                        .addGap(32, 32, 32)
-                                        .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                                        .addGap(86, 86, 86)
-                                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(90, 90, 90)
-                                        .addComponent(FeesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addComponent(CurrCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        detailsPaymentPanelLayout.setVerticalGroup(
-            detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel19)
-                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(SearchBtn)
-                            .addComponent(IDtxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailsPaymentPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(DocTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cashRadBtn2)
-                    .addComponent(creditRadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FeesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(CurrCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel23)
-                .addContainerGap())
-        );
+        IDtxt.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        detailsPaymentPanel.add(IDtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 159, 163, 43));
 
-        javax.swing.GroupLayout panel_paymentsLayout = new javax.swing.GroupLayout(panel_payments);
-        panel_payments.setLayout(panel_paymentsLayout);
-        panel_paymentsLayout.setHorizontalGroup(
-            panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_paymentsLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(detailsPaymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panel_paymentsLayout.setVerticalGroup(
-            panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_paymentsLayout.createSequentialGroup()
-                .addGroup(panel_paymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_paymentsLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel_paymentsLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(detailsPaymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(157, Short.MAX_VALUE))
-        );
+        panel_payments.add(detailsPaymentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 29, -1, 795));
 
         panel_homepage.add(panel_payments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -748,6 +697,7 @@ public class UserProfile extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbl_fnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lbl_fnameActionPerformed
@@ -838,8 +788,7 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void btn_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_outActionPerformed
         // TODO add your handling code here:
-        UserLogin userLogin = new UserLogin();
-        userLogin.setVisible(true);
+        new EntryForm().setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_outActionPerformed
 
@@ -950,6 +899,71 @@ public class UserProfile extends javax.swing.JFrame {
 
     }//GEN-LAST:event_CurrComboActionPerformed
 
+    private void lbl_homepageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_homepageMouseEntered
+        // TODO add your handling code here:
+		lbl_homepage.setBackground(new Color(153,197,235));
+		lbl_homepage.setForeground(new Color(0,112,205));
+		lbl_homepage.setOpaque(true);
+    }//GEN-LAST:event_lbl_homepageMouseEntered
+
+    private void lbl_homepageMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_homepageMouseExited
+        // TODO add your handling code here:
+		lbl_homepage.setBackground(new Color(0,112,205));
+		lbl_homepage.setForeground(Color.white);
+    }//GEN-LAST:event_lbl_homepageMouseExited
+
+    private void lbl_chnginfo1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_chnginfo1MouseEntered
+        // TODO add your handling code here:
+		lbl_chnginfo1.setBackground(new Color(153,197,235));
+		lbl_chnginfo1.setForeground(new Color(0,112,205));
+		lbl_chnginfo1.setOpaque(true);
+    }//GEN-LAST:event_lbl_chnginfo1MouseEntered
+
+    private void lbl_chnginfo1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_chnginfo1MouseExited
+        // TODO add your handling code here:
+		lbl_chnginfo1.setBackground(new Color(0,112,205));
+		lbl_chnginfo1.setForeground(Color.white);
+    }//GEN-LAST:event_lbl_chnginfo1MouseExited
+
+    private void lbl_chngPassMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_chngPassMouseEntered
+        // TODO add your handling code here:
+		lbl_chngPass.setBackground(new Color(153,197,235));
+		lbl_chngPass.setForeground(new Color(0,112,205));
+		lbl_chngPass.setOpaque(true);
+    }//GEN-LAST:event_lbl_chngPassMouseEntered
+
+    private void lbl_chngPassMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_chngPassMouseExited
+        // TODO add your handling code here:
+		lbl_chngPass.setBackground(new Color(0,112,205));
+		lbl_chngPass.setForeground(Color.white);
+    }//GEN-LAST:event_lbl_chngPassMouseExited
+
+    private void lbl_AppoinMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_AppoinMouseEntered
+        // TODO add your handling code here:
+		lbl_Appoin.setBackground(new Color(153,197,235));
+		lbl_Appoin.setForeground(new Color(0,112,205));
+		lbl_Appoin.setOpaque(true);
+    }//GEN-LAST:event_lbl_AppoinMouseEntered
+
+    private void lbl_AppoinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_AppoinMouseExited
+        // TODO add your handling code here:
+		lbl_Appoin.setBackground(new Color(0,112,205));
+		lbl_Appoin.setForeground(Color.white);
+    }//GEN-LAST:event_lbl_AppoinMouseExited
+
+    private void lbl_paymentsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_paymentsMouseEntered
+        // TODO add your handling code here:
+		lbl_payments.setBackground(new Color(153,197,235));
+		lbl_payments.setForeground(new Color(0,112,205));
+		lbl_payments.setOpaque(true);
+    }//GEN-LAST:event_lbl_paymentsMouseEntered
+
+    private void lbl_paymentsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_paymentsMouseExited
+        // TODO add your handling code here:
+		lbl_payments.setBackground(new Color(0,112,205));
+		lbl_payments.setForeground(Color.white);
+    }//GEN-LAST:event_lbl_paymentsMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -995,6 +1009,7 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JButton btn_confirm;
     private javax.swing.JButton btn_out;
     private javax.swing.JButton btn_update;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JTextField cardNumberText;
     private javax.swing.JRadioButton cashRadBtn2;
     private javax.swing.JRadioButton creditRadBtn;
@@ -1003,6 +1018,7 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JTextField exYearText;
     private javax.swing.JLabel gender;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1013,6 +1029,7 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
