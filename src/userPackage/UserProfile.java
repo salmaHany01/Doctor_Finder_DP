@@ -918,7 +918,7 @@ public class UserProfile extends javax.swing.JFrame {
                 
            else if (pay_type.equalsIgnoreCase("cash"))
                {
-              JOptionPane.showMessageDialog(this, "you can pay in the clinic");
+				 JOptionPane.showMessageDialog(this, "you can pay in the clinic");
                }
        
           
