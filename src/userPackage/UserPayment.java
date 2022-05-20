@@ -67,7 +67,7 @@ public class UserPayment extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         exYearText = new javax.swing.JTextField();
         cardNumberText = new javax.swing.JTextField();
-        exMonth = new javax.swing.JComboBox<String>();
+        exMonth = new javax.swing.JComboBox<>();
         secCodeText = new javax.swing.JPasswordField();
         jLabel16 = new javax.swing.JLabel();
         payBtn = new javax.swing.JButton();
@@ -111,7 +111,7 @@ public class UserPayment extends javax.swing.JFrame {
         cardNumberText.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
 
         exMonth.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
-        exMonth.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        exMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
         exMonth.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exMonthActionPerformed(evt);
@@ -324,9 +324,8 @@ public class UserPayment extends javax.swing.JFrame {
                                 .addGroup(detailsPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(detailsPaymentPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(FeesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(CurrCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -521,8 +520,5 @@ public class UserPayment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton payBtn;
     private javax.swing.JPasswordField secCodeText;
-    private javax.swing.JButton submitBtn;
-    private javax.swing.JButton submitBtn1;
-    private javax.swing.JButton submitBtn2;
     // End of variables declaration//GEN-END:variables
 }
