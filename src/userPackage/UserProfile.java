@@ -1088,7 +1088,14 @@ public class UserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(lbl_fname.getText().equals("") || lbl_lname.getText().equals("") || lbl_add.getText().equals("") || lbl_phone1.getText().equals("") || lbl_email.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "You have to fill all the information", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
+        }
+        else if(lbl_phone1.getText().length() != 11){
+                JOptionPane.showMessageDialog(this, "Please Enter a Valid Phone Number", "Error", JOptionPane.ERROR_MESSAGE);           
+        }
+        else if( !lbl_email.getText().contains("a") || !lbl_email.getText().contains("com")){
+                JOptionPane.showMessageDialog(this, "Please Enter a Valid Email", "Error", JOptionPane.ERROR_MESSAGE);                      
+        }
+        else{
        try{
            user = UserData.getCertainUser(UserLogin.userID);
 
@@ -1113,7 +1120,7 @@ public class UserProfile extends javax.swing.JFrame {
             }
     
         }catch(Exception e){
-           JOptionPane.showMessageDialog(this, "update button : " + e.getMessage());
+           JOptionPane.showMessageDialog(this, "update Error : " + "there is an error happened.\nPlease try again");
         }
         }
 
@@ -1233,6 +1240,8 @@ public class UserProfile extends javax.swing.JFrame {
         else{
             user.setPass(newPass);
             updatePass(user, newPass);
+            txt_oldpass.setText("");
+            txt_confirm.setText("");
         }
     }//GEN-LAST:event_btn_confirmActionPerformed
 

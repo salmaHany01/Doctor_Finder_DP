@@ -7,7 +7,9 @@ package adminPackage;
 //import com.mycompany.doctorFinder.admin;
 import java.sql.Connection;
 import java.sql.*;
-
+import java.io.FileInputStream;
+import java.io.*;
+import java.util.*;
 
 
 
@@ -20,25 +22,30 @@ public class DatabaseConnectionDoc {
    
     private DatabaseConnectionDoc() {}
 
- private static Connection con;
-     
+    private static Connection con;
     public static Connection setConnection()
     {
         try{
             if(con==null)
 			{
-             
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/DoctorFinder", "doctor","123");
+            FileReader reader = new FileReader("src\\database.properties");
+            
+            Properties pro = new Properties();
+            pro.load(reader);
+            //read props
+            String url = pro.getProperty("dburl");
+            String pass = pro.getProperty("pass");            
+            String user = pro.getProperty("user");
+            
+            con = DriverManager.getConnection(url, user, pass);
+          
             System.out.println("Connected");
             
                         }
         }
-        catch (SQLException e)
+        catch (SQLException | IOException  e)
         {
-             System.out.println("Not connected");
-            
-           
-            
+             System.out.println("Not connected " + e.getMessage());   
         }
         return con;
             
