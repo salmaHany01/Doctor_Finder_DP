@@ -19,6 +19,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 import javax.swing.ImageIcon;
+import FactoryPackage.*;
+import java.awt.Font;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -38,23 +42,31 @@ public class UserProfile extends javax.swing.JFrame {
     public UserProfile() {
         initComponents();
 		//GUI related *ignore*
-		//lbl_img.setIcon(new ImageIcon("D:\\Software_Engineering\\Semester_6\\Design patterns\\Project\\DoctorFinderProject\\src\\main\\java\\com\\mycompany\\doctorFinder\\user\\pp2.png"));
-        //System.out.println(getClass().getResource("C:\\Users\\Salma\\OneDrive\\Documents\\GitHub\\yay\\Doctor_Finder_DP\\src\\userPackage\\user.png"));
-		//lbl_img.setIcon(new javax.swing.ImageIcon(getClass().getResource("user.png")));
 		panel_homepage.setVisible(true);
         panel_chngInfo.setVisible(false);
         panel_chngPass.setVisible(false);
         panel_appointments.setVisible(false);
         panel_payments.setVisible(false);
+		panel_concerns.setVisible(false);
+		SearchBtn.setVisible(false);
 		payBtn.setVisible(false);
 		btn_out.setBackground(Color.white);
         btn_update.setBackground(Color.white);
 		btn_confirm.setBackground(Color.white);
 		SearchBtn.setBackground(Color.white);
+		Search_btn.setBackground(Color.white);
 		payBtn.setBackground(Color.white);
+		SearchAdd_btn.setBackground(Color.white);
+		submit_concernBtn.setBackground(Color.white);
+		Add_btn.setBackground(Color.white);
+		Canel_btn.setBackground(Color.white);
+		UIManager.put("OptionPane.messageFont", new Font("Microsoft JhengHei UI", Font.PLAIN, 18));
+		jTable1.setRowHeight(28);
         //display connection
         con = DatabaseConnectionDoc.setConnection();
-        
+        DisplayDoctors();
+        DisplayAddress();
+        SetRecords();
 
         //Intialize vars
         udata = new UserData();
@@ -67,6 +79,7 @@ public class UserProfile extends javax.swing.JFrame {
         
         if(user != null){
             lbl_name.setText(user.getName() + " " + user.getLname());  
+			PatName_txt.setText(user.getName() + " " + user.getLname());
             uploadData(user);
         }
     }
@@ -127,6 +140,68 @@ public class UserProfile extends javax.swing.JFrame {
         }
         return null;
     }
+	 void DisplayDoctors()
+    {
+        try {
+            Statement st = con.createStatement();
+            String Query = "Select distinct Speciality from Doctors";
+            ResultSet rs = st.executeQuery(Query);
+            while(rs.next())
+            {
+                Speciality_cmb.addItem(rs.getString("Speciality"));
+            }
+        } catch (Exception e) {
+        }
+    }
+	  void DisplayAddress()
+    {
+        try {
+            Statement st = con.createStatement();
+            String Query = "Select distinct Address from Doctors";
+            ResultSet rs = st.executeQuery(Query);
+            while(rs.next())
+            {
+                Address_cmb.addItem(rs.getString("Address"));
+            }
+        } catch (Exception e) {
+        }
+    }
+	public void SetRecords()
+    {
+        try
+        {
+        //   Connection con = DatabaseConnectionDoc.setConnection();
+            
+            Statement st = con.createStatement();
+            String sql = "select * from Doctors";
+            ResultSet rs = st.executeQuery(sql);
+
+            while(rs.next())
+            {
+                int id = rs.getInt("ID");
+                String name = rs.getString("Name");
+                String address = rs.getString("Address");
+                String speciality = rs.getString("Speciality");
+                String fees = String.valueOf(rs.getInt("Fees"));
+                String App= rs.getString("Appointments");
+                String PhoneNo= String.valueOf(rs.getInt("PhoneNo"));
+                String Rating = String.valueOf(rs.getDouble("Rating"));
+
+               DefaultTableModel tbModel = (DefaultTableModel)jTable1.getModel();
+
+                String tbData [] = {name,address,speciality,fees,App, PhoneNo,Rating};
+                
+                tbModel.addRow(tbData);
+                
+            }
+            //tbModel.setRowCount(0);
+            //con.close();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }     
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -145,7 +220,21 @@ public class UserProfile extends javax.swing.JFrame {
         lbl_payments = new javax.swing.JLabel();
         btn_out = new javax.swing.JButton();
         lbl_img = new javax.swing.JLabel();
+        lbl_concerns = new javax.swing.JLabel();
         panel_homepage = new javax.swing.JPanel();
+        panel_concerns = new javax.swing.JPanel();
+        first_spCmbox = new javax.swing.JComboBox<>();
+        jLabel31 = new javax.swing.JLabel();
+        second_spCmbox = new javax.swing.JComboBox<>();
+        third_spCmbox = new javax.swing.JComboBox<>();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        submit_concernBtn = new javax.swing.JButton();
+        jLabel35 = new javax.swing.JLabel();
+        display_spec_lbl = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
         panel_chngInfo = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         lbl_fname = new javax.swing.JTextField();
@@ -174,6 +263,26 @@ public class UserProfile extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         panel_appointments = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel28 = new javax.swing.JLabel();
+        Fees_txt = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        DocName_txt = new javax.swing.JTextField();
+        Address_cmb = new javax.swing.JComboBox<>();
+        App_txt = new javax.swing.JTextField();
+        Speciality_cmb = new javax.swing.JComboBox<>();
+        SearchAdd_btn = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        Search_btn = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        Speciality_txt = new javax.swing.JTextField();
+        Canel_btn = new javax.swing.JButton();
+        jLabel36 = new javax.swing.JLabel();
+        Add_btn = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
+        PatName_txt = new javax.swing.JTextField();
         panel_payments = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -243,7 +352,7 @@ public class UserProfile extends javax.swing.JFrame {
                 lbl_homepageMouseExited(evt);
             }
         });
-        panel_Profile.add(lbl_homepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 249, 240, 50));
+        panel_Profile.add(lbl_homepage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 240, 50));
 
         lbl_chnginfo1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
         lbl_chnginfo1.setForeground(new java.awt.Color(255, 255, 255));
@@ -260,7 +369,7 @@ public class UserProfile extends javax.swing.JFrame {
                 lbl_chnginfo1MouseExited(evt);
             }
         });
-        panel_Profile.add(lbl_chnginfo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 240, 50));
+        panel_Profile.add(lbl_chnginfo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 240, 50));
 
         lbl_chngPass.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
         lbl_chngPass.setForeground(new java.awt.Color(255, 255, 255));
@@ -277,7 +386,7 @@ public class UserProfile extends javax.swing.JFrame {
                 lbl_chngPassMouseExited(evt);
             }
         });
-        panel_Profile.add(lbl_chngPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, 50));
+        panel_Profile.add(lbl_chngPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 240, 50));
 
         lbl_Appoin.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
         lbl_Appoin.setForeground(new java.awt.Color(255, 255, 255));
@@ -294,7 +403,7 @@ public class UserProfile extends javax.swing.JFrame {
                 lbl_AppoinMouseExited(evt);
             }
         });
-        panel_Profile.add(lbl_Appoin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 240, 50));
+        panel_Profile.add(lbl_Appoin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 240, 50));
 
         lbl_payments.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
         lbl_payments.setForeground(new java.awt.Color(255, 255, 255));
@@ -311,7 +420,7 @@ public class UserProfile extends javax.swing.JFrame {
                 lbl_paymentsMouseExited(evt);
             }
         });
-        panel_Profile.add(lbl_payments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 240, 50));
+        panel_Profile.add(lbl_payments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 510, 240, 50));
 
         btn_out.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 18)); // NOI18N
         btn_out.setForeground(new java.awt.Color(0, 112, 205));
@@ -325,10 +434,147 @@ public class UserProfile extends javax.swing.JFrame {
         panel_Profile.add(btn_out, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 770, 240, 60));
         panel_Profile.add(lbl_img, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 130, 140));
 
+        lbl_concerns.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 22)); // NOI18N
+        lbl_concerns.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_concerns.setText(" Fill Concern Form ");
+        lbl_concerns.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lbl_concerns.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_concernsMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbl_concernsMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbl_concernsMouseExited(evt);
+            }
+        });
+        panel_Profile.add(lbl_concerns, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 240, 50));
+
         jSplitPane1.setLeftComponent(panel_Profile);
 
         panel_homepage.setBackground(new java.awt.Color(255, 255, 255));
         panel_homepage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panel_concerns.setBackground(new java.awt.Color(255, 255, 255));
+
+        first_spCmbox.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        first_spCmbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Headache", "Stomach ache", "Itching", "Fatigue", " " }));
+
+        jLabel31.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
+        jLabel31.setText("First Symptom");
+
+        second_spCmbox.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        second_spCmbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toothache", "Weakness", "Nausea", "Dry skin", "Spitting blood", "Excessive tearing", "Heavy legs", "Stiff joints", " " }));
+
+        third_spCmbox.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 18)); // NOI18N
+        third_spCmbox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pain and swelling ", "Constipation", "Mobile teeth", "Friable nails", "Neck tenderness", "Night blindness", "Vein soarness", "Sleeping disorders" }));
+
+        jLabel32.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
+        jLabel32.setText("Third Symptom");
+
+        jLabel33.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
+        jLabel33.setText("Second Symptom");
+
+        jLabel34.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 48)); // NOI18N
+        jLabel34.setText("Fill Concern");
+
+        submit_concernBtn.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 20)); // NOI18N
+        submit_concernBtn.setForeground(new java.awt.Color(0, 112, 205));
+        submit_concernBtn.setText("Submit Concern");
+        submit_concernBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submit_concernBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel35.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(0, 112, 205));
+        jLabel35.setText("You can search for doctors in this speciality");
+
+        display_spec_lbl.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 24)); // NOI18N
+        display_spec_lbl.setForeground(new java.awt.Color(153, 153, 153));
+        display_spec_lbl.setText("Speciality");
+
+        jLabel38.setText("____________________________________");
+
+        javax.swing.GroupLayout panel_concernsLayout = new javax.swing.GroupLayout(panel_concerns);
+        panel_concerns.setLayout(panel_concernsLayout);
+        panel_concernsLayout.setHorizontalGroup(
+            panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_concernsLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_concernsLayout.createSequentialGroup()
+                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel34)))
+                    .addGroup(panel_concernsLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_concernsLayout.createSequentialGroup()
+                                .addComponent(jLabel31)
+                                .addGap(100, 100, 100)
+                                .addComponent(first_spCmbox, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_concernsLayout.createSequentialGroup()
+                                .addComponent(jLabel33)
+                                .addGap(69, 69, 69)
+                                .addComponent(second_spCmbox, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_concernsLayout.createSequentialGroup()
+                                .addComponent(jLabel32)
+                                .addGap(91, 91, 91)
+                                .addComponent(third_spCmbox, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(142, 142, 142)
+                                .addComponent(submit_concernBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel_concernsLayout.createSequentialGroup()
+                                .addComponent(jLabel35)
+                                .addGap(96, 96, 96)
+                                .addComponent(display_spec_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(257, Short.MAX_VALUE))
+        );
+        panel_concernsLayout.setVerticalGroup(
+            panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_concernsLayout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel_concernsLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel_concernsLayout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel38))
+                            .addComponent(jLabel34))))
+                .addGap(60, 60, 60)
+                .addGroup(panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_concernsLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel31))
+                    .addComponent(first_spCmbox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_concernsLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel33))
+                    .addComponent(second_spCmbox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_concernsLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel32))
+                    .addGroup(panel_concernsLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(third_spCmbox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(submit_concernBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(136, 136, 136)
+                .addGroup(panel_concernsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel35)
+                    .addComponent(display_spec_lbl))
+                .addContainerGap(224, Short.MAX_VALUE))
+        );
+
+        panel_homepage.add(panel_concerns, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 830));
 
         panel_chngInfo.setBackground(new java.awt.Color(255, 255, 255));
         panel_chngInfo.setName("gender"); // NOI18N
@@ -486,17 +732,125 @@ public class UserProfile extends javax.swing.JFrame {
         panel_homepage.add(panel_chngPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 810));
 
         panel_appointments.setBackground(new java.awt.Color(255, 255, 255));
+        panel_appointments.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout panel_appointmentsLayout = new javax.swing.GroupLayout(panel_appointments);
-        panel_appointments.setLayout(panel_appointmentsLayout);
-        panel_appointmentsLayout.setHorizontalGroup(
-            panel_appointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1300, Short.MAX_VALUE)
-        );
-        panel_appointmentsLayout.setVerticalGroup(
-            panel_appointmentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 810, Short.MAX_VALUE)
-        );
+        jTable1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Address", "Speciality", "Fees", "Appointments", "PhoneNo", "Rating"
+            }
+        ));
+        jTable1.setSelectionBackground(new java.awt.Color(76, 154, 220));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        panel_appointments.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 410, 1250, 380));
+
+        jLabel28.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel28.setText("Fees");
+        panel_appointments.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 210, -1, -1));
+
+        Fees_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        panel_appointments.add(Fees_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, 150, -1));
+
+        jLabel27.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel27.setText("Doctor Name");
+        panel_appointments.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+
+        jLabel25.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel25.setText("Appointments");
+        panel_appointments.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, -1, -1));
+
+        DocName_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        panel_appointments.add(DocName_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 250, -1));
+
+        Address_cmb.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Address_cmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Address_cmbActionPerformed(evt);
+            }
+        });
+        panel_appointments.add(Address_cmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 230, 40));
+
+        App_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        panel_appointments.add(App_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, 510, -1));
+
+        Speciality_cmb.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Speciality_cmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Speciality_cmbActionPerformed(evt);
+            }
+        });
+        panel_appointments.add(Speciality_cmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 230, 40));
+
+        SearchAdd_btn.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        SearchAdd_btn.setForeground(new java.awt.Color(0, 112, 205));
+        SearchAdd_btn.setText("Search");
+        SearchAdd_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchAdd_btnActionPerformed(evt);
+            }
+        });
+        panel_appointments.add(SearchAdd_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 110, 40));
+
+        jLabel26.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel26.setText("Speciality");
+        panel_appointments.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+
+        Search_btn.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Search_btn.setForeground(new java.awt.Color(0, 112, 205));
+        Search_btn.setText("Search");
+        Search_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Search_btnActionPerformed(evt);
+            }
+        });
+        panel_appointments.add(Search_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 120, 40));
+
+        jLabel30.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel30.setText("Search By Address");
+        panel_appointments.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, -1, -1));
+
+        Speciality_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        panel_appointments.add(Speciality_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 250, -1));
+
+        Canel_btn.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Canel_btn.setForeground(new java.awt.Color(0, 112, 205));
+        Canel_btn.setText("Cancel Appointment");
+        Canel_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Canel_btnActionPerformed(evt);
+            }
+        });
+        panel_appointments.add(Canel_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 270, 236, 55));
+
+        jLabel36.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel36.setText("Search By Speciality");
+        panel_appointments.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+
+        Add_btn.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        Add_btn.setForeground(new java.awt.Color(0, 112, 205));
+        Add_btn.setText("Add Appointment");
+        Add_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Add_btnActionPerformed(evt);
+            }
+        });
+        panel_appointments.add(Add_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 236, 55));
+
+        jLabel29.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        jLabel29.setText("Patient Name");
+        panel_appointments.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        PatName_txt.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
+        panel_appointments.add(PatName_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 250, -1));
 
         panel_homepage.add(panel_appointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 810));
 
@@ -570,17 +924,15 @@ public class UserProfile extends javax.swing.JFrame {
                         .addGap(60, 71, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel18))
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(payBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(cardNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel18)
+                                    .addComponent(cardNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -778,32 +1130,39 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void lbl_chnginfo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_chnginfo1MouseClicked
         // TODO add your handling code here:
-        panel_chngInfo.setVisible(true);
+        panel_concerns.setVisible(false);
+		panel_chngInfo.setVisible(true);
+		panel_chngPass.setVisible(false);
+		panel_payments.setVisible(false);
+		panel_appointments.setVisible(false);
     }//GEN-LAST:event_lbl_chnginfo1MouseClicked
 
     private void lbl_chngPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_chngPassMouseClicked
         // TODO add your handling code here:
-        panel_chngPass.setVisible(true);
-        panel_chngInfo.setVisible(false);
-
+		panel_concerns.setVisible(false);
+		panel_chngInfo.setVisible(false);
+		panel_chngPass.setVisible(true);
+		panel_payments.setVisible(false);
+		panel_appointments.setVisible(false);
     }//GEN-LAST:event_lbl_chngPassMouseClicked
 
     private void lbl_AppoinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_AppoinMouseClicked
         // TODO add your handling code here:
-        panel_appointments.setVisible(true);
-        panel_chngPass.setVisible(false);
-        panel_chngInfo.setVisible(false);
-
+        panel_concerns.setVisible(false);
+		panel_chngInfo.setVisible(false);
+		panel_chngPass.setVisible(false);
+		panel_payments.setVisible(false);
+		panel_appointments.setVisible(true);
     }//GEN-LAST:event_lbl_AppoinMouseClicked
 
     private void lbl_paymentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_paymentsMouseClicked
         // TODO add your handling code here:
-        
-        panel_payments.setVisible(true);
-        panel_appointments.setVisible(false);
-        panel_chngPass.setVisible(false);
-        panel_chngInfo.setVisible(false);
-
+        SearchBtn.setVisible(true);
+		panel_concerns.setVisible(false);
+		panel_chngInfo.setVisible(false);
+		panel_chngPass.setVisible(false);
+		panel_payments.setVisible(true);
+		panel_appointments.setVisible(false);
     }//GEN-LAST:event_lbl_paymentsMouseClicked
 
     private void btn_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_outActionPerformed
@@ -1098,6 +1457,132 @@ public class UserProfile extends javax.swing.JFrame {
 	   }
     }//GEN-LAST:event_secCodeTextFocusLost
 
+    private void submit_concernBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_concernBtnActionPerformed
+        // TODO add your handling code here:
+        String first_sp = first_spCmbox.getSelectedItem().toString();
+        String second_sp = second_spCmbox.getSelectedItem().toString();
+        String third_sp = third_spCmbox.getSelectedItem().toString();
+        Speciality spec;
+        String resulted_speciality;
+        try{
+            spec = Speciality_Factory.getSpeciality(first_sp, second_sp, third_sp);
+            resulted_speciality = spec.determine_speciality();
+            display_spec_lbl.setForeground(new Color(0,200,151));
+            display_spec_lbl.setText(resulted_speciality);
+
+        }
+        catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Sorry. Couldn't specify a speciality to your concern.");
+        }
+    }//GEN-LAST:event_submit_concernBtnActionPerformed
+
+    private void lbl_concernsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_concernsMouseClicked
+        // TODO add your handling code here:
+		panel_concerns.setVisible(true);
+		panel_chngInfo.setVisible(false);
+		panel_chngPass.setVisible(false);
+		panel_payments.setVisible(false);
+		panel_appointments.setVisible(false);
+    }//GEN-LAST:event_lbl_concernsMouseClicked
+
+    private void lbl_concernsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_concernsMouseEntered
+        // TODO add your handling code here:
+		lbl_concerns.setBackground(new Color(153,197,235));
+		lbl_concerns.setForeground(new Color(0,112,205));
+		lbl_concerns.setOpaque(true);
+    }//GEN-LAST:event_lbl_concernsMouseEntered
+
+    private void lbl_concernsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_concernsMouseExited
+        // TODO add your handling code here:
+		lbl_concerns.setBackground(new Color(0,112,205));
+		lbl_concerns.setForeground(Color.white);
+    }//GEN-LAST:event_lbl_concernsMouseExited
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        int selected = jTable1.getSelectedRow();
+        //DoctorID =
+        DocName_txt.setText(model.getValueAt(selected, 0).toString());
+        Speciality_txt.setText(model.getValueAt(selected,2 ).toString());
+        Fees_txt.setText(model.getValueAt(selected,3 ).toString());
+        App_txt.setText(model.getValueAt(selected,4).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void Address_cmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Address_cmbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Address_cmbActionPerformed
+
+    private void Speciality_cmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Speciality_cmbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Speciality_cmbActionPerformed
+
+    private void SearchAdd_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchAdd_btnActionPerformed
+        String str = Address_cmb.getSelectedItem().toString();
+
+        DefaultTableModel searchModel = (DefaultTableModel) jTable1.getModel();
+
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<DefaultTableModel>(searchModel);
+
+        jTable1.setRowSorter(trs);
+        trs.setRowFilter(javax.swing.RowFilter.regexFilter(str));
+    }//GEN-LAST:event_SearchAdd_btnActionPerformed
+
+    private void Search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_btnActionPerformed
+
+        String str = Speciality_cmb.getSelectedItem().toString();
+
+        DefaultTableModel searchModel = (DefaultTableModel) jTable1.getModel();
+
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<DefaultTableModel>(searchModel);
+
+        jTable1.setRowSorter(trs);
+        trs.setRowFilter(javax.swing.RowFilter.regexFilter(str));
+        // searchModel.setRowCount(0);
+    }//GEN-LAST:event_Search_btnActionPerformed
+
+    private void Canel_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Canel_btnActionPerformed
+        try
+        {
+            String name = PatName_txt.getText();
+            Statement st = con.createStatement();
+            String sql = "Delete from Appoint where PatientName =  '"+ name+"'";
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(this, "Appointment Deleted");
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }//GEN-LAST:event_Canel_btnActionPerformed
+
+    private void Add_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_btnActionPerformed
+        try
+        {
+
+            Statement st = con.createStatement();
+            //DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+            String date = App_txt.getText();
+            String sep = Speciality_txt.getText();
+            String patient = PatName_txt.getText();
+            String doctor = DocName_txt.getText();
+            int fees = Integer.parseInt(Fees_txt.getText());
+            String sql = "insert into Appoint (PatientName,DoctorName,Speciality,DayAndTime,Fees) values ('"+patient+"' , '"+doctor+"','"+sep+"','"+date+"', "+fees+")";
+            st.executeUpdate(sql);
+            /*
+            String tbData [] = {date, time, patient ,doctor};
+            DefaultTableModel tbModel = (DefaultTableModel)jTable1.getModel();
+            tbModel.addRow(tbData);
+            */
+            JOptionPane.showMessageDialog(this, "Appointment Added");
+
+            //con.close();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }//GEN-LAST:event_Add_btnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1135,11 +1620,22 @@ public class UserProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Add_btn;
+    private javax.swing.JComboBox<String> Address_cmb;
+    private javax.swing.JTextField App_txt;
+    private javax.swing.JButton Canel_btn;
     private javax.swing.JComboBox CurrCombo;
+    private javax.swing.JTextField DocName_txt;
     private javax.swing.JTextField DocTxt;
     private javax.swing.JTextField FeesTxt;
+    private javax.swing.JTextField Fees_txt;
     private javax.swing.JTextField IDtxt;
+    private javax.swing.JTextField PatName_txt;
+    private javax.swing.JButton SearchAdd_btn;
     private javax.swing.JButton SearchBtn;
+    private javax.swing.JButton Search_btn;
+    private javax.swing.JComboBox<String> Speciality_cmb;
+    private javax.swing.JTextField Speciality_txt;
     private javax.swing.JButton btn_confirm;
     private javax.swing.JButton btn_out;
     private javax.swing.JButton btn_update;
@@ -1148,8 +1644,10 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JRadioButton cashRadBtn2;
     private javax.swing.JRadioButton creditRadBtn;
     private javax.swing.JPanel detailsPaymentPanel;
+    private javax.swing.JLabel display_spec_lbl;
     private javax.swing.JComboBox<String> exMonth;
     private javax.swing.JTextField exYearText;
+    private javax.swing.JComboBox<String> first_spCmbox;
     private javax.swing.JLabel gender;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
@@ -1169,7 +1667,21 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1177,11 +1689,14 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_Appoin;
     private javax.swing.JTextField lbl_add;
     private javax.swing.JLabel lbl_chngPass;
     private javax.swing.JLabel lbl_chnginfo1;
+    private javax.swing.JLabel lbl_concerns;
     private javax.swing.JTextField lbl_email;
     private javax.swing.JTextField lbl_fname;
     private javax.swing.JLabel lbl_homepage;
@@ -1195,6 +1710,7 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JPanel panel_appointments;
     private javax.swing.JPanel panel_chngInfo;
     private javax.swing.JPanel panel_chngPass;
+    private javax.swing.JPanel panel_concerns;
     private javax.swing.JPanel panel_homepage;
     private javax.swing.JPanel panel_payments;
     private javax.swing.JButton payBtn;
@@ -1202,6 +1718,9 @@ public class UserProfile extends javax.swing.JFrame {
     private javax.swing.JRadioButton r_male;
     private javax.swing.ButtonGroup radio_group;
     private javax.swing.JPasswordField secCodeText;
+    private javax.swing.JComboBox<String> second_spCmbox;
+    private javax.swing.JButton submit_concernBtn;
+    private javax.swing.JComboBox<String> third_spCmbox;
     private javax.swing.JPasswordField txt_confirm;
     private javax.swing.JPasswordField txt_newpass;
     private javax.swing.JPasswordField txt_oldpass;
